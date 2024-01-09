@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -89,6 +90,57 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
+      body: NestedScrollView(
+        headerSliverBuilder: (context, bool boxIsScrolled) {
+          return <Widget>[
+            SliverToBoxAdapter(
+              child: Container(
+                padding: EdgeInsets.all(20),
+                width: double.infinity,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    FadeInUp(
+                      child: Text(
+                        "Balance",
+                        style: TextStyle(
+                          color: Colors.blueGrey.shade300,
+                          fontSize: 20,
+                        ),
+                      ),
+                      duration: Duration(milliseconds: 800),
+                    ),
+                    SizedBox(height: 20),
+                    FadeInUp(
+                      child: Text(
+                        "\$ 1,000,000",
+                        style: TextStyle(
+                          color: Colors.blueGrey.shade300,
+                          fontSize: 40,
+                        ),
+                      ),
+                      duration: Duration(milliseconds: 800),
+                    ),
+                    FadeInUp(
+                      child: Container(
+                        width: double.infinity,
+                        height: 250,
+                        child: LineChart(
+                          mainData(),
+                          swapAnimationDuration: Duration(milliseconds: 1000),
+                          swapAnimationCurve: Curves.linear,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+
+          ];
+        },
+        body: Container(),
+      ),
     );
   }
 
@@ -115,79 +167,80 @@ class _HomePageState extends State<HomePage> {
         drawVerticalLine: false,
       ),
       titlesData: FlTitlesData(
-        show: true,
-        rightTitles: SideTitles(showTitles: false),
-        topTitles: SideTitles(showTitles: false),
-        bottomTitles: SideTitles(
-          showTitles: true,
-          reservedSize: 22,
-          interval: 1,
-          getTextStyles: (context, value) => const TextStyle(
-            color: Color(0xff68737d),
-            fontWeight: FontWeight.bold,
-            fontSize: 11,
+          show: true,
+          rightTitles: SideTitles(showTitles: false),
+          topTitles: SideTitles(showTitles: false),
+          bottomTitles: SideTitles(
+            showTitles: true,
+            reservedSize: 22,
+            interval: 1,
+            getTextStyles: (context, value) => const TextStyle(
+              color: Color(0xff68737d),
+              fontWeight: FontWeight.bold,
+              fontSize: 11,
+            ),
+            getTitles: (value) {
+              switch (value.toInt()) {
+                case 0:
+                  return 'MAR';
+                case 4:
+                  return 'JUN';
+                case 8:
+                  return 'SEP';
+                case 11:
+                  return 'OCT';
+              }
+              return '';
+            },
+            margin: 10,
           ),
-          getTitles: (value) {
-            switch(value.toInt()) {
-              case 0:
-                return 'MAR';
-              case 4:
-                return 'JUN';
-              case 8:
-                return 'SEP';
-              case 11:
-                return 'OCT';
-            }
-            return '';
-          },
-          margin: 10,
-        ),
-        leftTitles: SideTitles(
-          showTitles: true,
-          interval: 1,
-          getTextStyles: (context, value) => const TextStyle(
-            color: Color(0xff67727d),
-            fontWeight: FontWeight.bold,
-            fontSize: 12,
-          ),
-          getTitles: (value) {
-            switch (value.toInt()) {
-              case 1:
-                return '10k';
-              case 3:
-                return '30k';
-              case 5:
-                return '50k';
-            }
-            return '';
-          },
-          reservedSize: 25,
-          margin: 12,
-        )
-      ),
+          leftTitles: SideTitles(
+            showTitles: true,
+            interval: 1,
+            getTextStyles: (context, value) => const TextStyle(
+              color: Color(0xff67727d),
+              fontWeight: FontWeight.bold,
+              fontSize: 12,
+            ),
+            getTitles: (value) {
+              switch (value.toInt()) {
+                case 1:
+                  return '10k';
+                case 3:
+                  return '30k';
+                case 5:
+                  return '50k';
+              }
+              return '';
+            },
+            reservedSize: 25,
+            margin: 12,
+          )),
       minX: 0,
       maxX: 11,
       minY: 0,
       maxY: 6,
       lineBarsData: [
         LineChartBarData(
-          spots: _isLoaded ? [
-            FlSpot(0, 3),
-            FlSpot(2.4, 2),
-            FlSpot(4, 3),
-            FlSpot(6.4, 3.1),
-            FlSpot(8, 4),
-            FlSpot(9.5, 4),
-            FlSpot(11, 5),
-          ] : [
-            FlSpot(0, 0),
-            FlSpot(0, 0),
-            FlSpot(0, 0),
-            FlSpot(0, 0),
-            FlSpot(0, 0),
-            FlSpot(0, 0),
-            FlSpot(0, 0),
-          ],
+          spots: _isLoaded
+              ? [
+                  FlSpot(0, 3),
+                  FlSpot(2.4, 2),
+                  FlSpot(4, 3),
+                  FlSpot(6.4, 3.1),
+                  FlSpot(8, 4),
+                  FlSpot(9.5, 4),
+                  FlSpot(11, 5),
+                ]
+              : [
+                  FlSpot(0, 0),
+                  FlSpot(0, 0),
+                  FlSpot(0, 0),
+                  FlSpot(0, 0),
+                  FlSpot(0, 0),
+                  FlSpot(0, 0),
+                  FlSpot(0, 0),
+                ],
           isCurved: true,
           colors: gradientColors,
           barWidth: 2,
@@ -196,8 +249,8 @@ class _HomePageState extends State<HomePage> {
           ),
           belowBarData: BarAreaData(
             show: true,
-            gradientFrom: Offset(0,0),
-            gradientTo: Offset(0,1),
+            gradientFrom: Offset(0, 0),
+            gradientTo: Offset(0, 1),
             colors: [
               Color(0xff02d39a).withOpacity(0.1),
               Color(0xff02d39a).withOpacity(0),
