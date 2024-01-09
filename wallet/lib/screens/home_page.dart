@@ -2,6 +2,7 @@ import 'package:animate_do/animate_do.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
 class HomePage extends StatefulWidget {
@@ -29,6 +30,8 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
+      // App bar
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -57,6 +60,8 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
       backgroundColor: Color(0xff161621),
+
+      // Menu bottom for navigation
       bottomNavigationBar: SalomonBottomBar(
         currentIndex: _currentIndex,
         selectedItemColor: Colors.white,
@@ -90,6 +95,8 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
+
+      // Body app
       body: NestedScrollView(
         headerSliverBuilder: (context, bool boxIsScrolled) {
           return <Widget>[
@@ -99,6 +106,8 @@ class _HomePageState extends State<HomePage> {
                 width: double.infinity,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
+
+                  // Title, Balance and Graphics
                   children: [
                     FadeInUp(
                       child: Text(
@@ -136,10 +145,87 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
             ),
-
           ];
         },
-        body: Container(),
+
+        // Body transactions
+        body: Container(
+          padding: EdgeInsets.all(20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              FadeInUp(
+                duration: Duration(milliseconds: 1000),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    MaterialButton(
+                      onPressed: () {
+                        Navigator.of(context).pushReplacementNamed("/");
+                      },
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      color: Color(0xff02d39a).withOpacity(0.7),
+                      child: Row(
+                        children: [
+                          Icon(Iconsax.wallet, color: Colors.white),
+                          SizedBox(width: 10),
+                          Text(
+                            "Payment",
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(width: 20),
+                    MaterialButton(
+                      onPressed: () {},
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                      color: Colors.transparent,
+                      splashColor: Color(0xff02d39a).withOpacity(0.4),
+                      highlightColor: Color(0xff02d39a).withOpacity(0.4),
+                      shape: RoundedRectangleBorder(
+                        side: BorderSide(
+                            color: Color(0xff02d39a).withOpacity(0.4),
+                            width: 1),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Row(
+                        children: [
+                          Icon(Iconsax.arrow_3, color: Colors.white),
+                          SizedBox(width: 10),
+                          Text(
+                            "Transfer",
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(height: 40),
+              FadeInUp(
+                duration: Duration(milliseconds: 1000),
+                child: Text(
+                  "Recent Transactions",
+                  style: TextStyle(
+                    color: Colors.blueGrey.shade300,
+                    fontSize: 16,
+                  ),
+                ),
+              ),
+
+              // Transactions
+
+
+            ],
+          ),
+        ),
       ),
     );
   }
