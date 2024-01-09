@@ -43,7 +43,7 @@ class _HomePageState extends State<HomePage> {
             onPressed: () {},
             icon: Icon(
               Icons.notifications,
-              color: Colors.blueGrey,
+              color: Theme.of(context).iconTheme.color,
             ),
           ),
           // IconButton(
@@ -55,7 +55,7 @@ class _HomePageState extends State<HomePage> {
           // ),
           Switch(
             value: themeProvider.darkTheme,
-            activeColor: Color(0xff02d39a).withOpacity(0.7),
+            activeColor: Theme.of(context).buttonTheme.colorScheme?.primary,
             onChanged: (value) {
               themeProvider.toggleTheme();
             },
@@ -65,7 +65,7 @@ class _HomePageState extends State<HomePage> {
           onPressed: () {},
           icon: Icon(
             Icons.menu,
-            color: Colors.blueGrey,
+            color: Theme.of(context).iconTheme.color,
           ),
         ),
       ),
@@ -74,8 +74,8 @@ class _HomePageState extends State<HomePage> {
       // Menu bottom for navigation
       bottomNavigationBar: SalomonBottomBar(
         currentIndex: _currentIndex,
-        selectedItemColor: Colors.white,
-        unselectedItemColor: Colors.white,
+        selectedItemColor: Theme.of(context).bottomNavigationBarTheme.selectedItemColor,
+        unselectedItemColor: Theme.of(context).bottomNavigationBarTheme.unselectedItemColor,
         margin: EdgeInsets.only(bottom: 30, top: 10, right: 20, left: 20),
         onTap: (index) {
           setState(() {
@@ -86,22 +86,18 @@ class _HomePageState extends State<HomePage> {
           SalomonBottomBarItem(
             icon: Icon(Icons.home),
             title: Text("Home"),
-            selectedColor: Colors.white,
           ),
           SalomonBottomBarItem(
             icon: Icon(Icons.explore_outlined),
             title: Text("Likes"),
-            selectedColor: Colors.pink,
           ),
           SalomonBottomBarItem(
             icon: Icon(Icons.data_usage),
             title: Text("Search"),
-            selectedColor: Colors.orange,
           ),
           SalomonBottomBarItem(
             icon: Icon(Icons.settings),
             title: Text("Profile"),
-            selectedColor: Colors.teal,
           ),
         ],
       ),
@@ -123,7 +119,7 @@ class _HomePageState extends State<HomePage> {
                       child: Text(
                         "Balance",
                         style: TextStyle(
-                          color: Colors.blueGrey.shade300,
+                          color: Theme.of(context).textTheme.headline5?.color,
                           fontSize: 20,
                         ),
                       ),
@@ -134,7 +130,7 @@ class _HomePageState extends State<HomePage> {
                       child: Text(
                         "\$ 1,000,000",
                         style: TextStyle(
-                          color: Colors.blueGrey.shade300,
+                          color: Theme.of(context).textTheme.headline5?.color,
                           fontSize: 40,
                         ),
                       ),
@@ -178,14 +174,14 @@ class _HomePageState extends State<HomePage> {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
-                      color: Color(0xff02d39a).withOpacity(0.7),
+                      color: Theme.of(context).buttonTheme.colorScheme?.primary,
                       child: Row(
                         children: [
-                          Icon(Iconsax.wallet, color: Colors.white),
+                          Icon(Iconsax.wallet, color: Theme.of(context).primaryColor),
                           SizedBox(width: 10),
                           Text(
                             "Payment",
-                            style: TextStyle(color: Colors.white),
+                            style: TextStyle(color: Theme.of(context).primaryColor),
                           ),
                         ],
                       ),
@@ -196,8 +192,8 @@ class _HomePageState extends State<HomePage> {
                       padding:
                           EdgeInsets.symmetric(horizontal: 30, vertical: 15),
                       color: Colors.transparent,
-                      splashColor: Color(0xff02d39a).withOpacity(0.4),
-                      highlightColor: Color(0xff02d39a).withOpacity(0.4),
+                      splashColor: Theme.of(context).buttonTheme.colorScheme?.primary.withOpacity(0.4),
+                      highlightColor: Theme.of(context).buttonTheme.colorScheme?.primary.withOpacity(0.4),
                       shape: RoundedRectangleBorder(
                         side: BorderSide(
                             color: Color(0xff02d39a).withOpacity(0.4),
@@ -206,11 +202,11 @@ class _HomePageState extends State<HomePage> {
                       ),
                       child: Row(
                         children: [
-                          Icon(Iconsax.arrow_3, color: Colors.white),
+                          Icon(Iconsax.arrow_3, color: Theme.of(context).iconTheme.color),
                           SizedBox(width: 10),
                           Text(
                             "Transfer",
-                            style: TextStyle(color: Colors.white),
+                            style: TextStyle(color: Theme.of(context).textTheme.headline5?.color),
                           ),
                         ],
                       ),
@@ -224,7 +220,7 @@ class _HomePageState extends State<HomePage> {
                 child: Text(
                   "Recent Transactions",
                   style: TextStyle(
-                    color: Colors.blueGrey.shade300,
+                    color: Theme.of(context).textTheme.headline5?.color,
                     fontSize: 16,
                   ),
                 ),
@@ -254,19 +250,19 @@ class _HomePageState extends State<HomePage> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Icon(Iconsax.arrow_3, color: Colors.blueGrey),
+                              Icon(Iconsax.arrow_3, color: Theme.of(context).iconTheme.color),
                               SizedBox(width: 10),
                               Text(
                                 "Transfer",
                                 style: TextStyle(
-                                  color: Colors.blueGrey,
+                                  color: Theme.of(context).iconTheme.color,
                                 ),
                               ),
                               SizedBox(width: 10),
                               Text(
                                 "\$1,000,000",
                                 style: TextStyle(
-                                  color: Colors.blueGrey,
+                                  color: Theme.of(context).iconTheme.color,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
@@ -274,7 +270,7 @@ class _HomePageState extends State<HomePage> {
                               Text(
                                 "1:00 PM",
                                 style: TextStyle(
-                                  color: Colors.blueGrey,
+                                  color: Theme.of(context).iconTheme.color,
                                   fontSize: 12,
                                 ),
                               ),
