@@ -30,7 +30,6 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
       // App bar
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -219,10 +218,63 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
               ),
+              SizedBox(height: 20),
 
               // Transactions
-
-
+              Expanded(
+                child: Container(
+                  height: 200,
+                  child: ListView.builder(
+                    physics: NeverScrollableScrollPhysics(),
+                    itemCount: 5,
+                    itemBuilder: (context, index) {
+                      return FadeInUp(
+                        from: 50,
+                        duration: Duration(milliseconds: 1000 + index * 100),
+                        child: Container(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 20),
+                          margin: EdgeInsets.only(bottom: 15),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              border: Border.all(
+                                  color: Colors.blueGrey.withOpacity(0.3),
+                                  width: 1)),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Icon(Iconsax.arrow_3, color: Colors.blueGrey),
+                              SizedBox(width: 10),
+                              Text(
+                                "Transfer",
+                                style: TextStyle(
+                                  color: Colors.blueGrey,
+                                ),
+                              ),
+                              SizedBox(width: 10),
+                              Text(
+                                "\$1,000,000",
+                                style: TextStyle(
+                                  color: Colors.blueGrey,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              SizedBox(width: 10),
+                              Text(
+                                "1:00 PM",
+                                style: TextStyle(
+                                  color: Colors.blueGrey,
+                                  fontSize: 12,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ),
             ],
           ),
         ),
