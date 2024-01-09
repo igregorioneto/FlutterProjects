@@ -3,7 +3,9 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:provider/provider.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
+import 'package:wallet/providers/theme_provider.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -29,6 +31,8 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context, listen: false);
+
     return Scaffold(
       // App bar
       appBar: AppBar(
@@ -42,12 +46,19 @@ class _HomePageState extends State<HomePage> {
               color: Colors.blueGrey,
             ),
           ),
-          IconButton(
-            onPressed: () {},
-            icon: Icon(
-              Icons.more_vert,
-              color: Colors.blueGrey,
-            ),
+          // IconButton(
+          //   onPressed: () {},
+          //   icon: Icon(
+          //     Icons.moon,
+          //     color: Colors.blueGrey,
+          //   ),
+          // ),
+          Switch(
+            value: themeProvider.darkTheme,
+            activeColor: Color(0xff02d39a).withOpacity(0.7),
+            onChanged: (value) {
+              themeProvider.toggleTheme();
+            },
           ),
         ],
         leading: IconButton(
@@ -58,7 +69,7 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
       ),
-      backgroundColor: Color(0xff161621),
+      backgroundColor: Theme.of(context).backgroundColor,
 
       // Menu bottom for navigation
       bottomNavigationBar: SalomonBottomBar(
