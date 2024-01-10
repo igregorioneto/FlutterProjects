@@ -28,3 +28,30 @@ O projeto "Todo List em Flutter" é um aplicativo de gerenciamento de tarefas qu
 - **Flutter:** Framework de desenvolvimento multiplataforma que permite a criação de aplicativos nativos para iOS e Android a partir de um único código-base.
 - **Dart:** Linguagem de programação utilizada pelo Flutter para desenvolvimento de aplicações mobile.
 </details>
+
+<details>
+<summary>Wallet - Aplicativo simulando uma Wallet - wallet</summary>
+
+## Wallet
+
+<img src="wallet/assets/Screenshot_1.png" width="150">
+<img src="wallet/assets/Screenshot_2.png" width="150">
+
+### Descrição
+
+O projeto "Wallet" é um aplicativo que simula o template de uma carteira digital.
+Foi utilizando uma arquitetura de pastas para separação do service da regra de negócio e da page. Utilizando a troca de tema dark e light utilizando o provider.
+
+### Recursos Principais
+
+- Interface de usuário atraente e responsiva, desenvolvida com Flutter.
+- Temas Dark e Light.
+- Gráfico representando as transações.
+- listagem de transações.
+- Menu de navegação.
+
+### Tecnologias Utilizadas
+
+- **Flutter:** Framework de desenvolvimento multiplataforma que permite a criação de aplicativos nativos para iOS e Android a partir de um único código-base.
+- **Dart:** Linguagem de programação utilizada pelo Flutter para desenvolvimento de aplicações mobile.
+</details>
