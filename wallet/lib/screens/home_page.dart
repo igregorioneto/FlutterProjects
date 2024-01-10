@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:provider/provider.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
+import 'package:wallet/domain/models/transaction.dart';
 import 'package:wallet/providers/theme_provider.dart';
 import 'package:wallet/services/chart_service.dart';
 import 'package:wallet/viewmodel/home_view_model.dart';
@@ -20,6 +21,7 @@ class _HomePageState extends State<HomePage> {
   bool _isLoaded = false;
   int _currentIndex = 0;
   LineChartData? _chartData;
+  List<Transaction>? _transactionData;
 
   // ChartService chartService = ChartService();
   final homeViewModel = HomeViewModel();
@@ -31,15 +33,23 @@ class _HomePageState extends State<HomePage> {
     //     _isLoaded = true;
     //   });
     // });
-    _fetchData();
+    _fetchChartData();
+    _fetchTransactionData();
     super.initState();
   }
 
-  void _fetchData() async {
+  void _fetchChartData() async {
     LineChartData chartData = await homeViewModel.fetchChartData(_isLoaded);
     setState(() {
       _chartData = chartData;
       _isLoaded = true;
+    });
+  }
+
+  void _fetchTransactionData() async {
+    final transactionData = await homeViewModel.fetchTransactionData();
+    setState(() {
+      _transactionData = transactionData;
     });
   }
 
@@ -270,52 +280,58 @@ class _HomePageState extends State<HomePage> {
                   height: 200,
                   child: ListView.builder(
                     physics: NeverScrollableScrollPhysics(),
-                    itemCount: 5,
+                    itemCount: _transactionData?.length ?? 0,
                     itemBuilder: (context, index) {
-                      return FadeInUp(
-                        from: 50,
-                        duration: Duration(milliseconds: 1000 + index * 100),
-                        child: Container(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 20, vertical: 20),
-                          margin: EdgeInsets.only(bottom: 15),
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              border: Border.all(
-                                  color: Colors.blueGrey.withOpacity(0.3),
-                                  width: 1)),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Icon(Iconsax.arrow_3,
-                                  color: Theme.of(context).iconTheme.color),
-                              SizedBox(width: 10),
-                              Text(
-                                "Transfer",
-                                style: TextStyle(
-                                  color: Theme.of(context).iconTheme.color,
+                      if (_transactionData != null) {
+                        Transaction transaction = _transactionData![index];
+
+                        return FadeInUp(
+                          from: 50,
+                          duration: Duration(milliseconds: 1000 + index * 100),
+                          child: Container(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 20, vertical: 20),
+                            margin: EdgeInsets.only(bottom: 15),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                border: Border.all(
+                                    color: Colors.blueGrey.withOpacity(0.3),
+                                    width: 1)),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Icon(Iconsax.arrow_3,
+                                    color: Theme.of(context).iconTheme.color),
+                                SizedBox(width: 10),
+                                Text(
+                                  transaction.type,
+                                  style: TextStyle(
+                                    color: Theme.of(context).iconTheme.color,
+                                  ),
                                 ),
-                              ),
-                              SizedBox(width: 10),
-                              Text(
-                                "\$1,000,000",
-                                style: TextStyle(
-                                  color: Theme.of(context).iconTheme.color,
-                                  fontWeight: FontWeight.bold,
+                                SizedBox(width: 10),
+                                Text(
+                                  "\$ ${transaction.amount}",
+                                  style: TextStyle(
+                                    color: Theme.of(context).iconTheme.color,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
-                              ),
-                              SizedBox(width: 10),
-                              Text(
-                                "1:00 PM",
-                                style: TextStyle(
-                                  color: Theme.of(context).iconTheme.color,
-                                  fontSize: 12,
+                                SizedBox(width: 10),
+                                Text(
+                                  "${transaction.timestamp.month}/${transaction.timestamp.day}/${transaction.timestamp.year}",
+                                  style: TextStyle(
+                                    color: Theme.of(context).iconTheme.color,
+                                    fontSize: 12,
+                                  ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
-                        ),
-                      );
+                        );
+                      }
+
+                      return Center(child: CircularProgressIndicator());
                     },
                   ),
                 ),
