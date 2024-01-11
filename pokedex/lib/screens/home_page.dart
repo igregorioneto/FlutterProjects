@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:pokedex/domains/models/pokemon.dart';
 import 'package:pokedex/domains/models/pokemon_results_data.dart';
 import 'package:pokedex/services/pokemon_service.dart';
+import 'package:pokedex/util/pokemon_type_colors.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -79,7 +80,8 @@ class _HomePageState extends State<HomePage> {
                         viewportFraction: 0.7,
                         onPageChanged: (index, reason) {
                           setState(() {
-                            imagePokemon = snapshot.data![index].sprite_official_artwork;
+                            imagePokemon =
+                                snapshot.data![index].sprite_official_artwork;
                           });
                         },
                       ),
@@ -93,7 +95,7 @@ class _HomePageState extends State<HomePage> {
                               width: MediaQuery.of(context).size.width,
                               margin: EdgeInsets.symmetric(horizontal: 5),
                               decoration: BoxDecoration(
-                                color: Colors.white,
+                                color: PokemonTypeColors.getColorTypePokemon('fire').withOpacity(0.4),
                                 borderRadius: BorderRadius.circular(20),
                               ),
                               child: SingleChildScrollView(
@@ -104,13 +106,52 @@ class _HomePageState extends State<HomePage> {
                                       margin: EdgeInsets.only(top: 30),
                                       clipBehavior: Clip.hardEdge,
                                       decoration: BoxDecoration(
-                                        borderRadius:
-                                        BorderRadius.circular(20),
+                                        borderRadius: BorderRadius.circular(20),
                                       ),
                                       child: Image.network(
                                         pokemon.sprite_official_artwork,
                                         fit: BoxFit.cover,
                                       ),
+                                    ),
+                                    SizedBox(height: 20),
+                                    Text(
+                                      pokemon.name.toUpperCase(),
+                                      style: TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    SizedBox(height: 20),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Container(
+                                          child: Text(
+                                            'fire'.toUpperCase(),
+                                            style: TextStyle(
+                                              fontSize: 14,
+                                              color: Colors.white,
+                                            ),
+                                            textAlign: TextAlign.center,
+                                          ),
+                                          padding: EdgeInsets.all(10),
+                                          color: PokemonTypeColors
+                                              .getColorTypePokemon('fire'),
+                                        ),
+                                        SizedBox(width: 10),
+                                        Container(
+                                          child: Text(
+                                            'rock'.toUpperCase(),
+                                            style: TextStyle(
+                                              fontSize: 14,
+                                              color: Colors.white,
+                                            ),
+                                            textAlign: TextAlign.center,
+                                          ),
+                                          padding: EdgeInsets.all(10),
+                                          color: PokemonTypeColors.getColorTypePokemon('rock'),
+                                        ),
+                                      ],
                                     ),
                                   ],
                                 ),
