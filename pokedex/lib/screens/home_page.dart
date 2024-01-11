@@ -19,7 +19,7 @@ class _HomePageState extends State<HomePage> {
 
   String? imagePokemon = "";
 
-  Future<List<Pokemon>>? listPokemons;
+  late Future<List<Pokemon>> listPokemons;
 
   @override
   void initState() {
@@ -72,6 +72,10 @@ class _HomePageState extends State<HomePage> {
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return Center(child: CircularProgressIndicator());
+                  } else if (snapshot.hasError) {
+                    return Center(child: Text('Erro ao carregar dados...'));
+                  } else if (snapshot.data == null || snapshot.data!.isEmpty){
+                    return Center(child: Text('Nenhum dado disponível!'));
                   } else {
                     return CarouselSlider.builder(
                       options: CarouselOptions(
@@ -86,7 +90,7 @@ class _HomePageState extends State<HomePage> {
                         },
                       ),
                       carouselController: _controllerCarousel,
-                      itemCount: snapshot.data!.length,
+                      itemCount: snapshot.data?.length,
                       itemBuilder: (context, index, realIndex) {
                         var pokemon = snapshot.data![index];
                         return Builder(
@@ -95,7 +99,7 @@ class _HomePageState extends State<HomePage> {
                               width: MediaQuery.of(context).size.width,
                               margin: EdgeInsets.symmetric(horizontal: 5),
                               decoration: BoxDecoration(
-                                color: PokemonTypeColors.getColorTypePokemon('fire').withOpacity(0.4),
+                                color: PokemonTypeColors.getColorTypePokemon(pokemon.types).withOpacity(0.4),
                                 borderRadius: BorderRadius.circular(20),
                               ),
                               child: SingleChildScrollView(
@@ -109,13 +113,13 @@ class _HomePageState extends State<HomePage> {
                                         borderRadius: BorderRadius.circular(20),
                                       ),
                                       child: Image.network(
-                                        pokemon.sprite_official_artwork,
+                                        pokemon.sprite_official_artwork ?? '',
                                         fit: BoxFit.cover,
                                       ),
                                     ),
                                     SizedBox(height: 20),
                                     Text(
-                                      pokemon.name.toUpperCase(),
+                                      pokemon.name?.toUpperCase() ?? '',
                                       style: TextStyle(
                                           fontSize: 16,
                                           fontWeight: FontWeight.bold),
@@ -127,7 +131,7 @@ class _HomePageState extends State<HomePage> {
                                       children: [
                                         Container(
                                           child: Text(
-                                            'fire'.toUpperCase(),
+                                            pokemon.types.toUpperCase(),
                                             style: TextStyle(
                                               fontSize: 14,
                                               color: Colors.white,
@@ -136,12 +140,12 @@ class _HomePageState extends State<HomePage> {
                                           ),
                                           padding: EdgeInsets.all(10),
                                           color: PokemonTypeColors
-                                              .getColorTypePokemon('fire'),
+                                              .getColorTypePokemon(pokemon.types),
                                         ),
                                         SizedBox(width: 10),
                                         Container(
                                           child: Text(
-                                            'rock'.toUpperCase(),
+                                            pokemon.types2.toUpperCase(),
                                             style: TextStyle(
                                               fontSize: 14,
                                               color: Colors.white,
@@ -149,7 +153,7 @@ class _HomePageState extends State<HomePage> {
                                             textAlign: TextAlign.center,
                                           ),
                                           padding: EdgeInsets.all(10),
-                                          color: PokemonTypeColors.getColorTypePokemon('rock'),
+                                          color: PokemonTypeColors.getColorTypePokemon(pokemon.types2),
                                         ),
                                       ],
                                     ),
