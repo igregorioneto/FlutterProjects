@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:pokedex/domains/models/pokemon.dart';
 import 'package:pokedex/domains/models/pokemon_results_data.dart';
 import 'package:pokedex/services/pokemon_service.dart';
 
@@ -15,7 +16,9 @@ class _HomePageState extends State<HomePage> {
   final _controllerCarousel = CarouselController();
   final _pokemonService = PokemonService();
 
-  Future<List<PokemonResultsData>>? listPokemons;
+  String? imagePokemon = "";
+
+  Future<List<Pokemon>>? listPokemons;
 
   @override
   void initState() {
@@ -31,7 +34,9 @@ class _HomePageState extends State<HomePage> {
         child: Stack(
           children: [
             Image.network(
-                "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png"),
+              imagePokemon! ?? '',
+              fit: BoxFit.cover,
+            ),
             Positioned(
               top: 0,
               bottom: 0,
@@ -67,28 +72,53 @@ class _HomePageState extends State<HomePage> {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return Center(child: CircularProgressIndicator());
                   } else {
-                    return CarouselSlider(
+                    return CarouselSlider.builder(
                       options: CarouselOptions(
-                          height: 500,
-                          aspectRatio: 16 / 9,
-                          viewportFraction: 0.7,
-                          onPageChanged: (index, reason) {
-                            setState(() {
-                              _currentPokemon = index;
-                            });
-                          }),
+                        height: 500,
+                        aspectRatio: 16 / 9,
+                        viewportFraction: 0.7,
+                        onPageChanged: (index, reason) {
+                          setState(() {
+                            imagePokemon = snapshot.data![index].sprite_official_artwork;
+                          });
+                        },
+                      ),
                       carouselController: _controllerCarousel,
-                      items: snapshot.data
-                          ?.map((e) => Builder(builder: (context) {
-                                return Container(
-                                  height: 150,
-                                  width: 150,
-                                  decoration: BoxDecoration(
-                                    color: Colors.black,
-                                  ),
-                                );
-                              }))
-                          .toList(),
+                      itemCount: snapshot.data!.length,
+                      itemBuilder: (context, index, realIndex) {
+                        var pokemon = snapshot.data![index];
+                        return Builder(
+                          builder: (context) {
+                            return Container(
+                              width: MediaQuery.of(context).size.width,
+                              margin: EdgeInsets.symmetric(horizontal: 5),
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              child: SingleChildScrollView(
+                                child: Column(
+                                  children: [
+                                    Container(
+                                      height: 320,
+                                      margin: EdgeInsets.only(top: 30),
+                                      clipBehavior: Clip.hardEdge,
+                                      decoration: BoxDecoration(
+                                        borderRadius:
+                                        BorderRadius.circular(20),
+                                      ),
+                                      child: Image.network(
+                                        pokemon.sprite_official_artwork,
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            );
+                          },
+                        );
+                      },
                     );
                   }
                 },
