@@ -74,7 +74,7 @@ class _HomePageState extends State<HomePage> {
                     return Center(child: CircularProgressIndicator());
                   } else if (snapshot.hasError) {
                     return Center(child: Text('Erro ao carregar dados...'));
-                  } else if (snapshot.data == null || snapshot.data!.isEmpty){
+                  } else if (snapshot.data == null || snapshot.data!.isEmpty) {
                     return Center(child: Text('Nenhum dado disponível!'));
                   } else {
                     return CarouselSlider.builder(
@@ -86,6 +86,7 @@ class _HomePageState extends State<HomePage> {
                           setState(() {
                             imagePokemon =
                                 snapshot.data![index].sprite_official_artwork;
+                            _currentPokemon = index;
                           });
                         },
                       ),
@@ -99,7 +100,10 @@ class _HomePageState extends State<HomePage> {
                               width: MediaQuery.of(context).size.width,
                               margin: EdgeInsets.symmetric(horizontal: 5),
                               decoration: BoxDecoration(
-                                color: PokemonTypeColors.getColorTypePokemon(pokemon.types).withOpacity(0.4),
+                                // color: PokemonTypeColors.getColorTypePokemon(
+                                //         pokemon.types)
+                                //     .withOpacity(0.4),
+                                color: Colors.white,
                                 borderRadius: BorderRadius.circular(20),
                               ),
                               child: SingleChildScrollView(
@@ -124,7 +128,7 @@ class _HomePageState extends State<HomePage> {
                                           fontSize: 16,
                                           fontWeight: FontWeight.bold),
                                     ),
-                                    SizedBox(height: 20),
+                                    SizedBox(height: 10),
                                     Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
@@ -140,12 +144,12 @@ class _HomePageState extends State<HomePage> {
                                           ),
                                           padding: EdgeInsets.all(10),
                                           color: PokemonTypeColors
-                                              .getColorTypePokemon(pokemon.types),
+                                              .getColorTypePokemon(
+                                                  pokemon.types),
                                         ),
-                                        SizedBox(width: 10),
-                                        Container(
+                                        /*Container(
                                           child: Text(
-                                            pokemon.types2.toUpperCase(),
+                                            'fire'.toUpperCase(),
                                             style: TextStyle(
                                               fontSize: 14,
                                               color: Colors.white,
@@ -153,9 +157,83 @@ class _HomePageState extends State<HomePage> {
                                             textAlign: TextAlign.center,
                                           ),
                                           padding: EdgeInsets.all(10),
-                                          color: PokemonTypeColors.getColorTypePokemon(pokemon.types2),
-                                        ),
+                                          color: PokemonTypeColors.getColorTypePokemon('fire'),
+                                        ),*/
+
                                       ],
+                                    ),
+                                    SizedBox(height: 20),
+                                    AnimatedOpacity(
+                                      opacity:
+                                      _currentPokemon == index ? 1 : 0,
+                                      duration: Duration(
+                                        milliseconds: 500,
+                                      ),
+                                      child: Container(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 20),
+                                        child: Row(
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Container(
+                                              child: Row(
+                                                children: [
+                                                  Icon(
+                                                    Icons.star,
+                                                    color: Colors.yellow,
+                                                    size: 20,
+                                                  ),
+                                                  SizedBox(width: 5),
+                                                  Text(
+                                                    '${pokemon.base_experience}',
+                                                    style: TextStyle(
+                                                      fontSize: 14,
+                                                      color: Colors
+                                                          .black,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                            Container(
+                                              child: Row(
+                                                children: [
+                                                  Icon(
+                                                    Icons.line_weight,
+                                                    color: Colors.blue,
+                                                    size: 20,
+                                                  ),
+                                                  SizedBox(width: 5),
+                                                  Text(
+                                                    '${pokemon.weight}',
+                                                    style: TextStyle(
+                                                      fontSize: 14,
+                                                      color: Colors.black,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                            Container(
+                                              width: MediaQuery.of(context).size.width * 0.2,
+                                              child: Row(
+                                                children: [
+                                                  Icon(Icons.height,
+                                                      color: Colors.green,
+                                                      size: 20),
+                                                  SizedBox(width: 5),
+                                                  Text(
+                                                    '${pokemon.height}',
+                                                    style: TextStyle(
+                                                        fontSize: 14,
+                                                        color: Colors.black),
+                                                  ),
+                                                ],
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                      ),
                                     ),
                                   ],
                                 ),

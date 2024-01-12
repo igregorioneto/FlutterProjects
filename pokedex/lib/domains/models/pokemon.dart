@@ -4,7 +4,7 @@ class Pokemon {
   final String? sprite_official_artwork;
 
   final String types;
-  final String types2;
+  //final String types2;
 
   final int? weight;
   final int? height;
@@ -15,7 +15,7 @@ class Pokemon {
     required this.name,
     required this.sprite_official_artwork,
     this.types = '',
-    this.types2 = '',
+    //this.types2 = '',
     required this.height,
     required this.base_experience,
     required this.weight,
@@ -30,6 +30,6 @@ class Pokemon {
         weight = json['weight'],
         base_experience = json['base_experience'],
         height = json['height'],
-        types = json['types'][0]['type']['name'],
-        types2 = json['types'][1]['type']['name'];
+        types = json['types'][0]['type']['name'];
+        //types2 = json['types'][1]['type']['name'];
 }
