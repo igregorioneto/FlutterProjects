@@ -55,3 +55,32 @@ Foi utilizando uma arquitetura de pastas para separação do service da regra de
 - **Flutter:** Framework de desenvolvimento multiplataforma que permite a criação de aplicativos nativos para iOS e Android a partir de um único código-base.
 - **Dart:** Linguagem de programação utilizada pelo Flutter para desenvolvimento de aplicações mobile.
 </details>
+
+<details>
+<summary>Pokedex - pokedex (Ainda em construção...)</summary>
+
+## Pokedex
+
+<img src="pokedex/assets/Android Emulator - android_5554 2024-01-12 17-08-26.gif" width="150">
+<br />
+<img src="pokedex/assets/Screenshot_1.png" width="150">
+<img src="pokedex/assets/Screenshot_2.png" width="150">
+
+### Descrição
+
+O projeto "Pokedex" é um aplicativo que simula uma pokedex de pokemon, para treinar
+os estilos e layout do flutter. Foi realizado a requisição na api da https://pokeapi.co/.
+
+### Recursos Principais
+
+- Interface de usuário atraente e responsiva, desenvolvida com Flutter.
+- Carousel.
+- Imagem do pokemon de fundo.
+- Listagem de pokemons.
+- Conexão com API.
+
+### Tecnologias Utilizadas
+
+- **Flutter:** Framework de desenvolvimento multiplataforma que permite a criação de aplicativos nativos para iOS e Android a partir de um único código-base.
+- **Dart:** Linguagem de programação utilizada pelo Flutter para desenvolvimento de aplicações mobile.
+</details>
