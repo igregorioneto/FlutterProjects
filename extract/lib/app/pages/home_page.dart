@@ -102,28 +102,85 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
             Container(
-              child: Padding(
-                padding: EdgeInsets.all(15),
-                child: ListTile(
-                  tileColor: AppColors.gray2,
-                  title: Text('Transferência enviada'),
-                  subtitle: Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text('David Bond'),
-                          Text('13/10'),
-                        ],
+              child: ListTile(
+                leading: Column(
+                  children: [
+                    Container(
+                      width: 2,
+                      height: 20,
+                      color: Colors.grey,
+                    ),
+                    Container(
+                      width: 10,
+                      height: 10,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: AppColors.blue,
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text('R\$ 18,00'),
-                        ],
-                      ),
-                    ],
+                    ),
+                    Container(
+                      width: 2,
+                      height: 20,
+                      color: Colors.grey,
+                    ),
+                  ],
+                ),
+                tileColor: AppColors.gray2,
+                title: Padding(
+                  padding: const EdgeInsets.only(top: 5, left: 20),
+                  child: Text(
+                    'Transferência enviada',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.black,
+                    ),
                   ),
+                ),
+                subtitle: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(top: 5, left: 20),
+                          child: Text(
+                            'David Bond',
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: AppColors.gray,
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 5, left: 20),
+                          child: Text(
+                            '13/10',
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: AppColors.gray,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(top: 5, left: 20),
+                          child: Text(
+                            'R\$ 18,00',
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color: AppColors.black,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
               ),
             ),
