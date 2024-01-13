@@ -1,3 +1,7 @@
+import 'package:extract/app/data/bloc/transfer_bloc.dart';
+import 'package:extract/app/data/bloc/transfer_event.dart';
+import 'package:extract/app/data/bloc/transfer_state.dart';
+import 'package:extract/app/pages/extract_page.dart';
 import 'package:extract/app/presenter/themes/colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +15,14 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   bool _isBalance = true;
+  late final TransferBloc _transferBloc;
+
+  @override
+  void initState() {
+    super.initState();
+    _transferBloc = TransferBloc();
+    _transferBloc.inputTransfer.add(GetTransfers());
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -101,86 +113,123 @@ class _HomePageState extends State<HomePage> {
                 ),
               ],
             ),
-            Container(
-              child: ListTile(
-                leading: Column(
-                  children: [
-                    Container(
-                      width: 2,
-                      height: 20,
-                      color: Colors.grey,
-                    ),
-                    Container(
-                      width: 10,
-                      height: 10,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: AppColors.blue,
-                      ),
-                    ),
-                    Container(
-                      width: 2,
-                      height: 20,
-                      color: Colors.grey,
-                    ),
-                  ],
-                ),
-                tileColor: AppColors.gray2,
-                title: Padding(
-                  padding: const EdgeInsets.only(top: 5, left: 20),
-                  child: Text(
-                    'Transferência enviada',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      color: AppColors.black,
-                    ),
-                  ),
-                ),
-                subtitle: Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(top: 5, left: 20),
-                          child: Text(
-                            'David Bond',
-                            style: TextStyle(
-                              fontSize: 16,
-                              color: AppColors.gray,
+            Expanded(
+              child: SingleChildScrollView(
+                child: StreamBuilder<TransferState>(
+                  stream: _transferBloc.outputTransfer,
+                  builder: (context, state) {
+                    if (state.data is TransferLoadingState) {
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    } else if (state.data is TransferLoadedState) {
+                      final list = state.data?.transfers ?? [];
+                      return ListView.separated(
+                        separatorBuilder: (_, __) => const Divider(),
+                        physics: NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemCount: list.length,
+                        itemBuilder: (_, index) {
+                          return ListTile(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => ExtractPage(type: list[index].type,),
+                                ),
+                              );
+                            },
+                            leading: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                // Container(
+                                //   width: 2,
+                                //   height: 20,
+                                //   color: Colors.grey,
+                                // ),
+                                Container(
+                                  width: 10,
+                                  height: 10,
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: AppColors.blue,
+                                  ),
+                                ),
+                                // Container(
+                                //   width: 2,
+                                //   height: 20,
+                                //   color: Colors.grey,
+                                // ),
+                              ],
                             ),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 5, left: 20),
-                          child: Text(
-                            '13/10',
-                            style: TextStyle(
-                              fontSize: 16,
-                              color: AppColors.gray,
+                            tileColor: AppColors.gray2,
+                            title: Padding(
+                              padding: const EdgeInsets.only(top: 5),
+                              child: Text(
+                                list[index].type,
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                  color: AppColors.black,
+                                ),
+                              ),
                             ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(top: 5, left: 20),
-                          child: Text(
-                            'R\$ 18,00',
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                              color: AppColors.black,
+                            subtitle: Column(
+                              children: [
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.only(top: 5),
+                                      child: Text(
+                                        list[index].from,
+                                        style: TextStyle(
+                                          fontSize: 16,
+                                          color: AppColors.gray,
+                                        ),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(top: 5),
+                                      child: Text(
+                                        list[index].date,
+                                        style: TextStyle(
+                                          fontSize: 16,
+                                          color: AppColors.gray,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.only(top: 5),
+                                      child: Text(
+                                        'R\$ ${list[index].value}',
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold,
+                                          color: AppColors.black,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
                             ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
+                          );
+                        },
+                      );
+                    } else {
+                      return Center(
+                        child: Text('Error'),
+                      );
+                    }
+                  },
                 ),
               ),
             ),
