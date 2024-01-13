@@ -85,6 +85,48 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
             ),
+            SizedBox(height: 10),
+            Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(15),
+                  child: Text(
+                    'Sua movimentações',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.black,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            Container(
+              child: Padding(
+                padding: EdgeInsets.all(15),
+                child: ListTile(
+                  tileColor: AppColors.gray2,
+                  title: Text('Transferência enviada'),
+                  subtitle: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text('David Bond'),
+                          Text('13/10'),
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text('R\$ 18,00'),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
           ],
         ),
       ),
