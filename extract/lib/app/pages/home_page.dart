@@ -3,6 +3,7 @@ import 'package:extract/app/data/bloc/transfer_event.dart';
 import 'package:extract/app/data/bloc/transfer_state.dart';
 import 'package:extract/app/pages/extract_page.dart';
 import 'package:extract/app/presenter/themes/colors.dart';
+import 'package:extract/app/presenter/utils/title_type.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -124,8 +125,7 @@ class _HomePageState extends State<HomePage> {
                       );
                     } else if (state.data is TransferLoadedState) {
                       final list = state.data?.transfers ?? [];
-                      return ListView.separated(
-                        separatorBuilder: (_, __) => const Divider(),
+                      return ListView.builder(
                         physics: NeverScrollableScrollPhysics(),
                         shrinkWrap: true,
                         itemCount: list.length,
@@ -136,7 +136,8 @@ class _HomePageState extends State<HomePage> {
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => ExtractPage(
-                                    type: list[index].type,
+                                    type: TitleType.getTitleType(
+                                        list[index].type),
                                     from: list[index].from,
                                     value: list[index].value,
                                     date: list[index].date,
@@ -168,17 +169,38 @@ class _HomePageState extends State<HomePage> {
                                 // ),
                               ],
                             ),
-                            tileColor: AppColors.gray2,
-                            title: Padding(
-                              padding: const EdgeInsets.only(top: 5),
-                              child: Text(
-                                list[index].type,
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                  color: AppColors.black,
+                            tileColor: list[index].type == 'PIXE' ||
+                                    list[index].type == 'PIXR'
+                                ? AppColors.gray2
+                                : AppColors.white,
+                            title: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 5),
+                                  child: Text(
+                                    TitleType.getTitleType(list[index].type),
+                                    style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold,
+                                      color: AppColors.black,
+                                    ),
+                                  ),
                                 ),
-                              ),
+                                list[index].type == 'PIXE' || list[index].type == 'PIXR' ? Container(
+                                  width: 50,
+                                  height: 20,
+                                  child: Text(
+                                    'PIX',
+                                    style: TextStyle(
+                                      color: AppColors.white,
+                                      fontSize: 15,
+                                    ),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                  color: AppColors.blue,
+                                ) : Container(),
+                              ],
                             ),
                             subtitle: Column(
                               children: [
@@ -186,15 +208,20 @@ class _HomePageState extends State<HomePage> {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Padding(
-                                      padding: const EdgeInsets.only(top: 5),
-                                      child: Text(
-                                        list[index].from,
-                                        style: TextStyle(
-                                          fontSize: 16,
-                                          color: AppColors.gray,
+                                    Row(
+                                      children: [
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(top: 5),
+                                          child: Text(
+                                            list[index].from,
+                                            style: TextStyle(
+                                              fontSize: 16,
+                                              color: AppColors.gray,
+                                            ),
+                                          ),
                                         ),
-                                      ),
+                                      ],
                                     ),
                                     Padding(
                                       padding: const EdgeInsets.only(top: 5),
