@@ -135,7 +135,12 @@ class _HomePageState extends State<HomePage> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => ExtractPage(type: list[index].type,),
+                                  builder: (context) => ExtractPage(
+                                    type: list[index].type,
+                                    from: list[index].from,
+                                    value: list[index].value,
+                                    date: list[index].date,
+                                  ),
                                 ),
                               );
                             },
