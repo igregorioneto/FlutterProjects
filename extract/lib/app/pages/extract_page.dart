@@ -4,6 +4,7 @@ import 'package:extract/app/presenter/themes/colors.dart';
 import 'package:extract/app/presenter/utils/pdf.dart';
 import 'package:extract/app/presenter/widgets/title_result_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:share_plus/share_plus.dart';
 
 class ExtractPage extends StatelessWidget {
@@ -99,18 +100,28 @@ class ExtractPage extends StatelessWidget {
                 ),
               ),
               onPressed: () async {
-                await PDF.generatePdf(
-                  type: type,
-                  from: from,
-                  value: value,
-                  date: date,
-                );
+                try {
+                  await PDF.generatePdf(
+                    type: type,
+                    from: from,
+                    value: value,
+                    date: date,
+                  );
+                  final directory = await getApplicationDocumentsDirectory();
+                  final sourceFile = File('${Directory.systemTemp.path}/comprovante.pdf');
+                  final destinationFile = File('${directory.path}/comprovante.pdf');
 
-                final result = await Share.shareXFiles(
-                    ([XFile('${Directory.systemTemp.path}/comprovante.pdf')]),
-                    text: 'Compartilhando...');
-                if (result.status == ShareResultStatus.success) {
-                  print('Compartilhamento realizado com sucesso!');
+                  await sourceFile.copy(destinationFile.path);
+
+                  if (await destinationFile.exists()) {
+                    await Share.shareFiles(
+                        [destinationFile.path],
+                        text: 'Compartilhando...');
+                  } else {
+                    print('Erro ao compartilhar o PDF: o arquivo não foi encontrado.');
+                  }
+                } catch (e) {
+                  print('Erro ao compartilhar o PDF: $e');
                 }
               },
             ),
