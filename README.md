@@ -84,3 +84,29 @@ os estilos e layout do flutter. Foi realizado a requisição na api da https://p
 - **Flutter:** Framework de desenvolvimento multiplataforma que permite a criação de aplicativos nativos para iOS e Android a partir de um único código-base.
 - **Dart:** Linguagem de programação utilizada pelo Flutter para desenvolvimento de aplicações mobile.
 </details>
+
+<details>
+<summary>Extract - extract</summary>
+
+## Extract
+
+<img src="extract/assets/Android Emulator - android_5554 2024-01-15 16-15-59.gif" width="300">
+<br />
+
+### Descrição
+
+O projeto "Wallet" aplicativo baseado no desafio neste git: https://github.com/somosphi/desafio-android. Simulei o backend como esta inativo com dados mockados, criei utilizando bloc, compartilhamento, gerando pdf.
+
+### Recursos Principais
+
+- Interface de usuário atraente e responsiva, desenvolvida com Flutter.
+- Listagem de transações.
+- Bloc.
+- Compartilhamento.
+- Gerando arquivo PDF.
+
+### Tecnologias Utilizadas
+
+- **Flutter:** Framework de desenvolvimento multiplataforma que permite a criação de aplicativos nativos para iOS e Android a partir de um único código-base.
+- **Dart:** Linguagem de programação utilizada pelo Flutter para desenvolvimento de aplicações mobile.
+</details>
