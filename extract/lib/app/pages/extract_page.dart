@@ -1,6 +1,10 @@
+import 'dart:io';
+
 import 'package:extract/app/presenter/themes/colors.dart';
+import 'package:extract/app/presenter/utils/pdf.dart';
 import 'package:extract/app/presenter/widgets/title_result_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:share_plus/share_plus.dart';
 
 class ExtractPage extends StatelessWidget {
   final String type;
@@ -94,7 +98,21 @@ class ExtractPage extends StatelessWidget {
                   fontSize: 20,
                 ),
               ),
-              onPressed: () {},
+              onPressed: () async {
+                await PDF.generatePdf(
+                  type: type,
+                  from: from,
+                  value: value,
+                  date: date,
+                );
+
+                final result = await Share.shareXFiles(
+                    ([XFile('${Directory.systemTemp.path}/comprovante.pdf')]),
+                    text: 'Compartilhando...');
+                if (result.status == ShareResultStatus.success) {
+                  print('Compartilhamento realizado com sucesso!');
+                }
+              },
             ),
           ),
         ],
