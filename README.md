@@ -95,7 +95,7 @@ os estilos e layout do flutter. Foi realizado a requisição na api da https://p
 
 ### Descrição
 
-O projeto "Wallet" aplicativo baseado no desafio neste git: https://github.com/somosphi/desafio-android. Simulei o backend como esta inativo com dados mockados, criei utilizando bloc, compartilhamento, gerando pdf.
+O projeto "Extract" aplicativo baseado no desafio neste git: https://github.com/somosphi/desafio-android. Simulei o backend como esta inativo com dados mockados, criei utilizando bloc, compartilhamento, gerando pdf.
 
 ### Recursos Principais
 
