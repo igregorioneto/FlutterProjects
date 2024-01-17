@@ -110,3 +110,51 @@ O projeto "Extract" aplicativo baseado no desafio neste git: https://github.com/
 - **Flutter:** Framework de desenvolvimento multiplataforma que permite a criação de aplicativos nativos para iOS e Android a partir de um único código-base.
 - **Dart:** Linguagem de programação utilizada pelo Flutter para desenvolvimento de aplicações mobile.
 </details>
+
+<details>
+<summary>Provider - provider_estudos</summary>
+
+## Extract
+
+<img src="provider_estados/assets/Android Emulator - android_5554 2024-01-17 16-23-02.gif" width="300">
+<br />
+
+### Descrição
+
+O projeto "Provider" aplicativo para mudança de temas utilizando o provider.
+
+### Recursos Principais
+
+- Interface de usuário atraente e responsiva, desenvolvida com Flutter.
+- Mudança de temas.
+- Provider
+
+### Tecnologias Utilizadas
+
+- **Flutter:** Framework de desenvolvimento multiplataforma que permite a criação de aplicativos nativos para iOS e Android a partir de um único código-base.
+- **Dart:** Linguagem de programação utilizada pelo Flutter para desenvolvimento de aplicações mobile.
+</details>
+
+<details>
+<summary>Todo Cubit - todo_cubit</summary>
+
+## Extract
+
+<img src="todo_cubit/assets/Android Emulator - android_5554 2024-01-17 16-25-22.gif" width="300">
+<br />
+
+### Descrição
+
+O projeto "Todo Cubit" aplicativo utilizando o Cubit para gerenciamento de estado.
+Simulando uma implementação com api e utilizando o gerenciamento de estado.
+
+### Recursos Principais
+
+- Interface de usuário atraente e responsiva, desenvolvida com Flutter.
+- Cubit para gerenciamento de estado.
+
+### Tecnologias Utilizadas
+
+- **Flutter:** Framework de desenvolvimento multiplataforma que permite a criação de aplicativos nativos para iOS e Android a partir de um único código-base.
+- **Dart:** Linguagem de programação utilizada pelo Flutter para desenvolvimento de aplicações mobile.
+</details>
