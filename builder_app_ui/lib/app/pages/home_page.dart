@@ -38,7 +38,6 @@ class _HomePageState extends State<HomePage> {
         ],
         onTap: _onItemTap,
       ),
-      backgroundColor: Theme.of(context).backgroundColor,
       appBar: AppBar(
         leading: Padding(
           padding: const EdgeInsets.symmetric(horizontal:15),
@@ -94,9 +93,67 @@ class _HomePageState extends State<HomePage> {
                 children: [
                   Text('Here are your sites', style: TextStyle(fontSize: 18),),
                 ],
-              )
+              ),
 
               // Cards AI and New Site
+              SizedBox(height: 40),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Container(
+                    color: Colors.white,
+                    width: 170,
+                    height: 200,
+                    child: Column(
+                      children: [
+                        Container(
+                          child: Icon(Icons.star),
+                          height: 75,
+                          width: 120,
+                          color: Colors.blue,
+                          margin: EdgeInsets.all(15),
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            SizedBox(height: 10),
+                            Text('AI'),
+                            SizedBox(height: 10),
+                            Text('Create with AI'),
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
+
+                  Container(
+                    color: Colors.white,
+                    width: 170,
+                    height: 200,
+                    child: Column(
+                      children: [
+                        Container(
+                          child: Icon(Icons.menu_book),
+                          height: 75,
+                          width: 120,
+                          color: Colors.blue,
+                          margin: EdgeInsets.all(15),
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            SizedBox(height: 10),
+                            Text('New Site'),
+                            SizedBox(height: 10),
+                            Text('Create with Blank'),
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
+                ],
+              )
 
               // List cards created
 
