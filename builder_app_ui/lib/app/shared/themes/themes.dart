@@ -13,6 +13,9 @@ ThemeData get lightTheme => ThemeData(
   ),
   cardColor: _lightColorScheme.onSecondary,
   backgroundColor: _lightColorScheme.onPrimary,
+  iconTheme: IconThemeData(color: _lightColorScheme.secondary),
+  buttonTheme: ButtonThemeData(colorScheme: ColorScheme.fromSwatch(backgroundColor: _lightColorScheme.secondary)),
+  textTheme: TextTheme(headline5: TextStyle(color: _lightColorScheme.onPrimary)),
 );
 
 ThemeData get darkTheme => ThemeData(
@@ -27,4 +30,7 @@ ThemeData get darkTheme => ThemeData(
   ),
   cardColor: _darkColorScheme.onSecondary,
   backgroundColor: _darkColorScheme.onPrimary,
+  iconTheme: IconThemeData(color: _darkColorScheme.secondary),
+  buttonTheme: ButtonThemeData(colorScheme: ColorScheme.fromSwatch(backgroundColor: _darkColorScheme.secondary)),
+  textTheme: TextTheme(headline5: TextStyle(color: _darkColorScheme.onPrimary)),
 );
