@@ -112,6 +112,7 @@ class _HomePageState extends State<HomePage> {
                     iconContainer: Icon(
                       Icons.star,
                       color: Colors.white,
+                      size: 32,
                     ),
                     textTitle: 'AI',
                     textDescription: 'Create with AI',
@@ -128,9 +129,61 @@ class _HomePageState extends State<HomePage> {
                     textDescription: 'Create with Blank',
                   ),
                 ],
-              )
+              ),
 
+              SizedBox(height: 20),
               // List cards created
+              Expanded(
+                child: ListView.builder(
+                  itemCount: 5,
+                  itemBuilder: (context, index) {
+                    return Container(
+                      height: 80,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(16),
+                        color: Colors.white,
+                        border: Border.all(
+                          width: 2,
+                          color: Colors.grey.shade200,
+                        ),
+                      ),
+                      child: Align(
+                        alignment: Alignment.center,
+                        child: ListTile(
+                          leading: Container(
+                            height: 60,
+                            width: 60,
+                            child: Card(
+                              child: Icon(Icons.ac_unit, color: Colors.white),
+                              color: Colors.green,
+                              shadowColor: Colors.black,
+                            ),
+                          ),
+                          title: Text(
+                            'Fintech Website',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                            ),
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                          subtitle: Text(
+                            'Free * Unpublished',
+                            style: TextStyle(
+                              fontSize: 18,
+                            ),
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                          trailing: IconButton(
+                            icon: Icon(Icons.more_horiz),
+                            onPressed: () {},
+                          ),
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ),
             ],
           ),
         ),

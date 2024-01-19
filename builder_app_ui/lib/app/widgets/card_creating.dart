@@ -21,6 +21,7 @@ class CardCreating extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      shadowColor: Colors.grey.shade200,
       child: Column(
         children: [
           Container(
@@ -31,6 +32,14 @@ class CardCreating extends StatelessWidget {
             decoration: BoxDecoration(
               color: boxColor,
               borderRadius: BorderRadius.circular(16),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.5),
+                  spreadRadius: 5,
+                  blurRadius: 7,
+                  offset: Offset(0, 3),
+                ),
+              ],
             ),
           ),
           Column(
