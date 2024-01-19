@@ -1,5 +1,9 @@
+import 'package:builder_app_ui/app/app_store.dart';
+import 'package:builder_app_ui/app/data/models/app_generate.dart';
+import 'package:builder_app_ui/app/viewmodel/home_viewmodel.dart';
 import 'package:builder_app_ui/app/widgets/card_creating.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -11,6 +15,22 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int _currentPageIndex = 0;
 
+  final _homeViewModel = HomeViewModel();
+  List<AppGenerate>? _appGeneratedValue;
+
+  @override
+  void initState() {
+    _fetchAppGeneratedValue();
+    super.initState();
+  }
+
+  void _fetchAppGeneratedValue() async {
+    final appGeneratedValue = await _homeViewModel.fetchAppGeneratedValues();
+    setState(() {
+      _appGeneratedValue = appGeneratedValue;
+    });
+  }
+
   void _onItemTap(int index) {
     setState(() {
       _currentPageIndex = index;
@@ -19,6 +39,8 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final AppStore appStore = Provider.of<AppStore>(context);
+
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Theme.of(context).cardColor,
@@ -46,9 +68,19 @@ class _HomePageState extends State<HomePage> {
         ),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              if (appStore.themeMode == ThemeMode.system ||
+                  appStore.themeMode == ThemeMode.light) {
+                appStore.switchTheme(ThemeMode.dark);
+              } else {
+                appStore.switchTheme(ThemeMode.light);
+              }
+            },
             icon: Icon(
-              Icons.motion_photos_on_outlined,
+              appStore.themeMode == ThemeMode.system ||
+                      appStore.themeMode == ThemeMode.light
+                  ? Icons.mode_night_outlined
+                  : Icons.wb_sunny_outlined,
               size: 30,
             ),
           ),
@@ -108,7 +140,8 @@ class _HomePageState extends State<HomePage> {
                   CardCreating(
                     height: 120,
                     width: 140,
-                    boxColor: Colors.green.shade500,
+                    boxColorPrimary: Colors.green.shade500,
+                    boxColorSecondary: Colors.green.shade200,
                     iconContainer: Icon(
                       Icons.star,
                       color: Colors.white,
@@ -120,7 +153,8 @@ class _HomePageState extends State<HomePage> {
                   CardCreating(
                     height: 120,
                     width: 140,
-                    boxColor: Colors.grey.shade300,
+                    boxColorPrimary: Colors.grey.shade500,
+                    boxColorSecondary: Colors.grey.shade200,
                     iconContainer: Icon(
                       Icons.menu_open,
                       color: Colors.white,
@@ -135,52 +169,60 @@ class _HomePageState extends State<HomePage> {
               // List cards created
               Expanded(
                 child: ListView.builder(
-                  itemCount: 5,
+                  itemCount: _appGeneratedValue?.length ?? 0,
                   itemBuilder: (context, index) {
-                    return Container(
-                      height: 80,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(16),
-                        color: Colors.white,
-                        border: Border.all(
-                          width: 2,
-                          color: Colors.grey.shade200,
-                        ),
-                      ),
-                      child: Align(
-                        alignment: Alignment.center,
-                        child: ListTile(
-                          leading: Container(
-                            height: 60,
-                            width: 60,
-                            child: Card(
-                              child: Icon(Icons.ac_unit, color: Colors.white),
-                              color: Colors.green,
-                              shadowColor: Colors.black,
-                            ),
-                          ),
-                          title: Text(
-                            'Fintech Website',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20,
-                            ),
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                          subtitle: Text(
-                            'Free * Unpublished',
-                            style: TextStyle(
-                              fontSize: 18,
-                            ),
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                          trailing: IconButton(
-                            icon: Icon(Icons.more_horiz),
-                            onPressed: () {},
+                    if (_appGeneratedValue != null) {
+                      final value = _appGeneratedValue![index];
+
+                      return Container(
+                        height: 80,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(16),
+                          color: Theme.of(context).cardColor,
+                          border: Border.all(
+                            width: 2,
+                            color: Colors.grey.shade200,
                           ),
                         ),
-                      ),
-                    );
+                        child: Align(
+                          alignment: Alignment.center,
+                          child: ListTile(
+                            leading: Container(
+                              height: 60,
+                              width: 60,
+                              child: Card(
+                                child: Icon(Icons.ac_unit, color: Colors.white),
+                                color: value.typeApp == 'APP'
+                                    ? Colors.green
+                                    : Colors.orangeAccent,
+                                shadowColor: Colors.grey,
+                              ),
+                            ),
+                            title: Text(
+                              value.title,
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                              ),
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                            subtitle: Text(
+                              '${value.typePayment} * ${value.publishad ? 'Published' : 'Unpublished'}',
+                              style: TextStyle(
+                                fontSize: 18,
+                              ),
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                            trailing: IconButton(
+                              icon: Icon(Icons.more_horiz),
+                              onPressed: () {},
+                            ),
+                          ),
+                        ),
+                      );
+                    }
+                    // Progress Indicator
+                    return Center(child: CircularProgressIndicator());
                   },
                 ),
               ),
