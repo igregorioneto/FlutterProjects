@@ -158,3 +158,28 @@ Simulando uma implementação com api e utilizando o gerenciamento de estado.
 - **Flutter:** Framework de desenvolvimento multiplataforma que permite a criação de aplicativos nativos para iOS e Android a partir de um único código-base.
 - **Dart:** Linguagem de programação utilizada pelo Flutter para desenvolvimento de aplicações mobile.
 </details>
+
+<details>
+<summary>Builder App UI - builder_app_ui (Falta a página de Templates)</summary>
+
+## Extract
+
+<img src="builder_app_ui/assets/Android Emulator - android_5554 2024-01-19 16-36-22.gif" width="300">
+<br />
+
+### Descrição
+
+O projeto "Builder App UI" aplicativo tirando como base este design https://dribbble.com/shots/23447398-Website-Builder-App-UI#. Foi desenvolvido a parte do Tema Dark e Light utilizando provider e simulando a integração com API.
+
+### Recursos Principais
+
+- Interface de usuário atraente e responsiva, desenvolvida com Flutter.
+- Temas Dark e Light.
+- Simulando a integração com API.
+- Provider para gerenciamento de estado.
+
+### Tecnologias Utilizadas
+
+- **Flutter:** Framework de desenvolvimento multiplataforma que permite a criação de aplicativos nativos para iOS e Android a partir de um único código-base.
+- **Dart:** Linguagem de programação utilizada pelo Flutter para desenvolvimento de aplicações mobile.
+</details>
