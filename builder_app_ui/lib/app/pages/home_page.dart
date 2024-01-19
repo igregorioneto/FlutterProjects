@@ -1,3 +1,4 @@
+import 'package:builder_app_ui/app/widgets/card_creating.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -40,7 +41,7 @@ class _HomePageState extends State<HomePage> {
       ),
       appBar: AppBar(
         leading: Padding(
-          padding: const EdgeInsets.symmetric(horizontal:15),
+          padding: const EdgeInsets.symmetric(horizontal: 15),
           child: Icon(Icons.ac_unit, size: 40),
         ),
         actions: [
@@ -65,10 +66,7 @@ class _HomePageState extends State<HomePage> {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            color: Theme.of(context)
-                .buttonTheme
-                .colorScheme
-                ?.background,
+            color: Theme.of(context).buttonTheme.colorScheme?.background,
           ),
           SizedBox(width: 10),
           CircleAvatar(
@@ -86,12 +84,18 @@ class _HomePageState extends State<HomePage> {
               // Salutation
               Row(
                 children: [
-                  Text('Hi Paulo', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),),
+                  Text(
+                    'Hi Paulo',
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                  ),
                 ],
               ),
               Row(
                 children: [
-                  Text('Here are your sites', style: TextStyle(fontSize: 18),),
+                  Text(
+                    'Here are your sites',
+                    style: TextStyle(fontSize: 18),
+                  ),
                 ],
               ),
 
@@ -101,62 +105,32 @@ class _HomePageState extends State<HomePage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Container(
-                    color: Colors.white,
-                    width: 170,
-                    height: 200,
-                    child: Column(
-                      children: [
-                        Container(
-                          child: Icon(Icons.star),
-                          height: 75,
-                          width: 120,
-                          color: Colors.blue,
-                          margin: EdgeInsets.all(15),
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            SizedBox(height: 10),
-                            Text('AI'),
-                            SizedBox(height: 10),
-                            Text('Create with AI'),
-                          ],
-                        )
-                      ],
+                  CardCreating(
+                    height: 120,
+                    width: 140,
+                    boxColor: Colors.green.shade500,
+                    iconContainer: Icon(
+                      Icons.star,
+                      color: Colors.white,
                     ),
+                    textTitle: 'AI',
+                    textDescription: 'Create with AI',
                   ),
-
-                  Container(
-                    color: Colors.white,
-                    width: 170,
-                    height: 200,
-                    child: Column(
-                      children: [
-                        Container(
-                          child: Icon(Icons.menu_book),
-                          height: 75,
-                          width: 120,
-                          color: Colors.blue,
-                          margin: EdgeInsets.all(15),
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            SizedBox(height: 10),
-                            Text('New Site'),
-                            SizedBox(height: 10),
-                            Text('Create with Blank'),
-                          ],
-                        )
-                      ],
+                  CardCreating(
+                    height: 120,
+                    width: 140,
+                    boxColor: Colors.grey.shade300,
+                    iconContainer: Icon(
+                      Icons.menu_open,
+                      color: Colors.white,
                     ),
+                    textTitle: 'New Site',
+                    textDescription: 'Create with Blank',
                   ),
                 ],
               )
 
               // List cards created
-
             ],
           ),
         ),
