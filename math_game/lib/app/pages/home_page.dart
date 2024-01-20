@@ -18,6 +18,7 @@ class _HomePageState extends State<HomePage> {
 
   int numberA = 0;
   int numberB = 0;
+  String operation = '-';
 
   @override
   void initState() {
@@ -42,6 +43,29 @@ class _HomePageState extends State<HomePage> {
     '.',
     'x',
     '=',
+  ];
+
+  final levelsPad = [
+    [7, 3, '+', true],
+    [5, 2, '-', false],
+    [4, 6, '*', false],
+    [8, 2, '/', false],
+    [9, 4, '+', false],
+    [12, 4, '/', false],
+    [3, 2, '*', false],
+    [10, 5, '-', false],
+    [15, 3, '*', false],
+    [18, 6, '/', false],
+    [7, 4, '+', false],
+    [11, 2, '-', false],
+    [6, 2, '*', false],
+    [25, 5, '/', false],
+    [14, 7, '*', false],
+    [21, 3, '-', false],
+    [16, 4, '+', false],
+    [27, 9, '/', false],
+    [8, 4, '*', false],
+    [12, 3, '-', false],
   ];
 
   void buttonTapped(String button) {
@@ -86,8 +110,6 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
-  
-
   void goToNextQuestion() {
     Navigator.of(context).pop();
 
@@ -113,6 +135,37 @@ class _HomePageState extends State<HomePage> {
           Container(
             height: 160,
             color: Colors.blueGrey[200],
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: levelsPad.length,
+              itemBuilder: (context, index) {
+                final bool isCorrect = levelsPad[index].elementAt(3) as bool;
+
+                return Center(
+                  child: Padding(
+                    padding: const EdgeInsets.all(4),
+                    child: Container(
+                      height: 70,
+                      width: 70,
+                      decoration: BoxDecoration(
+                        color: !isCorrect ? Colors.blueGrey : Colors.blueGrey[300],
+                        borderRadius: BorderRadius.circular(8),
+                        border: isCorrect ? Border.all(color: Colors.red) : Border(),
+                        boxShadow: [
+                          if (!isCorrect)
+                            BoxShadow(
+                              color: Colors.blueGrey.withOpacity(0.4),
+                              spreadRadius: 5,
+                              blurRadius: 7,
+                              offset: Offset(0, 3),
+                            ),
+                        ],
+                      ),
+                    ),
+                  ),
+                );
+              },
+            ),
           ),
 
           // Calculate
@@ -122,7 +175,12 @@ class _HomePageState extends State<HomePage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    numberA.toString() + ' + ' + numberB.toString() + ' = ',
+                    numberA.toString() +
+                        ' ' +
+                        operation.toString() +
+                        ' ' +
+                        numberB.toString() +
+                        ' = ',
                     style: whiteTextStyle,
                   ),
                   Container(
