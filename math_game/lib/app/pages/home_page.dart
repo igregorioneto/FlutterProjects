@@ -1,9 +1,11 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:math_game/app/provider/game_provider.dart';
 import 'package:math_game/app/util/constants.dart';
 import 'package:math_game/app/widgets/my_button.dart';
 import 'package:math_game/app/widgets/result_message.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -22,8 +24,8 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
-    numberA = randomNumber.nextInt(10);
-    numberB = randomNumber.nextInt(10);
+    // numberA = randomNumber.nextInt(10);
+    // numberB = randomNumber.nextInt(10);
   }
 
   final numberPad = [
@@ -45,29 +47,6 @@ class _HomePageState extends State<HomePage> {
     '=',
   ];
 
-  final levelsPad = [
-    [7, 3, '+', true],
-    [5, 2, '-', false],
-    [4, 6, '*', false],
-    [8, 2, '/', false],
-    [9, 4, '+', false],
-    [12, 4, '/', false],
-    [3, 2, '*', false],
-    [10, 5, '-', false],
-    [15, 3, '*', false],
-    [18, 6, '/', false],
-    [7, 4, '+', false],
-    [11, 2, '-', false],
-    [6, 2, '*', false],
-    [25, 5, '/', false],
-    [14, 7, '*', false],
-    [21, 3, '-', false],
-    [16, 4, '+', false],
-    [27, 9, '/', false],
-    [8, 4, '*', false],
-    [12, 3, '-', false],
-  ];
-
   void buttonTapped(String button) {
     setState(() {
       if (button == '=') {
@@ -85,7 +64,8 @@ class _HomePageState extends State<HomePage> {
   }
 
   void checkResult() {
-    if (numberA + numberB == int.parse(userResponse)) {
+    if (resultOperation(numberA, numberB, operation) ==
+        int.parse(userResponse)) {
       showDialog(
         context: context,
         builder: (context) {
@@ -110,8 +90,22 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
+  num resultOperation(int numberA, int numberB, String operation) {
+    if (operation == '+') {
+      return numberA + numberB;
+    } else if (operation == '-') {
+      return numberA - numberB;
+    } else if (operation == '*') {
+      return numberA * numberB;
+    } else {
+      return numberA / numberB;
+    }
+  }
+
   void goToNextQuestion() {
     Navigator.of(context).pop();
+
+    Provider.of<GameProvider>(context, listen: false).nextLevel();
 
     setState(() {
       userResponse = '';
@@ -127,6 +121,11 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final GameProvider gameProvider = Provider.of<GameProvider>(context);
+    numberA = gameProvider.getLevel().numberA;
+    numberB = gameProvider.getLevel().numberB;
+    operation = gameProvider.getLevel().operation;
+
     return Scaffold(
       backgroundColor: Colors.blueGrey[400],
       body: Column(
@@ -137,9 +136,9 @@ class _HomePageState extends State<HomePage> {
             color: Colors.blueGrey[200],
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
-              itemCount: levelsPad.length,
+              itemCount: gameProvider.levelsPad.length,
               itemBuilder: (context, index) {
-                final bool isCorrect = levelsPad[index].elementAt(3) as bool;
+                final level = gameProvider.levelsPad[index];
 
                 return Center(
                   child: Padding(
@@ -147,12 +146,25 @@ class _HomePageState extends State<HomePage> {
                     child: Container(
                       height: 70,
                       width: 70,
+                      child: level.nextLevel
+                          ? Center(
+                              child: Icon(
+                                Icons.check,
+                                color: Colors.white,
+                                size: 32,
+                              ),
+                            )
+                          : Center(),
                       decoration: BoxDecoration(
-                        color: !isCorrect ? Colors.blueGrey : Colors.blueGrey[300],
+                        color: !level.nextLevel
+                            ? Colors.blueGrey
+                            : Colors.blueGrey[300],
                         borderRadius: BorderRadius.circular(8),
-                        border: isCorrect ? Border.all(color: Colors.red) : Border(),
+                        border: level.nextLevel
+                            ? Border.all(color: Colors.red)
+                            : Border(),
                         boxShadow: [
-                          if (!isCorrect)
+                          if (!level.nextLevel)
                             BoxShadow(
                               color: Colors.blueGrey.withOpacity(0.4),
                               spreadRadius: 5,
