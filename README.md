@@ -183,3 +183,27 @@ O projeto "Builder App UI" aplicativo tirando como base este design https://drib
 - **Flutter:** Framework de desenvolvimento multiplataforma que permite a criação de aplicativos nativos para iOS e Android a partir de um único código-base.
 - **Dart:** Linguagem de programação utilizada pelo Flutter para desenvolvimento de aplicações mobile.
 </details>
+
+<details>
+<summary>Math Game - math_game</summary>
+
+## Extract
+
+<img src="math_game/assets/Android Emulator - android_5554 2024-01-20 17-10-59.gif" width="300">
+<br />
+
+### Descrição
+
+O projeto "Math Game" jogo de Cálculo de Matemática estilo Puzzle, onde você vai avançando de levels com base no resultado do cálculo. Utilizei o Provider para gerenciar os estados e estou refatorando ainda o código. Esta bem divertido.
+A Princípio terá 20 leveis gerados para diversão e a medida que vai passando de level o jogo marca o quanto você já progrediu.
+
+### Recursos Principais
+
+- Interface de usuário atraente e responsiva, desenvolvida com Flutter.
+- Provider para gerenciamento de estado.
+
+### Tecnologias Utilizadas
+
+- **Flutter:** Framework de desenvolvimento multiplataforma que permite a criação de aplicativos nativos para iOS e Android a partir de um único código-base.
+- **Dart:** Linguagem de programação utilizada pelo Flutter para desenvolvimento de aplicações mobile.
+</details>
