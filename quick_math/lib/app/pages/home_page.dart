@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:quick_math/app/widgets/buttom_widget.dart';
 import 'package:quick_math/app/widgets/icon_text_widget.dart';
 
 class HomePage extends StatefulWidget {
@@ -12,7 +13,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   // Time and Score
-  double _timer = 11;
+  double _timer = 10;
   int _score = 0;
 
   // Slider Time
@@ -20,6 +21,14 @@ class _HomePageState extends State<HomePage> {
   double _maxTimeValue = 10;
   int _steps = 100;
   Duration _duration = Duration(seconds: 10);
+
+  // Grid Board
+  var responseBoard = [
+    '7',
+    '-1',
+    '-2',
+    '5',
+  ];
 
   @override
   void initState() {
@@ -78,7 +87,51 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                 ],
-              )
+              ),
+              Expanded(
+                flex: 2,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      '2 + 2 = ?',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                        fontSize: 36,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Expanded(
+                child: GridView.builder(
+                  itemCount: responseBoard.length,
+                  physics: NeverScrollableScrollPhysics(),
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    childAspectRatio: 2,
+                  ),
+                  itemBuilder: (context, index) {
+                    return MyButton(
+                      value: responseBoard[index],
+                      onTap: () {},
+                    );
+                  },
+                ),
+              ),
+              SizedBox(height: 20),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  IconButton(
+                    icon: Icon(Icons.lightbulb, size: 40,),
+                    color: Colors.yellowAccent,
+                    onPressed: () {},
+                  )
+                ],
+              ),
+              SizedBox(height: 10),
             ],
           ),
         ),
