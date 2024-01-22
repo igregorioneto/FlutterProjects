@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class IconTextWidget extends StatelessWidget {
-  final IconData icon;
+  final Widget icon;
   String text;
 
   IconTextWidget({
@@ -14,10 +14,9 @@ class IconTextWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Icon(
-          icon,
-          color: Colors.lightBlueAccent,
-          size: 32,
+        Container(
+          width: 32, // Limite de largura para o ícone
+          child: icon,
         ),
         SizedBox(width: 5),
         Text(

@@ -12,6 +12,8 @@ class GameProvider extends ChangeNotifier {
   final _operations = ['+', '-', '*', '/'];
   final random = Random();
 
+  int _rankedScore = 0;
+
   // Level actual
   int _actualLevel = 0;
   bool _gameFinish = false;
@@ -20,6 +22,7 @@ class GameProvider extends ChangeNotifier {
   List<LevelModel> get levels => _levels;
   int get actualLevel => _actualLevel;
   bool get gameFinish => _gameFinish;
+  int get rankedScore => _rankedScore;
 
   void finish() {
     _gameFinish = true;
@@ -30,13 +33,16 @@ class GameProvider extends ChangeNotifier {
     generatedLevel();
   }
 
+  void updatingRankedScore(int score) {
+    _rankedScore = score;
+  }
+
   void generatedLevel() {
     _levels.clear();
 
     var n1 = random.nextInt(100);
     var n2 = random.nextInt(100);
     var operation = _operations[random.nextInt(_operations.length)];
-    //var operation = _operations[0];
     var question = '${n1} ${operation} ${n2} = ?';
 
     num r = question.split("=")[0].trim().interpret();

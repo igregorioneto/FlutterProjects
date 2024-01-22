@@ -23,7 +23,7 @@ class MyButton extends StatelessWidget {
           ),
           child: Center(
             child: Text(
-              value.toString(),
+              value.toStringAsFixed(2),
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 color: Colors.white,

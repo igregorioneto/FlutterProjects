@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:quick_math/app/constants.dart';
 import 'package:quick_math/app/widgets/icon_text_widget.dart';
 
@@ -40,7 +41,7 @@ class ResultQuestionWidget extends StatelessWidget {
               children: [
                 IconButton(
                   onPressed: onTap,
-                  icon: Icon(Icons.play_circle, size: 150),
+                  icon: Icon(Icons.replay_circle_filled_rounded, size: 150),
                   color: Colors.lightBlueAccent,
                 ),
               ],
@@ -50,8 +51,20 @@ class ResultQuestionWidget extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                IconTextWidget(icon: Icons.star, text: pontuationGame.toString()),
-                IconTextWidget(icon: Icons.star, text: pontuationRankingGame.toString()),
+                IconTextWidget(
+                    icon: Icon(
+                      Icons.star,
+                      color: Colors.lightBlueAccent,
+                      size: 32,
+                    ),
+                    text: pontuationGame.toString()),
+                IconTextWidget(
+                    icon: FaIcon(
+                      FontAwesomeIcons.trophy,
+                      color: Colors.lightBlueAccent,
+                      size: 24,
+                    ),
+                    text: pontuationRankingGame.toString()),
               ],
             )
           ],

@@ -56,6 +56,7 @@ class _HomePageState extends State<HomePage> {
         _timeCurrent += _maxTimeValue / _steps;
         _timer -= _maxTimeValue / _steps;
         if (_timeCurrent >= _maxTimeValue && _timer < 0) {
+          endGame();
           _timeCurrent = 0;
           _timer = 10;
         }
@@ -74,6 +75,8 @@ class _HomePageState extends State<HomePage> {
     if (q.interpret() == res) {
       game.nextLevel();
       generateScore();
+      _timeCurrent = 0;
+      _timer = 10;
       /*if (game.gameWin()) {
         showDialog(
           context: context,
@@ -88,28 +91,35 @@ class _HomePageState extends State<HomePage> {
         );
       }*/
     } else {
-      game.finish();
-
-      if (_timerReference.isActive) {
-        _timerReference.cancel();
-      }
-
-      showDialog(
-        context: context,
-        builder: (context) {
-          return ResultQuestionWidget(
-            onTap: reloadQuickQuestion,
-            title: 'You Lost - Play Again',
-            pontuationGame: _score,
-            pontuationRankingGame: 7,
-          );
-        },
-      );
+      endGame();
     }
+  }
+
+  void endGame() {
+    game.finish();
+
+    if (_timerReference.isActive) {
+      _timerReference.cancel();
+    }
+
+    showDialog(
+      context: context,
+      builder: (context) {
+        return ResultQuestionWidget(
+          onTap: reloadQuickQuestion,
+          title: 'You Lost - Play Again',
+          pontuationGame: _score,
+          pontuationRankingGame: game.rankedScore,
+        );
+      },
+    );
   }
 
   void generateScore() {
     _score++;
+    if (_score >= game.rankedScore) {
+      game.updatingRankedScore(_score);
+    }
   }
 
   void reloadQuickQuestion() {
@@ -144,8 +154,20 @@ class _HomePageState extends State<HomePage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  IconTextWidget(icon: Icons.access_time, text: '$_timerAsInt'),
-                  IconTextWidget(icon: Icons.star, text: '$_score'),
+                  IconTextWidget(
+                      icon: Icon(
+                        Icons.access_time,
+                        color: Colors.lightBlueAccent,
+                        size: 32,
+                      ),
+                      text: '$_timerAsInt'),
+                  IconTextWidget(
+                      icon: Icon(
+                        Icons.star,
+                        color: Colors.lightBlueAccent,
+                        size: 32,
+                      ),
+                      text: '$_score'),
                 ],
               ),
               SizedBox(height: 10),
@@ -186,37 +208,41 @@ class _HomePageState extends State<HomePage> {
               ),
 
               // Board answers
-              !game.gameFinish ? Expanded(
-                child: GridView.builder(
-                  itemCount: level.answers.length,
-                  physics: NeverScrollableScrollPhysics(),
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    childAspectRatio: 2,
-                  ),
-                  itemBuilder: (context, index) {
-                    return MyButton(
-                      value: !game.gameFinish ? level.answers[index] : 0,
-                      onTap: verifyQuestion,
-                    );
-                  },
-                ),
-              ) : Container(),
+              !game.gameFinish
+                  ? Expanded(
+                      child: GridView.builder(
+                        itemCount: level.answers.length,
+                        physics: NeverScrollableScrollPhysics(),
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          childAspectRatio: 2,
+                        ),
+                        itemBuilder: (context, index) {
+                          return MyButton(
+                            value: !game.gameFinish ? level.answers[index] : 0,
+                            onTap: verifyQuestion,
+                          );
+                        },
+                      ),
+                    )
+                  : Container(),
 
               SizedBox(height: 20),
-              !game.gameFinish ? Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  IconButton(
-                    icon: Icon(
-                      Icons.lightbulb,
-                      size: 40,
-                    ),
-                    color: Colors.yellowAccent,
-                    onPressed: () {},
-                  )
-                ],
-              ) : Container(),
+              !game.gameFinish
+                  ? Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        IconButton(
+                          icon: Icon(
+                            Icons.lightbulb,
+                            size: 40,
+                          ),
+                          color: Colors.yellowAccent,
+                          onPressed: () {},
+                        )
+                      ],
+                    )
+                  : Container(),
               SizedBox(height: 10),
             ],
           ),
