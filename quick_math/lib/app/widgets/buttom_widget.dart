@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class MyButton extends StatelessWidget {
-  String value;
+  int value;
   final VoidCallback onTap;
 
   MyButton({
@@ -23,7 +23,7 @@ class MyButton extends StatelessWidget {
           ),
           child: Center(
             child: Text(
-              value,
+              value.toString(),
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 color: Colors.white,

@@ -1,6 +1,9 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
+import 'package:quick_math/app/providers/game_provider.dart';
 import 'package:quick_math/app/widgets/buttom_widget.dart';
 import 'package:quick_math/app/widgets/icon_text_widget.dart';
 
@@ -51,8 +54,12 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
+    final level = Provider.of<GameProvider>(context).getLevel();
+
     int _timerAsInt = _timer.toInt();
     return Scaffold(
+      extendBodyBehindAppBar: true,
       backgroundColor: Color(0xFF39555FFF),
       body: SafeArea(
         child: Padding(
@@ -94,7 +101,7 @@ class _HomePageState extends State<HomePage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      '2 + 2 = ?',
+                      level.question,
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
@@ -106,7 +113,7 @@ class _HomePageState extends State<HomePage> {
               ),
               Expanded(
                 child: GridView.builder(
-                  itemCount: responseBoard.length,
+                  itemCount: level.answers.length,
                   physics: NeverScrollableScrollPhysics(),
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
@@ -114,7 +121,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                   itemBuilder: (context, index) {
                     return MyButton(
-                      value: responseBoard[index],
+                      value: level.answers[index],
                       onTap: () {},
                     );
                   },
