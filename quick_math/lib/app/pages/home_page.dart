@@ -63,13 +63,13 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  void verifyQuestion(int value) {
+  void verifyQuestion(num value) {
     final level = game.getLevel();
     final question = level.question.replaceAll('?', value.toString());
     List<String> parts = question.split('=');
 
     final q = parts[0].trim();
-    final res = int.parse(parts[1].trim());
+    final res = num.parse(parts[1].trim());
 
     if (q.interpret() == res) {
       game.nextLevel();

@@ -1,6 +1,6 @@
 class LevelModel {
   String question;
-  List<int> answers;
+  List<num> answers;
 
   LevelModel({
     required this.question,

@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:function_tree/function_tree.dart';
 import 'package:quick_math/app/models/level_model.dart';
 
 class GameProvider extends ChangeNotifier {
@@ -34,11 +35,13 @@ class GameProvider extends ChangeNotifier {
 
     var n1 = random.nextInt(100);
     var n2 = random.nextInt(100);
-    //var operation = _operations[random.nextInt(_operations.length)];
-    var operation = _operations[0];
+    var operation = _operations[random.nextInt(_operations.length)];
+    //var operation = _operations[0];
     var question = '${n1} ${operation} ${n2} = ?';
 
-    List<int> answers = [n1 + n2, random.nextInt(200), random.nextInt(200), random.nextInt(200)];
+    num r = question.split("=")[0].trim().interpret();
+
+    List<num> answers = [r, random.nextInt(200), random.nextInt(200), random.nextInt(200)];
     answers.shuffle();
 
     _levels.add(LevelModel(
