@@ -20,6 +20,10 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   // Game Provider
   late GameProvider game;
+
+  // Timer Reference
+  late Timer _timerReference;
+
   // Time and Score
   double _timer = 10;
   int _score = 0;
@@ -43,10 +47,11 @@ class _HomePageState extends State<HomePage> {
     super.initState();
     startLoading();
     game = Provider.of<GameProvider>(context, listen: false);
+    game.generatedLevel();
   }
 
   void startLoading() {
-    Timer.periodic(_duration ~/ _steps, (timer) {
+    _timerReference = Timer.periodic(_duration ~/ _steps, (timer) {
       setState(() {
         _timeCurrent += _maxTimeValue / _steps;
         _timer -= _maxTimeValue / _steps;
@@ -68,7 +73,8 @@ class _HomePageState extends State<HomePage> {
 
     if (q.interpret() == res) {
       game.nextLevel();
-      if (game.gameWin()) {
+      generateScore();
+      /*if (game.gameWin()) {
         showDialog(
           context: context,
           builder: (context) {
@@ -80,15 +86,21 @@ class _HomePageState extends State<HomePage> {
             );
           },
         );
-      }
+      }*/
     } else {
+      game.finish();
+
+      if (_timerReference.isActive) {
+        _timerReference.cancel();
+      }
+
       showDialog(
         context: context,
         builder: (context) {
           return ResultQuestionWidget(
             onTap: reloadQuickQuestion,
             title: 'You Lost - Play Again',
-            pontuationGame: 4,
+            pontuationGame: _score,
             pontuationRankingGame: 7,
           );
         },
@@ -96,9 +108,23 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
+  void generateScore() {
+    _score++;
+  }
+
   void reloadQuickQuestion() {
     Navigator.of(context).pop();
     game.reloadingGame();
+    // Time and Score
+    _timer = 10;
+    _score = 0;
+
+    // Slider Time
+    _timeCurrent = 0;
+    _maxTimeValue = 10;
+
+    // Starting
+    startLoading();
   }
 
   @override
@@ -160,7 +186,7 @@ class _HomePageState extends State<HomePage> {
               ),
 
               // Board answers
-              Expanded(
+              !game.gameFinish ? Expanded(
                 child: GridView.builder(
                   itemCount: level.answers.length,
                   physics: NeverScrollableScrollPhysics(),
@@ -170,14 +196,15 @@ class _HomePageState extends State<HomePage> {
                   ),
                   itemBuilder: (context, index) {
                     return MyButton(
-                      value: level.answers[index],
+                      value: !game.gameFinish ? level.answers[index] : 0,
                       onTap: verifyQuestion,
                     );
                   },
                 ),
-              ),
+              ) : Container(),
+
               SizedBox(height: 20),
-              Row(
+              !game.gameFinish ? Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   IconButton(
@@ -189,7 +216,7 @@ class _HomePageState extends State<HomePage> {
                     onPressed: () {},
                   )
                 ],
-              ),
+              ) : Container(),
               SizedBox(height: 10),
             ],
           ),
