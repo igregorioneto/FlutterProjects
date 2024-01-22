@@ -18,6 +18,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  // Game Provider
+  late GameProvider game;
   // Time and Score
   double _timer = 10;
   int _score = 0;
@@ -40,6 +42,7 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     startLoading();
+    game = Provider.of<GameProvider>(context, listen: false);
   }
 
   void startLoading() {
@@ -56,8 +59,6 @@ class _HomePageState extends State<HomePage> {
   }
 
   void verifyQuestion(int value) {
-    final game = Provider.of<GameProvider>(context, listen: false);
-
     final level = game.getLevel();
     final question = level.question.replaceAll('?', value.toString());
     List<String> parts = question.split('=');
@@ -72,7 +73,7 @@ class _HomePageState extends State<HomePage> {
           context: context,
           builder: (context) {
             return ResultQuestionWidget(
-              onTap: () {},
+              onTap: reloadQuickQuestion,
               title: 'Finish Game - You Win',
               pontuationGame: 0,
               pontuationRankingGame: 7,
@@ -85,7 +86,7 @@ class _HomePageState extends State<HomePage> {
         context: context,
         builder: (context) {
           return ResultQuestionWidget(
-            onTap: () {},
+            onTap: reloadQuickQuestion,
             title: 'You Lost - Play Again',
             pontuationGame: 4,
             pontuationRankingGame: 7,
@@ -93,6 +94,11 @@ class _HomePageState extends State<HomePage> {
         },
       );
     }
+  }
+
+  void reloadQuickQuestion() {
+    Navigator.of(context).pop();
+    game.reloadingGame();
   }
 
   @override

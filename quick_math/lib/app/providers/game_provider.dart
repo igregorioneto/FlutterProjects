@@ -40,4 +40,9 @@ class GameProvider extends ChangeNotifier {
   LevelModel getLevel() {
     return _levels[_actualLevel];
   }
+
+  // Reloading Game
+  void reloadingGame() {
+    _actualLevel = 0;
+  }
 }
