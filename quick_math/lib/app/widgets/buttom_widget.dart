@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class MyButton extends StatelessWidget {
   int value;
-  final VoidCallback onTap;
+  final Function(int) onTap;
 
   MyButton({
     super.key,
@@ -15,7 +15,7 @@ class MyButton extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.all(4),
       child: MaterialButton(
-        onPressed: onTap,
+        onPressed: () => onTap(value),
         color: Colors.lightBlueAccent,
         child: Container(
           decoration: BoxDecoration(

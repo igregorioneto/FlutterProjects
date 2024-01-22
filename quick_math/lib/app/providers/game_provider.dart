@@ -16,7 +16,7 @@ class GameProvider extends ChangeNotifier {
   ];
 
   // Level actual
-  int _actualLevel = 1;
+  int _actualLevel = 0;
 
   // Gets
   List<LevelModel> get levels => _levels;
@@ -27,6 +27,13 @@ class GameProvider extends ChangeNotifier {
     if (_actualLevel < _levels.length) {
       _actualLevel++;
     }
+  }
+
+  bool gameWin() {
+    if (_actualLevel > _levels.length) {
+      return true;
+    }
+    return false;
   }
 
   // Get Level Actual

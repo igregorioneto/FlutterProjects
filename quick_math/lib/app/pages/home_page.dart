@@ -52,6 +52,12 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
+  void verifyQuestion(int value) {
+    final level = Provider.of<GameProvider>(context, listen: false).getLevel();
+    print(value);
+    print(level.question);
+  }
+
   @override
   Widget build(BuildContext context) {
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
@@ -95,6 +101,8 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ],
               ),
+
+              // Board question
               Expanded(
                 flex: 2,
                 child: Row(
@@ -111,6 +119,8 @@ class _HomePageState extends State<HomePage> {
                   ],
                 ),
               ),
+
+              // Board answers
               Expanded(
                 child: GridView.builder(
                   itemCount: level.answers.length,
@@ -122,7 +132,7 @@ class _HomePageState extends State<HomePage> {
                   itemBuilder: (context, index) {
                     return MyButton(
                       value: level.answers[index],
-                      onTap: () {},
+                      onTap: verifyQuestion,
                     );
                   },
                 ),
@@ -132,7 +142,10 @@ class _HomePageState extends State<HomePage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   IconButton(
-                    icon: Icon(Icons.lightbulb, size: 40,),
+                    icon: Icon(
+                      Icons.lightbulb,
+                      size: 40,
+                    ),
                     color: Colors.yellowAccent,
                     onPressed: () {},
                   )
