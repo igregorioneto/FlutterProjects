@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class IconTextWidget extends StatelessWidget {
-  final icon;
+  final IconData icon;
   String text;
 
   IconTextWidget({

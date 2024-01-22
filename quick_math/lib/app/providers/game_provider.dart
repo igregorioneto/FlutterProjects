@@ -30,7 +30,7 @@ class GameProvider extends ChangeNotifier {
   }
 
   bool gameWin() {
-    if (_actualLevel > _levels.length) {
+    if (_actualLevel >= _levels.length) {
       return true;
     }
     return false;

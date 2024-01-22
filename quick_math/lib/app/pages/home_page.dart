@@ -2,10 +2,13 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:function_tree/function_tree.dart';
 import 'package:provider/provider.dart';
+import 'package:quick_math/app/constants.dart';
 import 'package:quick_math/app/providers/game_provider.dart';
 import 'package:quick_math/app/widgets/buttom_widget.dart';
 import 'package:quick_math/app/widgets/icon_text_widget.dart';
+import 'package:quick_math/app/widgets/result_question_widget.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -53,9 +56,43 @@ class _HomePageState extends State<HomePage> {
   }
 
   void verifyQuestion(int value) {
-    final level = Provider.of<GameProvider>(context, listen: false).getLevel();
-    print(value);
-    print(level.question);
+    final game = Provider.of<GameProvider>(context, listen: false);
+
+    final level = game.getLevel();
+    final question = level.question.replaceAll('?', value.toString());
+    List<String> parts = question.split('=');
+
+    final q = parts[0].trim();
+    final res = int.parse(parts[1].trim());
+
+    if (q.interpret() == res) {
+      game.nextLevel();
+      if (game.gameWin()) {
+        showDialog(
+          context: context,
+          builder: (context) {
+            return ResultQuestionWidget(
+              onTap: () {},
+              title: 'Finish Game - You Win',
+              pontuationGame: 0,
+              pontuationRankingGame: 7,
+            );
+          },
+        );
+      }
+    } else {
+      showDialog(
+        context: context,
+        builder: (context) {
+          return ResultQuestionWidget(
+            onTap: () {},
+            title: 'You Lost - Play Again',
+            pontuationGame: 4,
+            pontuationRankingGame: 7,
+          );
+        },
+      );
+    }
   }
 
   @override
@@ -110,11 +147,7 @@ class _HomePageState extends State<HomePage> {
                   children: [
                     Text(
                       level.question,
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                        fontSize: 36,
-                      ),
+                      style: whiteText,
                     ),
                   ],
                 ),
