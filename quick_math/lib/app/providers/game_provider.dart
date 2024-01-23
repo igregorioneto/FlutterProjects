@@ -38,7 +38,9 @@ class GameProvider extends ChangeNotifier {
 
   // Finish Game
   void finish() {
+    _scoreBase = _score;
     _gameFinish = true;
+    notifyListeners();
   }
 
   // Starting Game
@@ -54,19 +56,22 @@ class GameProvider extends ChangeNotifier {
   // Updating Ranked Score
   void updatingRankedScore(int score) {
     _rankedScore = score;
+    notifyListeners();
   }
 
   void updatingCoinBase(int score) {
     _coinBase += (score * 2);
+    notifyListeners();
   }
 
   void updatingScore() {
     _score++;
-    _scoreBase++;
+    notifyListeners();
   }
 
   void resetScore() {
     _score = 0;
+    notifyListeners();
   }
 
   // Generating new level

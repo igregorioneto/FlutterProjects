@@ -49,32 +49,36 @@ class _HomePageState extends State<HomePage> {
             ],
           ),
           SizedBox(height: 20),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              IconTextWidget(
-                  icon: Icon(
-                    Icons.star,
-                    color: Colors.yellowAccent,
-                    size: 32,
-                  ),
-                  text: game.scoreBase.toString()),
-              IconTextWidget(
-                  icon: FaIcon(
-                    FontAwesomeIcons.trophy,
-                    color: Colors.yellowAccent,
-                    size: 24,
-                  ),
-                  text: game.rankedScore.toString()),
-              IconTextWidget(
-                  icon: Icon(
-                    Icons.money_outlined,
-                    color: Colors.green,
-                    size: 32,
-                  ),
-                  text: game.coinBase.toString()),
-            ],
+          Consumer<GameProvider>(
+            builder: (context, game, child) {
+              return Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  IconTextWidget(
+                      icon: Icon(
+                        Icons.star,
+                        color: Colors.yellowAccent,
+                        size: 32,
+                      ),
+                      text: game.scoreBase.toString()),
+                  IconTextWidget(
+                      icon: FaIcon(
+                        FontAwesomeIcons.trophy,
+                        color: Colors.yellowAccent,
+                        size: 24,
+                      ),
+                      text: game.rankedScore.toString()),
+                  IconTextWidget(
+                      icon: Icon(
+                        Icons.money_outlined,
+                        color: Colors.green,
+                        size: 32,
+                      ),
+                      text: game.coinBase.toString()),
+                ],
+              );
+            },
           ),
         ],
       ),
