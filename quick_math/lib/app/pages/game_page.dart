@@ -6,6 +6,7 @@ import 'package:function_tree/function_tree.dart';
 import 'package:provider/provider.dart';
 import 'package:quick_math/app/constants.dart';
 import 'package:quick_math/app/providers/game_provider.dart';
+import 'package:quick_math/app/widgets/animated_money_widget.dart';
 import 'package:quick_math/app/widgets/buttom_widget.dart';
 import 'package:quick_math/app/widgets/icon_text_widget.dart';
 import 'package:quick_math/app/widgets/result_question_widget.dart';
@@ -26,7 +27,6 @@ class _GamePageState extends State<GamePage> {
 
   // Time and Score
   double _timer = 10;
-
 
   // Slider Time
   double _timeCurrent = 0;
@@ -75,9 +75,10 @@ class _GamePageState extends State<GamePage> {
     final res = num.parse(parts[1].trim());
 
     if (q.interpret() == res) {
+      _timerReference.cancel();
+      showMoneyAnimation(context, '2');
       game.nextLevel();
       generateScore();
-      reloadTimer();
     } else {
       endGame();
     }
@@ -92,6 +93,7 @@ class _GamePageState extends State<GamePage> {
 
     showDialog(
       context: context,
+      barrierDismissible: false,
       builder: (context) {
         return ResultQuestionWidget(
           onTap: reloadQuickQuestion,
@@ -102,6 +104,26 @@ class _GamePageState extends State<GamePage> {
         );
       },
     );
+  }
+
+  void showMoneyAnimation(BuildContext context, String value) {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) {
+        return AlertDialog(
+          content: AnimatedMoneyWidget(
+            value: value,
+          ),
+        );
+      },
+    );
+
+    Future.delayed(Duration(seconds: 1), () {
+      Navigator.of(context).pop();
+      reloadTimer();
+      startLoading();
+    });
   }
 
   void returnMenu(BuildContext context) {
@@ -122,7 +144,6 @@ class _GamePageState extends State<GamePage> {
     game.reloadingGame();
     // Time and Score
     game.resetScore();
-    reloadTimer();
 
     // Starting
     startLoading();

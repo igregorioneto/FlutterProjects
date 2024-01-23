@@ -56,22 +56,18 @@ class GameProvider extends ChangeNotifier {
   // Updating Ranked Score
   void updatingRankedScore(int score) {
     _rankedScore = score;
-    notifyListeners();
   }
 
   void updatingCoinBase(int score) {
     _coinBase += (score * 2);
-    notifyListeners();
   }
 
   void updatingScore() {
     _score++;
-    notifyListeners();
   }
 
   void resetScore() {
     _score = 0;
-    notifyListeners();
   }
 
   // Generating new level

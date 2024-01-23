@@ -38,6 +38,7 @@ dependencies:
   provider: ^6.1.1
   function_tree: ^0.9.1
   font_awesome_flutter: ^10.6.0
+  animated_text_kit: ^4.2.2
 
 dev_dependencies:
   flutter_test:
