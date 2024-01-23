@@ -58,8 +58,15 @@ class GameProvider extends ChangeNotifier {
     _rankedScore = score;
   }
 
+  // Updating Coin Base
   void updatingCoinBase(int score) {
     _coinBase += (score * 2);
+  }
+
+  void usingCoinBase() {
+    if (coinBase > 5) {
+      _coinBase -= 5;
+    }
   }
 
   void updatingScore() {

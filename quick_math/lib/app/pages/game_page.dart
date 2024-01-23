@@ -34,6 +34,7 @@ class _GamePageState extends State<GamePage> {
   int _steps = 100;
   Duration _duration = Duration(seconds: 10);
 
+  // Init State Game Page
   @override
   void initState() {
     super.initState();
@@ -43,6 +44,7 @@ class _GamePageState extends State<GamePage> {
     game.generatedLevel();
   }
 
+  // Reset Game
   void resetGame() {
     game = Provider.of<GameProvider>(context, listen: false);
     game.generatedLevel();
@@ -53,6 +55,7 @@ class _GamePageState extends State<GamePage> {
     });
   }
 
+  // Start Game
   void startLoading() {
     _timerReference = Timer.periodic(_duration ~/ _steps, (timer) {
       setState(() {
@@ -66,6 +69,7 @@ class _GamePageState extends State<GamePage> {
     });
   }
 
+  // Verify Question
   void verifyQuestion(num value) {
     final level = game.getLevel();
     final question = level.question.replaceAll('?', value.toString());
@@ -76,7 +80,7 @@ class _GamePageState extends State<GamePage> {
 
     if (q.interpret() == res) {
       _timerReference.cancel();
-      showMoneyAnimation(context, '2');
+      showMoneyAnimation(context, '2', Icons.add);
       game.nextLevel();
       generateScore();
     } else {
@@ -84,6 +88,7 @@ class _GamePageState extends State<GamePage> {
     }
   }
 
+  // End Game
   void endGame() {
     game.finish();
 
@@ -106,7 +111,8 @@ class _GamePageState extends State<GamePage> {
     );
   }
 
-  void showMoneyAnimation(BuildContext context, String value) {
+  // Money Animation
+  void showMoneyAnimation(BuildContext context, String value, final icon) {
     showDialog(
       context: context,
       barrierDismissible: false,
@@ -114,6 +120,7 @@ class _GamePageState extends State<GamePage> {
         return AlertDialog(
           content: AnimatedMoneyWidget(
             value: value,
+            icon: icon,
           ),
         );
       },
@@ -126,11 +133,13 @@ class _GamePageState extends State<GamePage> {
     });
   }
 
+  // Return Menu Game
   void returnMenu(BuildContext context) {
     Navigator.of(context).pop();
     Navigator.of(context).popUntil(ModalRoute.withName("/"));
   }
 
+  // Generate Score Pontuation
   void generateScore() {
     game.updatingScore();
     game.updatingCoinBase(game.score);
@@ -139,6 +148,7 @@ class _GamePageState extends State<GamePage> {
     }
   }
 
+  // Reloading Game
   void reloadQuickQuestion() {
     Navigator.of(context).pop();
     game.reloadingGame();
@@ -149,10 +159,19 @@ class _GamePageState extends State<GamePage> {
     startLoading();
   }
 
+  // Reloading Timer Gamer
   void reloadTimer() {
     _timeCurrent = 0;
     _timer = 10;
     _maxTimeValue = 10;
+  }
+
+  // Using Tip Question
+  void usingTip() {
+    if (game.coinBase > 5) {
+      game.usingCoinBase();
+      showMoneyAnimation(context,'5', Icons.minimize_outlined);
+    }
   }
 
   @override
@@ -179,13 +198,25 @@ class _GamePageState extends State<GamePage> {
                         size: 32,
                       ),
                       text: '$_timerAsInt'),
-                  IconTextWidget(
-                      icon: Icon(
-                        Icons.star,
-                        color: Colors.yellowAccent,
-                        size: 32,
-                      ),
-                      text: '${game.score}'),
+                  Row(
+                    children: [
+                      IconTextWidget(
+                          icon: Icon(
+                            Icons.star,
+                            color: Colors.yellowAccent,
+                            size: 32,
+                          ),
+                          text: '${game.score}'),
+                      SizedBox(width: 10),
+                      IconTextWidget(
+                          icon: Icon(
+                            Icons.money_outlined,
+                            color: Colors.green,
+                            size: 32,
+                          ),
+                          text: '${game.coinBase}'),
+                    ],
+                  ),
                 ],
               ),
               SizedBox(height: 10),
@@ -256,7 +287,7 @@ class _GamePageState extends State<GamePage> {
                             size: 40,
                           ),
                           color: Colors.yellowAccent,
-                          onPressed: () {},
+                          onPressed: usingTip,
                         )
                       ],
                     )

@@ -3,21 +3,23 @@ import 'package:flutter/material.dart';
 
 class AnimatedMoneyWidget extends StatelessWidget {
   String value;
+  final icon;
 
   AnimatedMoneyWidget({
     super.key,
     required this.value,
+    required this.icon,
   });
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 150,
+      width: 80,
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
           Icon(
-            Icons.add,
+            icon,
             color: Colors.green,
             size: 24,
           ),
