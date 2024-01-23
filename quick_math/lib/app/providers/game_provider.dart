@@ -9,10 +9,19 @@ class GameProvider extends ChangeNotifier {
   // List Levels
   List<LevelModel> _levels = [];
 
+  // Operations and Random
   final _operations = ['+', '-', '*', '/'];
-  final random = Random();
+  final _random = Random();
 
+  // Ranked Score
   int _rankedScore = 0;
+
+  // Coin base
+  int _coinBase = 0;
+
+  // Score
+  int _score = 0;
+  int _scoreBase = 0;
 
   // Level actual
   int _actualLevel = 0;
@@ -23,9 +32,18 @@ class GameProvider extends ChangeNotifier {
   int get actualLevel => _actualLevel;
   bool get gameFinish => _gameFinish;
   int get rankedScore => _rankedScore;
+  int get coinBase => _coinBase;
+  int get score => _score;
+  int get scoreBase => _scoreBase;
 
+  // Finish Game
   void finish() {
     _gameFinish = true;
+  }
+
+  // Starting Game
+  void start() {
+    _gameFinish = false;
   }
 
   // Next Level
@@ -33,21 +51,36 @@ class GameProvider extends ChangeNotifier {
     generatedLevel();
   }
 
+  // Updating Ranked Score
   void updatingRankedScore(int score) {
     _rankedScore = score;
   }
 
+  void updatingCoinBase(int score) {
+    _coinBase += (score * 2);
+  }
+
+  void updatingScore() {
+    _score++;
+    _scoreBase++;
+  }
+
+  void resetScore() {
+    _score = 0;
+  }
+
+  // Generating new level
   void generatedLevel() {
     _levels.clear();
 
-    var n1 = random.nextInt(100);
-    var n2 = random.nextInt(100);
-    var operation = _operations[random.nextInt(_operations.length)];
+    var n1 = _random.nextInt(50);
+    var n2 = _random.nextInt(50);
+    var operation = _operations[_random.nextInt(_operations.length)];
     var question = '${n1} ${operation} ${n2} = ?';
 
     num r = question.split("=")[0].trim().interpret();
 
-    List<num> answers = [r, random.nextInt(200), random.nextInt(200), random.nextInt(200)];
+    List<num> answers = [r, _random.nextInt(100), _random.nextInt(100), _random.nextInt(100)];
     answers.shuffle();
 
     _levels.add(LevelModel(
@@ -56,6 +89,7 @@ class GameProvider extends ChangeNotifier {
     ));
   }
 
+  // Game Win - Will not be used
   bool gameWin() {
     if (_actualLevel >= _levels.length) {
       return true;
@@ -81,4 +115,5 @@ class GameProvider extends ChangeNotifier {
     _gameFinish = false;
     generatedLevel();
   }
+
 }
