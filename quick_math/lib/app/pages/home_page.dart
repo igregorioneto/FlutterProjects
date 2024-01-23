@@ -5,6 +5,7 @@ import 'package:quick_math/app/constants.dart';
 import 'package:quick_math/app/pages/game_page.dart';
 import 'package:quick_math/app/providers/game_provider.dart';
 import 'package:quick_math/app/widgets/icon_text_widget.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -15,11 +16,17 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   late GameProvider game;
+  late SharedPreferences prefs;
 
   @override
   void initState() {
     super.initState();
     game = Provider.of<GameProvider>(context, listen: false);
+    initSharedPreferences();
+  }
+
+  Future<void> initSharedPreferences() async {
+    await game.loadValuesInMemory();
   }
 
   @override

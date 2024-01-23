@@ -9,6 +9,7 @@ class ResultQuestionWidget extends StatelessWidget {
   final VoidCallback onTap2;
   int pontuationGame;
   int pontuationRankingGame;
+  int coinGame;
 
   ResultQuestionWidget({
     super.key,
@@ -17,6 +18,7 @@ class ResultQuestionWidget extends StatelessWidget {
     required this.title,
     required this.pontuationGame,
     required this.pontuationRankingGame,
+    required this.coinGame,
   });
 
   @override
@@ -78,7 +80,7 @@ class ResultQuestionWidget extends StatelessWidget {
                       color: Colors.green,
                       size: 32,
                     ),
-                    text: pontuationGame.toString()),
+                    text: coinGame.toString()),
               ],
             ),
           ],

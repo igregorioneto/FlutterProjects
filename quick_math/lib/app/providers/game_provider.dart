@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:function_tree/function_tree.dart';
 import 'package:quick_math/app/models/level_model.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class GameProvider extends ChangeNotifier {
 
@@ -36,9 +37,53 @@ class GameProvider extends ChangeNotifier {
   int get score => _score;
   int get scoreBase => _scoreBase;
 
+  // Loading values in memory
+  Future<void> loadValuesInMemory() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    _scoreBase = prefs.getInt('scoreBase') ?? 0;
+    _rankedScore = prefs.getInt('rankedScore') ?? 0;
+    _coinBase = prefs.getInt('coinBase') ?? 0;
+    notifyListeners();
+  }
+
+  // Save Coin Base
+  Future<void> saveCoinBase(int coinBase) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setInt('coinBase', coinBase);
+
+    _coinBase = coinBase;
+    notifyListeners();
+  }
+
+  // Save Ranked Score
+  Future<void> saveRankedScore(int rankedScore) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setInt('rankedScore', rankedScore);
+
+    _rankedScore = rankedScore;
+    notifyListeners();
+  }
+
+  // Save Score Base
+  Future<void> saveScoreBase(int scoreBase) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setInt('scoreBase', scoreBase);
+
+    _scoreBase = scoreBase;
+    notifyListeners();
+  }
+
+  // Updating Values
+  void updatingValues() {
+    saveCoinBase(_coinBase);
+    saveRankedScore(_rankedScore);
+    saveScoreBase(_scoreBase);
+  }
+
   // Finish Game
   void finish() {
     _scoreBase = _score;
+    saveScoreBase(_scoreBase);
     _gameFinish = true;
     notifyListeners();
   }
@@ -56,23 +101,28 @@ class GameProvider extends ChangeNotifier {
   // Updating Ranked Score
   void updatingRankedScore(int score) {
     _rankedScore = score;
+    saveRankedScore(_rankedScore);
   }
 
   // Updating Coin Base
   void updatingCoinBase(int score) {
     _coinBase += (score * 2);
+    saveCoinBase(_coinBase);
   }
 
+  // Using Coin
   void usingCoinBase() {
     if (coinBase > 5) {
       _coinBase -= 5;
     }
   }
 
+  // Updating Score
   void updatingScore() {
     _score++;
   }
 
+  // Reset Score
   void resetScore() {
     _score = 0;
   }

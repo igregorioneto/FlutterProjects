@@ -96,6 +96,8 @@ class _GamePageState extends State<GamePage> {
       _timerReference.cancel();
     }
 
+    game.updatingValues();
+
     showDialog(
       context: context,
       barrierDismissible: false,
@@ -104,8 +106,9 @@ class _GamePageState extends State<GamePage> {
           onTap: reloadQuickQuestion,
           onTap2: () => returnMenu(context),
           title: 'You Lost - Play Again',
-          pontuationGame: game.score,
+          pontuationGame: game.scoreBase,
           pontuationRankingGame: game.rankedScore,
+          coinGame: game.coinBase,
         );
       },
     );
@@ -126,9 +129,12 @@ class _GamePageState extends State<GamePage> {
       },
     );
 
+    reloadTimer();
+    if (_timerReference.isActive) {
+      _timerReference.cancel();
+    }
     Future.delayed(Duration(seconds: 1), () {
       Navigator.of(context).pop();
-      reloadTimer();
       startLoading();
     });
   }
@@ -171,6 +177,7 @@ class _GamePageState extends State<GamePage> {
     if (game.coinBase > 5) {
       game.usingCoinBase();
       showMoneyAnimation(context,'5', Icons.minimize_outlined);
+      game.nextLevel();
     }
   }
 
