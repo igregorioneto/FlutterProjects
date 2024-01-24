@@ -5,9 +5,12 @@ import 'package:flutter/services.dart';
 import 'package:function_tree/function_tree.dart';
 import 'package:provider/provider.dart';
 import 'package:quick_math/app/constants.dart';
+import 'package:quick_math/app/enums/shape_type.dart';
 import 'package:quick_math/app/providers/game_provider.dart';
+import 'package:quick_math/app/util/shape_converter.dart';
 import 'package:quick_math/app/widgets/animated_money_widget.dart';
 import 'package:quick_math/app/widgets/buttom_widget.dart';
+import 'package:quick_math/app/widgets/geometric_shape_widget.dart';
 import 'package:quick_math/app/widgets/icon_text_widget.dart';
 import 'package:quick_math/app/widgets/result_question_widget.dart';
 
@@ -72,7 +75,7 @@ class _GamePageState extends State<GamePage> {
   // Verify Question
   void verifyQuestion(num value) {
     final level = game.getLevel();
-    final question = level.question.replaceAll('?', value.toString());
+    final question = level.questionResponse.replaceAll('?', value.toString());
     List<String> parts = question.split('=');
 
     final q = parts[0].trim();
@@ -176,7 +179,7 @@ class _GamePageState extends State<GamePage> {
   void usingTip() {
     if (game.coinBase > 5) {
       game.usingCoinBase();
-      showMoneyAnimation(context,'5', Icons.minimize_outlined);
+      showMoneyAnimation(context, '5', Icons.minimize_outlined);
       game.nextLevel();
     }
   }
@@ -254,11 +257,16 @@ class _GamePageState extends State<GamePage> {
                 flex: 2,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Text(
-                      level.question,
+                    /*Text(
+                      !level.special
+                          ? level.question
+                          : ShapeConverter.replaceShapesInQuestion(
+                              level.question),
                       style: whiteText,
-                    ),
+                    ),*/
+                    level.question,
                   ],
                 ),
               ),
