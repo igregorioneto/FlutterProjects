@@ -182,7 +182,11 @@ class GameProvider extends ChangeNotifier {
     _levels.clear();
     // Gerar as formas
     var shape1 = _geometric[_random.nextInt(_geometric.length)];
-    var shape2 = _geometric[_random.nextInt(_geometric.length)];
+    var shape2;
+
+    do {
+      shape2 = _geometric[_random.nextInt(_geometric.length)];
+    } while(shape2 == shape1);
 
     num value1 = getShapeValue(shape1);
     num value2 = getShapeValue(shape2);
