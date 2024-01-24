@@ -173,6 +173,7 @@ class GameProvider extends ChangeNotifier {
       questionResponse: question,
       answers: answers,
       special: false,
+      response: r,
     ));
   }
 
@@ -219,6 +220,7 @@ class GameProvider extends ChangeNotifier {
         questionResponse: question3,
         answers: answers,
         special: true,
+        response: result3,
       ),
     );
   }
@@ -272,6 +274,7 @@ class GameProvider extends ChangeNotifier {
       questionResponse: '',
       answers: [0, 0, 0, 0],
       special: false,
+      response: 0,
     );
   }
 

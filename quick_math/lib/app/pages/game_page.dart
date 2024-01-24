@@ -75,17 +75,24 @@ class _GamePageState extends State<GamePage> {
   // Verify Question
   void verifyQuestion(num value) {
     final level = game.getLevel();
-    final question = level.questionResponse.replaceAll('?', value.toString());
+    /*final question = level.questionResponse.replaceAll('?', value.toString());
     List<String> parts = question.split('=');
 
     final q = parts[0].trim();
-    final res = num.parse(parts[1].trim());
+    final res = num.parse(parts[1].trim());*/
 
-    if (q.interpret() == res) {
+    if (value == level.response) {
       _timerReference.cancel();
       showMoneyAnimation(context, '2', Icons.add);
       game.nextLevel();
       generateScore();
+      if (game.getLevel().special) {
+        _duration = Duration(seconds: 30);
+        _timer = 30;
+      } else {
+        _duration = Duration(seconds: 10);
+        _timer = 10;
+      }
     } else {
       endGame();
     }
@@ -170,9 +177,15 @@ class _GamePageState extends State<GamePage> {
 
   // Reloading Timer Gamer
   void reloadTimer() {
-    _timeCurrent = 0;
-    _timer = 10;
-    _maxTimeValue = 10;
+    if (game.getLevel().special) {
+      _timeCurrent = 0;
+      _timer = 30;
+      _maxTimeValue = 30;
+    } else {
+      _timeCurrent = 0;
+      _timer = 10;
+      _maxTimeValue = 10;
+    }
   }
 
   // Using Tip Question

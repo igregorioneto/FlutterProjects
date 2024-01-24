@@ -4,6 +4,7 @@ import 'package:quick_math/app/enums/shape_type.dart';
 import 'package:quick_math/app/widgets/geometric_shape_widget.dart';
 
 class ShapeConverter {
+  // Converting Questions in widget
   static List<Widget> replaceShapesInQuestion(String question) {
     List<Widget> widgets = [];
 
@@ -33,6 +34,7 @@ class ShapeConverter {
     return widgets;
   }
 
+  // Converting shape geometric in Widget
   static Widget? _getShapeWidget(String shapeToken) {
     Map<String, dynamic> shapeMappings = {
       'q': GeometricShapeWidget(shapeType: ShapeType.square),
