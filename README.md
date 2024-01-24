@@ -207,3 +207,29 @@ A Princípio terá 20 leveis gerados para diversão e a medida que vai passando 
 - **Flutter:** Framework de desenvolvimento multiplataforma que permite a criação de aplicativos nativos para iOS e Android a partir de um único código-base.
 - **Dart:** Linguagem de programação utilizada pelo Flutter para desenvolvimento de aplicações mobile.
 </details>
+
+<details>
+<summary>Quick Math - quick_math</summary>
+
+## Extract
+
+<img src="quick_math/assets/Android Emulator - android_5554 2024-01-24 17-00-52.gif" width="300">
+<br />
+
+### Descrição
+
+O projeto "Quick Math" jogo em desenvolvimento no qual é para resolver questões de matemática rápidas, no caso pequenos desafios. Estes desafios são gerados pelo sistema, lembrando que tem tempo, pontuação, ranking da melhor pontuação, sistema de cash para poder pular as perguntas caso tenha 5 de cash, sistema de tempo dependendo do tipo da pergunta e tudo mais.
+
+### Recursos Principais
+
+- Interface de usuário atraente e responsiva, desenvolvida com Flutter.
+- Provider para gerenciamento de estado.
+- Sistema de pontuação.
+- Sistema de tempo de resposta dependendo da questão.
+- Cash para poder utilizar para pular questões.
+
+### Tecnologias Utilizadas
+
+- **Flutter:** Framework de desenvolvimento multiplataforma que permite a criação de aplicativos nativos para iOS e Android a partir de um único código-base.
+- **Dart:** Linguagem de programação utilizada pelo Flutter para desenvolvimento de aplicações mobile.
+</details>
