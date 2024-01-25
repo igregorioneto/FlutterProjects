@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:tetris_game/app/game/constants.dart';
+import 'package:tetris_game/app/game/piece.dart';
+import 'package:tetris_game/app/game/tetromino.dart';
 import 'package:tetris_game/app/widgets/pixel.dart';
 
 class GameBoardPage extends StatefulWidget {
@@ -9,26 +12,48 @@ class GameBoardPage extends StatefulWidget {
 }
 
 class _GameBoardPageState extends State<GameBoardPage> {
-  // grid dimensions
-  int rowLength = 10;
-  int colLength = 15;
+
+  // current tetris piece
+  Piece currentPiece = Piece(type: Tetromino.L);
+
+  @override
+  void initState() {
+    super.initState();
+
+    startGame();
+  }
+
+  void startGame() {
+    currentPiece.initializePiece();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black87,
       body: GridView.builder(
-        itemCount: rowLength * colLength,
+        itemCount: Constants.rowLength * Constants.colLength,
         physics: NeverScrollableScrollPhysics(),
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: rowLength,
+          crossAxisCount: Constants.rowLength,
         ),
-        itemBuilder: (context, index) => Center(
-          child: Pixel(
-            color: Colors.grey[900],
-            child: index,
-          ),
-        ),
+        itemBuilder: (context, index) {
+          if (currentPiece.position.contains(index)) {
+            return Center(
+              child: Pixel(
+                color: Colors.yellow,
+                child: index,
+              ),
+            );
+          } else {
+            return Center(
+              child: Pixel(
+                color: Colors.grey[900],
+                child: index,
+              ),
+            );
+          }
+        }
       ),
     );
   }
