@@ -1,5 +1,8 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:tetris_game/app/game/constants.dart';
+import 'package:tetris_game/app/game/direction.dart';
 import 'package:tetris_game/app/game/piece.dart';
 import 'package:tetris_game/app/game/tetromino.dart';
 import 'package:tetris_game/app/widgets/pixel.dart';
@@ -14,7 +17,7 @@ class GameBoardPage extends StatefulWidget {
 class _GameBoardPageState extends State<GameBoardPage> {
 
   // current tetris piece
-  Piece currentPiece = Piece(type: Tetromino.L);
+  Piece currentPiece = Piece(type: Tetromino.J);
 
   @override
   void initState() {
@@ -23,8 +26,22 @@ class _GameBoardPageState extends State<GameBoardPage> {
     startGame();
   }
 
+  // Game Starting
   void startGame() {
     currentPiece.initializePiece();
+
+    // frame frash
+    Duration frameRate = Duration(milliseconds: 800);
+    gameLoop(frameRate);
+  }
+
+  // Game Loop
+  void gameLoop(Duration frameRate) {
+    Timer.periodic(frameRate, (timer) {
+      setState(() {
+        currentPiece.movePiece(Direction.down);
+      });
+    });
   }
 
   @override
