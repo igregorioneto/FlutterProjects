@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -19,6 +20,7 @@ class _GameBoardPageState extends State<GameBoardPage> {
   // current tetris piece
   Piece currentPiece = Piece(type: Tetromino.L);
   int currentScore = 0;
+  bool gameOver = false;
 
   @override
   void initState() {
@@ -45,10 +47,58 @@ class _GameBoardPageState extends State<GameBoardPage> {
         clearLines();
         // check landing
         checkLanding();
+
+        // checked is game over
+        if (gameOver) {
+          timer.cancel();
+          showGameOverDialog();
+        }
+
         // move current piece down
         currentPiece.movePiece(Direction.down);
       });
     });
+  }
+
+  // show game over dialog
+  void showGameOverDialog() {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text('Game Over'),
+        content: Text('Your score is: $currentScore'),
+        actions: [
+          TextButton(
+            onPressed: () {
+              resetGame();
+              Navigator.of(context).pop();
+            },
+            child: Text('Play Again'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  // Game Reset
+  void resetGame() {
+    // clear game board
+    Piece.gameBoard = List.generate(
+      Constants.colLength,
+      (i) => List.generate(
+        Constants.rowLength,
+        (j) => null,
+      ),
+    );
+
+    gameOver = false;
+    currentScore = 0;
+
+    // create new Piece
+    createdNewPiece();
+
+    // start game
+    startGame();
   }
 
   // Check collision
@@ -103,6 +153,11 @@ class _GameBoardPageState extends State<GameBoardPage> {
         Tetromino.values[random.nextInt(Tetromino.values.length)];
     currentPiece = Piece(type: randomType);
     currentPiece.initializePiece();
+
+    // game over
+    if (isGameOver()) {
+      gameOver = true;
+    }
   }
 
   // Game Controls
@@ -139,6 +194,7 @@ class _GameBoardPageState extends State<GameBoardPage> {
         }
       }
 
+      // if row is full clear row
       if (rowIsFull) {
         for (int r = row; r > 0; r--) {
           Piece.gameBoard[r] = List.from(Piece.gameBoard[r - 1]);
@@ -147,6 +203,16 @@ class _GameBoardPageState extends State<GameBoardPage> {
         currentScore++;
       }
     }
+  }
+
+  // Game Over
+  bool isGameOver() {
+    for (int col = 0; col < Constants.rowLength; col++) {
+      if (Piece.gameBoard[0][col] != null) {
+        return true;
+      }
+    }
+    return false;
   }
 
   @override
@@ -171,19 +237,16 @@ class _GameBoardPageState extends State<GameBoardPage> {
                   return Center(
                     child: Pixel(
                       color: currentPiece.color,
-                      child: index,
                     ),
                   );
                 } else if (Piece.gameBoard[row][col] != null) {
                   return Pixel(
                     color: Colors.purple,
-                    child: '',
                   );
                 } else {
                   return Center(
                     child: Pixel(
                       color: Colors.grey[900],
-                      child: index,
                     ),
                   );
                 }
