@@ -61,6 +61,14 @@ class Piece {
           -5,
         ];
         break;
+      case Tetromino.T:
+        position = [
+          -26,
+          -16,
+          -6,
+          -15,
+        ];
+        break;
       default:
     }
   }
@@ -69,7 +77,6 @@ class Piece {
     switch(direction) {
       case Direction.down:
         for (int i = 0; i < position.length; i++) {
-          print(position[i]);
           position[i] += Constants.rowLength;
         }
         break;
