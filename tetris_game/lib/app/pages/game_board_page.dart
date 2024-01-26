@@ -8,14 +8,6 @@ import 'package:tetris_game/app/game/piece.dart';
 import 'package:tetris_game/app/game/tetromino.dart';
 import 'package:tetris_game/app/widgets/pixel.dart';
 
-List<List<Tetromino?>> gameBoard = List.generate(
-  Constants.colLength,
-  (i) => List.generate(
-    Constants.rowLength,
-    (j) => null,
-  ),
-);
-
 class GameBoardPage extends StatefulWidget {
   const GameBoardPage({super.key});
 
@@ -25,7 +17,7 @@ class GameBoardPage extends StatefulWidget {
 
 class _GameBoardPageState extends State<GameBoardPage> {
   // current tetris piece
-  Piece currentPiece = Piece(type: Tetromino.T);
+  Piece currentPiece = Piece(type: Tetromino.L);
 
   @override
   void initState() {
@@ -74,7 +66,8 @@ class _GameBoardPageState extends State<GameBoardPage> {
       if (row >= Constants.colLength || col < 0 || col >= Constants.rowLength) {
         return true;
       }
-      if (row >= 0 && gameBoard[row][col] != null) {
+      // checked if the piece is collid with others piece
+      if (row >= 0 && Piece.gameBoard[row][col] != null) {
         return true;
       }
     }
@@ -89,7 +82,7 @@ class _GameBoardPageState extends State<GameBoardPage> {
         int row = (currentPiece.position[i] / Constants.rowLength).floor();
         int col = currentPiece.position[i] % Constants.rowLength;
         if (row >= 0 && col >= 0) {
-          gameBoard[row][col] = currentPiece.type;
+          Piece.gameBoard[row][col] = currentPiece.type;
         }
       }
 
@@ -107,41 +100,97 @@ class _GameBoardPageState extends State<GameBoardPage> {
     currentPiece.initializePiece();
   }
 
+  // Game Controls
+  void moveLeft() {
+    if (!checkCollision(Direction.left)) {
+      setState(() {
+        currentPiece.movePiece(Direction.left);
+      });
+    }
+  }
+
+  void moveRight() {
+    if (!checkCollision(Direction.right)) {
+      setState(() {
+        currentPiece.movePiece(Direction.right);
+      });
+    }
+  }
+
+  void rotatePiece() {
+    setState(() {
+      currentPiece.rotatePiece();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
-      body: GridView.builder(
-          itemCount: Constants.rowLength * Constants.colLength,
-          physics: NeverScrollableScrollPhysics(),
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: Constants.rowLength,
-          ),
-          itemBuilder: (context, index) {
-            int row = (index / Constants.rowLength).floor();
-            int col = (index % Constants.rowLength);
+      body: Column(
+        children: [
+          // Game Board
+          Expanded(
+            child: GridView.builder(
+              itemCount: Constants.rowLength * Constants.colLength,
+              physics: NeverScrollableScrollPhysics(),
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: Constants.rowLength,
+              ),
+              itemBuilder: (context, index) {
+                int row = (index / Constants.rowLength).floor();
+                int col = (index % Constants.rowLength);
 
-            if (currentPiece.position.contains(index)) {
-              return Center(
-                child: Pixel(
-                  color: currentPiece.color,
-                  child: index,
+                if (currentPiece.position.contains(index)) {
+                  return Center(
+                    child: Pixel(
+                      color: currentPiece.color,
+                      child: index,
+                    ),
+                  );
+                } else if (Piece.gameBoard[row][col] != null) {
+                  return Pixel(
+                    color: Colors.purple,
+                    child: '',
+                  );
+                } else {
+                  return Center(
+                    child: Pixel(
+                      color: Colors.grey[900],
+                      child: index,
+                    ),
+                  );
+                }
+              },
+            ),
+          ),
+
+          // Game Controls
+          Padding(
+            padding: const EdgeInsets.only(bottom: 50),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                IconButton(
+                  onPressed: moveLeft,
+                  color: Colors.white,
+                  icon: Icon(Icons.arrow_back_ios),
                 ),
-              );
-            } else if(gameBoard[row][col] != null) {
-              return Pixel(
-                color: Colors.purple,
-                child: '',
-              );
-            } else {
-              return Center(
-                child: Pixel(
-                  color: Colors.grey[900],
-                  child: index,
+                IconButton(
+                  onPressed: rotatePiece,
+                  color: Colors.white,
+                  icon: Icon(Icons.rotate_right),
                 ),
-              );
-            }
-          }),
+                IconButton(
+                  onPressed: moveRight,
+                  color: Colors.white,
+                  icon: Icon(Icons.arrow_forward_ios),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

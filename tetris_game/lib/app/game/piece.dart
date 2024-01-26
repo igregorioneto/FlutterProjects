@@ -11,6 +11,15 @@ class Piece {
 
   Piece({required this.type});
 
+  // Game Board
+  static List<List<Tetromino?>> gameBoard = List.generate(
+    Constants.colLength,
+    (i) => List.generate(
+      Constants.rowLength,
+      (j) => null,
+    ),
+  );
+
   // the piece is just a list of integers
   List<int> position = [];
 
@@ -21,7 +30,7 @@ class Piece {
 
   // Generate the integers
   void initializePiece() {
-    switch(type) {
+    switch (type) {
       case Tetromino.L:
         position = [
           -4,
@@ -82,15 +91,16 @@ class Piece {
     }
   }
 
+  // Move Piece
   void movePiece(Direction direction) {
-    switch(direction) {
+    switch (direction) {
       case Direction.down:
         for (int i = 0; i < position.length; i++) {
           position[i] += Constants.rowLength;
         }
         break;
       case Direction.left:
-        for(int i = 0; i < position.length; i++) {
+        for (int i = 0; i < position.length; i++) {
           position[i] -= 1;
         }
         break;
@@ -101,5 +111,106 @@ class Piece {
         break;
       default:
     }
+  }
+
+  // Rotate Piece
+  int rotationState = 1;
+
+  void rotatePiece() {
+    // new position
+    List<int> newPosition = [];
+
+    // rotate piece based in type
+    switch (type) {
+      case Tetromino.L:
+        switch (rotationState) {
+          case 0:
+            newPosition = [
+              position[1] - Constants.rowLength,
+              position[1],
+              position[1] + Constants.rowLength,
+              position[1] + Constants.rowLength + 1,
+            ];
+            if (piecePositionIsValid(newPosition)) {
+              position = newPosition;
+              rotationState = (rotationState + 1) % 4;
+            }
+            break;
+          case 1:
+            newPosition = [
+              position[1] - 1,
+              position[1],
+              position[1] + 1,
+              position[1] + Constants.rowLength - 1,
+            ];
+            if (piecePositionIsValid(newPosition)) {
+              position = newPosition;
+              rotationState = (rotationState + 1) % 4;
+            }
+            break;
+          case 2:
+            newPosition = [
+              position[1] + Constants.rowLength,
+              position[1],
+              position[1] - Constants.rowLength,
+              position[1] - Constants.rowLength - 1,
+            ];
+            if (piecePositionIsValid(newPosition)) {
+              position = newPosition;
+              rotationState = (rotationState + 1) % 4;
+            }
+            break;
+          case 3:
+            newPosition = [
+              position[1] - Constants.rowLength + 1,
+              position[1],
+              position[1] + 1,
+              position[1] - 1,
+            ];
+            if (piecePositionIsValid(newPosition)) {
+              position = newPosition;
+              rotationState = (rotationState + 1) % 4;
+            }
+            break;
+          default:
+        }
+        break;
+      default:
+    }
+  }
+
+  // checked if valid position
+  bool positionIsValid(int position) {
+    int row = (position / Constants.rowLength).floor();
+    int col = position % Constants.rowLength;
+
+    if (row < 0 || col < 0 || gameBoard[row][col] != null) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  // checked if piece is valid position
+  bool piecePositionIsValid(List<int> piecePosition) {
+    bool firstColOccupied = false;
+    bool lastColOccupied = false;
+
+    for (int pos in piecePosition) {
+      // position taken return false
+      if (!positionIsValid(pos)) {
+        return false;
+      }
+
+      int col = pos % Constants.rowLength;
+      if (col == 0) {
+        firstColOccupied = true;
+      }
+      if (col == Constants.rowLength - 1) {
+        lastColOccupied = true;
+      }
+    }
+
+    return !(firstColOccupied && lastColOccupied);
   }
 }
