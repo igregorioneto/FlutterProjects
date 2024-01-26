@@ -18,6 +18,7 @@ class GameBoardPage extends StatefulWidget {
 class _GameBoardPageState extends State<GameBoardPage> {
   // current tetris piece
   Piece currentPiece = Piece(type: Tetromino.L);
+  int currentScore = 0;
 
   @override
   void initState() {
@@ -40,7 +41,11 @@ class _GameBoardPageState extends State<GameBoardPage> {
   void gameLoop(Duration frameRate) {
     Timer.periodic(frameRate, (timer) {
       setState(() {
+        // clear lines
+        clearLines();
+        // check landing
         checkLanding();
+        // move current piece down
         currentPiece.movePiece(Direction.down);
       });
     });
@@ -123,6 +128,27 @@ class _GameBoardPageState extends State<GameBoardPage> {
     });
   }
 
+  // Clear lines
+  void clearLines() {
+    for (int row = Constants.colLength - 1; row >= 0; row--) {
+      bool rowIsFull = true;
+      for (int col = 0; col < Constants.rowLength; col++) {
+        if (Piece.gameBoard[row][col] == null) {
+          rowIsFull = false;
+          break;
+        }
+      }
+
+      if (rowIsFull) {
+        for (int r = row; r > 0; r--) {
+          Piece.gameBoard[r] = List.from(Piece.gameBoard[r - 1]);
+        }
+        Piece.gameBoard[0] = List.generate(row, (index) => null);
+        currentScore++;
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -163,6 +189,11 @@ class _GameBoardPageState extends State<GameBoardPage> {
                 }
               },
             ),
+          ),
+
+          Text(
+            'Score: $currentScore',
+            style: TextStyle(color: Colors.white),
           ),
 
           // Game Controls
