@@ -124,7 +124,7 @@ class _GameBoardPageState extends State<GameBoardPage> {
             if (currentPiece.position.contains(index)) {
               return Center(
                 child: Pixel(
-                  color: Colors.yellow,
+                  color: currentPiece.color,
                   child: index,
                 ),
               );
