@@ -175,6 +175,229 @@ class Piece {
           default:
         }
         break;
+      case Tetromino.J:
+        switch(rotationState) {
+          case 0:
+            newPosition = [
+              position[1] - Constants.rowLength,
+              position[1],
+              position[1] + Constants.rowLength,
+              position[1] + Constants.rowLength - 1,
+            ];
+            if (piecePositionIsValid(newPosition)) {
+              position = newPosition;
+              rotationState = (rotationState + 1) % 4;
+            }
+            break;
+          case 1:
+            newPosition = [
+              position[1] - 1,
+              position[1],
+              position[1] + 1,
+              position[1] - Constants.rowLength - 1,
+            ];
+            if (piecePositionIsValid(newPosition)) {
+              position = newPosition;
+              rotationState = (rotationState + 1) % 4;
+            }
+            break;
+          case 2:
+            newPosition = [
+              position[1] + Constants.rowLength,
+              position[1],
+              position[1] - Constants.rowLength,
+              position[1] - Constants.rowLength + 1,
+            ];
+            if (piecePositionIsValid(newPosition)) {
+              position = newPosition;
+              rotationState = (rotationState + 1) % 4;
+            }
+            break;
+          case 3:
+            newPosition = [
+              position[1] + 1,
+              position[1],
+              position[1] - 1,
+              position[1] + Constants.rowLength + 1,
+            ];
+            if (piecePositionIsValid(newPosition)) {
+              position = newPosition;
+              rotationState = (rotationState + 1) % 4;
+            }
+            break;
+          default:
+        }
+        break;
+      case Tetromino.I:
+        switch(rotationState) {
+          case 0:
+            newPosition = [
+              position[1] - Constants.rowLength,
+              position[1],
+              position[1] + Constants.rowLength,
+              position[1] + 2 * Constants.rowLength,
+            ];
+            if (piecePositionIsValid(newPosition)) {
+              position = newPosition;
+              rotationState = (rotationState + 1) % 4;
+            }
+            break;
+          case 1:
+            newPosition = [
+              position[1] - 1,
+              position[1],
+              position[1] + 1,
+              position[1] + 2,
+            ];
+            if (piecePositionIsValid(newPosition)) {
+              position = newPosition;
+              rotationState = (rotationState + 1) % 4;
+            }
+            break;
+          case 2:
+            newPosition = [
+              position[1] - Constants.rowLength,
+              position[1],
+              position[1] + Constants.rowLength,
+              position[1] + 2 * Constants.rowLength,
+            ];
+            if (piecePositionIsValid(newPosition)) {
+              position = newPosition;
+              rotationState = (rotationState + 1) % 4;
+            }
+            break;
+          case 3:
+            newPosition = [
+              position[1] - 1,
+              position[1],
+              position[1] + 1,
+              position[1] + 2,
+            ];
+            if (piecePositionIsValid(newPosition)) {
+              position = newPosition;
+              rotationState = (rotationState + 1) % 4;
+            }
+            break;
+          default:
+        }
+        break;
+      case Tetromino.O:
+        break;
+      case Tetromino.S:
+        switch(rotationState) {
+          case 0:
+          case 2:
+            newPosition = [
+              position[1] - Constants.rowLength,
+              position[1],
+              position[1] + 1,
+              position[1] + Constants.rowLength + 1,
+            ];
+            if (piecePositionIsValid(newPosition)) {
+              position = newPosition;
+              rotationState = (rotationState + 1) % 4;
+            }
+            break;
+          case 1:
+          case 3:
+            newPosition = [
+              position[1] - 1,
+              position[1],
+              position[1] + Constants.rowLength,
+              position[1] + Constants.rowLength + 1,
+            ];
+            if (piecePositionIsValid(newPosition)) {
+              position = newPosition;
+              rotationState = (rotationState + 1) % 4;
+            }
+            break;
+          default:
+        }
+        break;
+      case Tetromino.Z:
+        switch(rotationState) {
+          case 0:
+          case 2:
+            newPosition = [
+              position[1] - Constants.rowLength - 1,
+              position[1] - Constants.rowLength,
+              position[1],
+              position[1] + 1,
+            ];
+            if (piecePositionIsValid(newPosition)) {
+              position = newPosition;
+              rotationState = (rotationState + 1) % 4;
+            }
+            break;
+          case 1:
+          case 3:
+            newPosition = [
+              position[1] - Constants.rowLength + 1,
+              position[1],
+              position[1] + Constants.rowLength,
+              position[1] + Constants.rowLength + 1,
+            ];
+            if (piecePositionIsValid(newPosition)) {
+              position = newPosition;
+              rotationState = (rotationState + 1) % 4;
+            }
+            break;
+          default:
+        }
+        break;
+      case Tetromino.T:
+        switch(rotationState) {
+          case 0:
+            newPosition = [
+              position[1] - Constants.rowLength,
+              position[1],
+              position[1] + 1,
+              position[1] + Constants.rowLength,
+            ];
+            if (piecePositionIsValid(newPosition)) {
+              position = newPosition;
+              rotationState = (rotationState + 1) % 4;
+            }
+            break;
+          case 1:
+            newPosition = [
+              position[1] - 1,
+              position[1],
+              position[1] + 1,
+              position[1] + Constants.rowLength,
+            ];
+            if (piecePositionIsValid(newPosition)) {
+              position = newPosition;
+              rotationState = (rotationState + 1) % 4;
+            }
+            break;
+          case 2:
+            newPosition = [
+              position[1] - Constants.rowLength,
+              position[1],
+              position[1] + 1,
+              position[1] + Constants.rowLength,
+            ];
+            if (piecePositionIsValid(newPosition)) {
+              position = newPosition;
+              rotationState = (rotationState + 1) % 4;
+            }
+            break;
+          case 3:
+            newPosition = [
+              position[1] - 1,
+              position[1],
+              position[1] + 1,
+              position[1] - Constants.rowLength,
+            ];
+            if (piecePositionIsValid(newPosition)) {
+              position = newPosition;
+              rotationState = (rotationState + 1) % 4;
+            }
+            break;
+          default:
+        }
+        break;
       default:
     }
   }
