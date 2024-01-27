@@ -114,7 +114,7 @@ O projeto "Extract" aplicativo baseado no desafio neste git: https://github.com/
 <details>
 <summary>Provider - provider_estudos</summary>
 
-## Extract
+## Provider
 
 <img src="provider_estados/assets/Android Emulator - android_5554 2024-01-17 16-23-02.gif" width="300">
 <br />
@@ -138,7 +138,7 @@ O projeto "Provider" aplicativo para mudança de temas utilizando o provider.
 <details>
 <summary>Todo Cubit - todo_cubit</summary>
 
-## Extract
+## Todo Cubit
 
 <img src="todo_cubit/assets/Android Emulator - android_5554 2024-01-17 16-25-22.gif" width="300">
 <br />
@@ -162,7 +162,7 @@ Simulando uma implementação com api e utilizando o gerenciamento de estado.
 <details>
 <summary>Builder App UI - builder_app_ui (Falta a página de Templates)</summary>
 
-## Extract
+## Builder App UI
 
 <img src="builder_app_ui/assets/Android Emulator - android_5554 2024-01-19 16-36-22.gif" width="300">
 <br />
@@ -187,7 +187,7 @@ O projeto "Builder App UI" aplicativo tirando como base este design https://drib
 <details>
 <summary>Math Game - math_game</summary>
 
-## Extract
+## Math Game
 
 <img src="math_game/assets/Android Emulator - android_5554 2024-01-20 17-10-59.gif" width="300">
 <br />
@@ -211,7 +211,7 @@ A Princípio terá 20 leveis gerados para diversão e a medida que vai passando 
 <details>
 <summary>Quick Math - quick_math</summary>
 
-## Extract
+## Quick Math
 
 <img src="quick_math/assets/Android Emulator - android_5554 2024-01-24 17-00-52.gif" width="300">
 <br />
@@ -227,6 +227,31 @@ O projeto "Quick Math" jogo em desenvolvimento no qual é para resolver questõe
 - Sistema de pontuação.
 - Sistema de tempo de resposta dependendo da questão.
 - Cash para poder utilizar para pular questões.
+
+### Tecnologias Utilizadas
+
+- **Flutter:** Framework de desenvolvimento multiplataforma que permite a criação de aplicativos nativos para iOS e Android a partir de um único código-base.
+- **Dart:** Linguagem de programação utilizada pelo Flutter para desenvolvimento de aplicações mobile.
+</details>
+
+<details>
+<summary>Tetris - tetris_game</summary>
+
+## Tetris
+
+<img src="tetris_game/assets/Android Emulator - android_5554 2024-01-26 19-41-01.gif" width="300">
+<br />
+
+### Descrição
+
+O projeto "Tetris" jogo de Tetris com a movimentação dos Tetrominos, giro e pontuação quando preenchido toda a linha.
+
+### Recursos Principais
+
+- Interface de usuário atraente e responsiva, desenvolvida com Flutter.
+- Sistema de pontuação.
+- Sistema de giro com base no Tetromino.
+- Sistema de criar o Tetromino com base no seu formato.
 
 ### Tecnologias Utilizadas
 
