@@ -258,3 +258,26 @@ O projeto "Tetris" jogo de Tetris com a movimentação dos Tetrominos, giro e po
 - **Flutter:** Framework de desenvolvimento multiplataforma que permite a criação de aplicativos nativos para iOS e Android a partir de um único código-base.
 - **Dart:** Linguagem de programação utilizada pelo Flutter para desenvolvimento de aplicações mobile.
 </details>
+
+<details>
+<summary>Github Users - github_users</summary>
+
+## Github Users
+
+<img src="github_users/assets/Android Emulator - android_5554 2024-01-29 08-24-53.gif" width="300">
+<br />
+
+### Descrição
+
+O projeto "Github Users" aplicativo que lista os usuários do github e detalhe de cada usuário. Foi utilizado Getx injeção de dependência, navegação e gerenciamento de estados.
+
+### Recursos Principais
+
+- Interface de usuário atraente e responsiva, desenvolvida com Flutter.
+- Getx para injeção de dependência, navegação e gerenciamento de estados.
+
+### Tecnologias Utilizadas
+
+- **Flutter:** Framework de desenvolvimento multiplataforma que permite a criação de aplicativos nativos para iOS e Android a partir de um único código-base.
+- **Dart:** Linguagem de programação utilizada pelo Flutter para desenvolvimento de aplicações mobile.
+</details>
