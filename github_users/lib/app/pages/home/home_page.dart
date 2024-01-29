@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:github_users/app/data/repositories/github_repository.dart';
 import 'package:github_users/app/pages/detail/detail_page.dart';
+import 'package:github_users/app/pages/home/home_binding.dart';
 import 'package:github_users/app/pages/home/home_controller.dart';
 
 class HomePage extends StatefulWidget {
@@ -19,12 +20,13 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
 
-    _controller = HomeController(
+    /*_controller = HomeController(
       repository: GithubRepository(
         dio: Dio(),
       ),
-    );
-
+    );*/
+    setUpHome();
+    _controller = Get.find();
     _controller.getGithubUsers();
   }
 

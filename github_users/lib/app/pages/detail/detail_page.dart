@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:github_users/app/data/repositories/github_repository.dart';
+import 'package:github_users/app/pages/detail/detail_binding.dart';
 import 'package:github_users/app/pages/detail/detail_controller.dart';
 
 class DetailPage extends StatefulWidget {
@@ -23,12 +24,13 @@ class _DetailPageState extends State<DetailPage> {
   void initState() {
     super.initState();
 
-    _controller = DetailController(
+    /*_controller = DetailController(
       repository: GithubRepository(
         dio: Dio(),
       ),
-    );
-
+    );*/
+    setUpDetail();
+    _controller = Get.find();
     _controller.getGithubUserDetail(login: widget.login);
   }
 
