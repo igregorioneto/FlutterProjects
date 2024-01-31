@@ -17,6 +17,7 @@ abstract class _ItemStore with Store {
   @action
   Future<void> fetchItems() async {
     final fetchedItems = await repository.getItemManagementList();
+    items.clear();
     items.addAll(fetchedItems);
   }
 }

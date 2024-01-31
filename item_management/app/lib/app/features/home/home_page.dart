@@ -67,11 +67,15 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
       ),
-      body: TabBarView(
-        children: [
-          AguardandoMovimentacaoWidget(),
-          ItensMovimentadosWidgets(),
-        ],
+      body: Observer(
+        builder: (_) {
+          return TabBarView(
+            children: [
+              AguardandoMovimentacaoWidget(itemStore: itemStore),
+              ItensMovimentadosWidgets(),
+            ],
+          );
+        },
       )
     );
   }
