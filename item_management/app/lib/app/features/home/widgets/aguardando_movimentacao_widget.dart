@@ -1,3 +1,4 @@
+import 'package:app/app/shared/widget/button_icon_widget.dart';
 import 'package:flutter/material.dart';
 
 class AguardandoMovimentacaoWidget extends StatelessWidget {
@@ -5,6 +6,28 @@ class AguardandoMovimentacaoWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(child: Text('Conteúdo 1'));
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ButtonIconWidget(
+                icon: Icons.filter_alt_rounded,
+                title: 'Filtros',
+                click: () {},
+              ),
+              SizedBox(width: 10),
+              ButtonIconWidget(
+                icon: Icons.menu_outlined,
+                title: 'Ordenamento',
+                click: () {},
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
   }
 }
