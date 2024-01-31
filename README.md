@@ -281,3 +281,26 @@ O projeto "Github Users" aplicativo que lista os usuários do github e detalhe d
 - **Flutter:** Framework de desenvolvimento multiplataforma que permite a criação de aplicativos nativos para iOS e Android a partir de um único código-base.
 - **Dart:** Linguagem de programação utilizada pelo Flutter para desenvolvimento de aplicações mobile.
 </details>
+
+<details>
+<summary>Counter with Mobx - counter_with_mobx</summary>
+
+## Counter with Mobx
+
+<img src="counter_with_mobx/assets/Android Emulator - android_5554 2024-01-30 22-23-15.gif" width="300">
+<br />
+
+### Descrição
+
+O projeto "Counter with Mobx" foi a conversão do app inicial do flutter de contador para Mobx.
+
+### Recursos Principais
+
+- Interface de usuário atraente e responsiva, desenvolvida com Flutter.
+- Mobx para gerenciamento de estados.
+
+### Tecnologias Utilizadas
+
+- **Flutter:** Framework de desenvolvimento multiplataforma que permite a criação de aplicativos nativos para iOS e Android a partir de um único código-base.
+- **Dart:** Linguagem de programação utilizada pelo Flutter para desenvolvimento de aplicações mobile.
+</details>
