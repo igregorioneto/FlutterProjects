@@ -5,6 +5,7 @@ class ButtonSimpleWidget extends StatelessWidget {
   final Color? titleColor;
   final Color color;
   final VoidCallback click;
+  final bool fullButton;
 
   const ButtonSimpleWidget({
     super.key,
@@ -12,11 +13,13 @@ class ButtonSimpleWidget extends StatelessWidget {
     this.titleColor,
     required this.color,
     required this.click,
+    required this.fullButton,
   });
 
   @override
   Widget build(BuildContext context) {
     return MaterialButton(
+      minWidth: fullButton ? double.infinity : 150,
       onPressed: click,
       child: Text(
         title,

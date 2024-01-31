@@ -46,12 +46,14 @@ class AguardandoMovimentacaoWidget extends StatelessWidget {
                   title: 'Área de Recebimento',
                   color: Colors.blue,
                   click: () {},
+                  fullButton: false,
                 ),
                 SizedBox(width: 10),
                 ButtonSimpleWidget(
                   title: 'Área de Quarentena',
                   color: Colors.orangeAccent,
                   click: () {},
+                  fullButton: false,
                 ),
               ],
             ),
@@ -89,8 +91,23 @@ class AguardandoMovimentacaoWidget extends StatelessWidget {
               itemCount: itemStore.items.length,
               itemBuilder: (context, index) {
                 final item = itemStore.items[index];
-                return ListTile(
-                  title: Text(item.name),
+                return Card(
+                  child: IntrinsicHeight(
+                    child: Column(
+                      children: [
+                        ListTile(title: Text(item.name)),
+                        Expanded(
+                          child: ButtonSimpleWidget(
+                            title: 'Movimentar',
+                            click: () {},
+                            color: Colors.lightBlue.shade50,
+                            titleColor: Colors.lightBlue,
+                            fullButton: true,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 );
               },
             ),
