@@ -1,3 +1,4 @@
+import 'package:app/app/shared/utils/colors.dart';
 import 'package:app/app/shared/widget/button_icon_widget.dart';
 import 'package:app/app/shared/widget/button_simple_widget.dart';
 import 'package:app/app/store/item.store.dart';
@@ -44,14 +45,14 @@ class AguardandoMovimentacaoWidget extends StatelessWidget {
               children: [
                 ButtonSimpleWidget(
                   title: 'Área de Recebimento',
-                  color: Colors.blue,
+                  color: receivingColor,
                   click: () {},
                   fullButton: false,
                 ),
                 SizedBox(width: 10),
                 ButtonSimpleWidget(
                   title: 'Área de Quarentena',
-                  color: Colors.orangeAccent,
+                  color: quarentineColor,
                   click: () {},
                   fullButton: false,
                 ),
