@@ -45,14 +45,14 @@ class AguardandoMovimentacaoWidget extends StatelessWidget {
               children: [
                 ButtonSimpleWidget(
                   title: 'Área de Recebimento',
-                  color: receivingColor,
+                  color: receivingColor.withOpacity(0.5),
                   click: () {},
                   fullButton: false,
                 ),
                 SizedBox(width: 10),
                 ButtonSimpleWidget(
                   title: 'Área de Quarentena',
-                  color: quarentineColor,
+                  color: quarentineColor.withOpacity(0.5),
                   click: () {},
                   fullButton: false,
                 ),
@@ -93,10 +93,126 @@ class AguardandoMovimentacaoWidget extends StatelessWidget {
               itemBuilder: (context, index) {
                 final item = itemStore.items[index];
                 return Card(
+                  color: Colors.white.withOpacity(1),
+                  elevation: 5,
+                  shadowColor: Colors.grey,
+                  margin: EdgeInsets.symmetric(vertical: 12, horizontal: 6),
                   child: IntrinsicHeight(
                     child: Column(
                       children: [
-                        ListTile(title: Text(item.name)),
+                        SizedBox(height: 4),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 16,
+                            vertical: 4,
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Flexible(
+                                child: Container(
+                                  child: Text(
+                                    'DISPONÍVEL PARA ARMAZENAMENTO',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 8,
+                                      color: storageColor,
+                                    ),
+                                  ),
+                                  color: storagesBackground,
+                                  padding: EdgeInsets.all(6),
+                                ),
+                              ),
+                              SizedBox(width: 10),
+                              Flexible(
+                                child: Row(
+                                  children: [
+                                    Text(
+                                      'Quarentena',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 10,
+                                        color: Colors.grey,
+                                      ),
+                                    ),
+                                    Icon(Icons.arrow_forward),
+                                    Text(
+                                      'Armazenamento',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 10,
+                                        color: Colors.grey,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        ListTile(
+                          title: Text(
+                            item.name,
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          subtitle: Text('(${item.numeration})'),
+                        ),
+                        Divider(),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 16, vertical: 4),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'OR: ${item.order}',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              Text(
+                                'Qtd: ${item.quantity}',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 16, vertical: 4),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'Lote: ${item.lot}',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 16, vertical: 4),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'Lote: ${item.barcode}',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        SizedBox(height: 5),
                         Expanded(
                           child: ButtonSimpleWidget(
                             title: 'Movimentar',
