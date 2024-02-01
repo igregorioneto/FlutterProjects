@@ -4,7 +4,7 @@ class ButtonSimpleWidget extends StatelessWidget {
   final String title;
   final Color? titleColor;
   final Color color;
-  final Function click;
+  final VoidCallback click;
   final bool fullButton;
 
   const ButtonSimpleWidget({

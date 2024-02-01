@@ -45,4 +45,28 @@ class Item {
       'storage_area': storageArea,
     };
   }
+
+  Item copyWith({
+    int? id,
+    String? name,
+    int? numeration,
+    int? order,
+    String? lot,
+    String? barcode,
+    double? quantity,
+    String? status,
+    bool? storageArea,
+  }) {
+    return Item(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      numeration: numeration ?? this.numeration,
+      order: order ?? this.order,
+      lot: lot ?? this.lot,
+      barcode: barcode ?? this.barcode,
+      quantity: quantity ?? this.quantity,
+      status: status ?? this.status,
+      storageArea: storageArea ?? this.storageArea,
+    );
+  }
 }

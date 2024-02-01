@@ -220,6 +220,6 @@ List<Map<String, dynamic>> mockData = [
     "barcode": "012345678901",
     "quantity": 30.75,
     "status": "Quarantine",
-    "storage_area": false,
+    "storage_area": true,
   }
 ];

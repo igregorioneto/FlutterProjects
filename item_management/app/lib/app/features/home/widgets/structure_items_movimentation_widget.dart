@@ -126,6 +126,7 @@ class StructureItemsMovimentationWidget extends StatelessWidget {
     }
 
     void fnMovimentationItem(Item item) {
+      print(item.numeration);
       showDialog(
         context: context,
         builder: (BuildContext builder) {
@@ -166,7 +167,7 @@ class StructureItemsMovimentationWidget extends StatelessWidget {
                 title: 'Confirmar',
                 color: Colors.blue,
                 click: () {
-                  print(item.name);
+                  itemStore.fetchStorageAreaUpdated(item);
                   Navigator.of(context).pop();
                 },
                 fullButton: false,

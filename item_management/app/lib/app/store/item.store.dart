@@ -47,7 +47,6 @@ abstract class _ItemStore with Store {
   void updatingIsItemsMovimentations(bool value) {
     if (_isItemsMovimentations != value) {
       _isItemsMovimentations = value;
-      print(_isItemsMovimentations);
       fetchItems();
     }
   }
@@ -60,9 +59,16 @@ abstract class _ItemStore with Store {
     isLoading = true;
 
     final fetchedItems = await repository.getItemManagementList();
-    items = ObservableList.of(
-      fetchedItems.where((item) => !item.storageArea || item.storageArea),
-    );
+
+    if (_isItemsMovimentations) {
+      items = ObservableList.of(
+        fetchedItems.where((item) => item.storageArea),
+      );
+    } else {
+      items = ObservableList.of(
+        fetchedItems.where((item) => !item.storageArea),
+      );
+    }
 
     itemsFilter = ObservableList.of(items);
 
@@ -168,7 +174,8 @@ abstract class _ItemStore with Store {
   * Movimentation to Storage area
   * */
   Future<void> fetchStorageAreaUpdated(Item item) async {
-    item.storageArea = true;
+    item = item.copyWith(storageArea: true);
     await repository.updatingItem(item);
+    fetchItems();
   }
 }
