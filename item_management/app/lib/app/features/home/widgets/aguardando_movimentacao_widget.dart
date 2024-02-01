@@ -1,3 +1,4 @@
+import 'package:app/app/core/models/item.dart';
 import 'package:app/app/core/services/item_service.dart';
 import 'package:app/app/shared/utils/colors.dart';
 import 'package:app/app/shared/widget/button_icon_widget.dart';
@@ -37,58 +38,55 @@ class AguardandoMovimentacaoWidget extends StatelessWidget {
 
           // Item information
           SizedBox(height: 10),
-          Padding(
-            padding: EdgeInsets.all(4),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'Itens Encontrados: ${itemStore.items.length}',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16,
-                  ),
+          Observer(
+            builder: (context) {
+              return Padding(
+                padding: EdgeInsets.all(4),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Itens Encontrados: ${itemStore.itemsFilter.length}',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                      ),
+                    ),
+                    Text(
+                      'Peso: ${itemStore.weightItems.toStringAsFixed(2)} kg',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                      ),
+                    ),
+                  ],
                 ),
-                Text(
-                  'Peso: ${itemStore.weightItems} kg',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16,
-                  ),
-                ),
-              ],
-            ),
+              );
+            },
           ),
 
           // List Itens
           SizedBox(height: 10),
-          Expanded(
-            child: ListView.builder(
-              itemCount: itemStore.itemsFilter.length,
-              itemBuilder: (context, index) {
-                final item = itemStore.itemsFilter.length > index
-                    ? itemStore.itemsFilter[index]
-                    : null;
-
-                if (itemStore.isLoading) {
-                  return Center(child: CircularProgressIndicator());
-                } else if (itemStore.itemsFilter.isEmpty) {
-                  return Center(
-                    child: Text(
-                      'Nenhum item cadastrado...',
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  );
-                }
-
-                if (item != null) {
-                  return CardItemListWidget(item: item);
-                }
-              },
-            ),
+          Observer(
+            builder: (context) {
+              return Expanded(
+                child: ListView.builder(
+                  itemCount: itemStore.itemsFilter.length,
+                  itemBuilder: (context, index) {
+                    final item = itemStore.itemsFilter.length > index
+                        ? itemStore.itemsFilter[index]
+                        : null;
+                    if (itemStore.isLoading == true) {
+                      return Center(child: CircularProgressIndicator());
+                    } else {
+                      if (item != null) {
+                        return CardItemListWidget(item: item);
+                      }
+                    }
+                  },
+                ),
+              );
+            },
           ),
         ],
       ),

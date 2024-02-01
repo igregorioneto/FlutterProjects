@@ -32,13 +32,12 @@ abstract class _ItemStore with Store {
   @action
   Future<void> fetchItems() async {
     isLoading = true;
-    await Future.delayed(Duration(seconds: 2));
 
     final fetchedItems = await repository.getItemManagementList();
-    items.clear();
-    items.addAll(fetchedItems);
+    items = ObservableList.of(fetchedItems);
     itemsFilter = ObservableList.of(items);
-    weightItems = ItemService.weightItems(items);
+    weightItems = ItemService.weightItems(itemsFilter);
+
     isLoading = false;
   }
 
@@ -48,11 +47,11 @@ abstract class _ItemStore with Store {
   @action
   Future<void> fetchItemsReceiving() async {
     isLoading = true;
-    await Future.delayed(Duration(seconds: 2));
 
-    List<Item> originalList = List.from(items);
-    List<Item> filteredList = originalList.where((item) => item.status == 'Receiving').toList();
+    List<Item> filteredList = items.where((item) => item.status == 'Receiving').toList();
+    itemsFilter.clear();
     itemsFilter = ObservableList.of(filteredList);
+    weightItems = ItemService.weightItems(itemsFilter);
 
     isLoading = false;
   }
@@ -63,11 +62,11 @@ abstract class _ItemStore with Store {
   @action
   Future<void> fetchItemsQuarantine() async {
     isLoading = true;
-    await Future.delayed(Duration(seconds: 2));
 
-    List<Item> originalList = List.from(items);
-    List<Item> filteredList = originalList.where((item) => item.status == 'Quarantine').toList();
+    List<Item> filteredList = items.where((item) => item.status == 'Quarantine').toList();
+    itemsFilter.clear();
     itemsFilter = ObservableList.of(filteredList);
+    weightItems = ItemService.weightItems(itemsFilter);
 
     isLoading = false;
   }
