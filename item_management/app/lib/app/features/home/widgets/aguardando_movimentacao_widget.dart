@@ -22,13 +22,107 @@ class AguardandoMovimentacaoWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    void fnAdvancedFilter() {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Filtro Avançado'),
+            content: SizedBox(
+              height: 200,
+              child: Column(
+                children: [
+                  // Filter status
+                  DropdownButton(
+                    value: itemStore.selectedStatusFilter,
+                    items: ['Todos', 'Quarentena', 'Recebimento', 'Armazenamento'].map(
+                      (String filter) {
+                        return DropdownMenuItem(
+                          value: filter,
+                          child: Text(filter),
+                        );
+                      },
+                    ).toList(),
+                    onChanged: (String? value) {
+                      if (value != null) {
+                        itemStore.selectedStatusFilter = value;
+                      }
+                    },
+                  ),
+
+                  // Filter order
+                  TextFormField(
+                    decoration: InputDecoration(labelText: 'Ordem'),
+                    keyboardType: TextInputType.number,
+                    onChanged: (String value) {
+                      itemStore.selectedOrderFilter = int.tryParse(value) ?? 0;
+                    },
+                  ),
+
+                  // Filter lot
+                  TextFormField(
+                    decoration: InputDecoration(labelText: 'Numeração'),
+                    keyboardType: TextInputType.number,
+                    onChanged: (String value) {
+                      itemStore.selectedNumerationFilter =
+                          int.tryParse(value) ?? 0;
+                    },
+                  ),
+                ],
+              ),
+            ),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  itemStore.resetFilter = true;
+                  itemStore.fetchAdvancedFilter();
+                  Navigator.of(context).pop();
+                },
+                child: Text(
+                  'Zerar Filtros',
+                  style: TextStyle(color: Colors.blue),
+                ),
+              ),
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text(
+                  'Cancelar',
+                  style: TextStyle(fontSize: 18,
+                    color: Colors.red,
+                    fontWeight: FontWeight.bold,),
+                ),
+              ),
+              TextButton(
+                onPressed: () {
+                  itemStore.fetchAdvancedFilter();
+                  Navigator.of(context).pop();
+                },
+                child: Text(
+                  'Filtrar',
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: Colors.blue,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ],
+          );
+        },
+      );
+    }
+
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Column(
         children: [
           // Buttons Filter
           FilterAdvancedTypeWidget(
-            click1: () {},
+            click1: () {
+              fnAdvancedFilter();
+            },
             click2: itemStore.fetchOrdenationItensByName,
           ),
 

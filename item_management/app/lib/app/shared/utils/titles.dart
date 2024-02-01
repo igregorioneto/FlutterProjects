@@ -14,6 +14,14 @@ String titlesStatusTypeItem(String status) {
       : 'Armazenamento';
 }
 
+String titlesStatusTypeItemForFilter(String status) {
+  return status == 'Recebimento'
+      ? 'Receiving'
+      : status == 'Quarentena'
+      ? 'Quarantine'
+      : 'Storage';
+}
+
 String titlesStatusNextTypeItem(String status) {
   return status == 'Receiving'
       ? 'Quarentena'

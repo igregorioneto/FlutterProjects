@@ -88,6 +88,23 @@ mixin _$ItemStore on _ItemStore, Store {
     });
   }
 
+  late final _$selectedStatusFilterAtom =
+      Atom(name: '_ItemStore.selectedStatusFilter', context: context);
+
+  @override
+  String get selectedStatusFilter {
+    _$selectedStatusFilterAtom.reportRead();
+    return super.selectedStatusFilter;
+  }
+
+  @override
+  set selectedStatusFilter(String value) {
+    _$selectedStatusFilterAtom.reportWrite(value, super.selectedStatusFilter,
+        () {
+      super.selectedStatusFilter = value;
+    });
+  }
+
   late final _$fetchItemsAsyncAction =
       AsyncAction('_ItemStore.fetchItems', context: context);
 
@@ -121,7 +138,8 @@ items: ${items},
 itemsFilter: ${itemsFilter},
 isLoading: ${isLoading},
 weightItems: ${weightItems},
-isSorteAscending: ${isSorteAscending}
+isSorteAscending: ${isSorteAscending},
+selectedStatusFilter: ${selectedStatusFilter}
     ''';
   }
 }

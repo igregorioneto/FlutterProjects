@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:app/app/core/models/item.dart';
 import 'package:app/app/core/repositories/item_management_repository.dart';
 import 'package:app/app/core/services/item_service.dart';
+import 'package:app/app/shared/utils/titles.dart';
 import 'package:mobx/mobx.dart';
 
 part 'item.store.g.dart';
@@ -28,6 +29,13 @@ abstract class _ItemStore with Store {
 
   @observable
   bool isSorteAscending = true;
+
+  // Observables Advanced Filter
+  @observable
+  String selectedStatusFilter = 'Todos';
+  int selectedOrderFilter = 0;
+  int selectedNumerationFilter = 0;
+  bool resetFilter = false;
 
   /*
   * List Items and Weight Items
@@ -91,5 +99,40 @@ abstract class _ItemStore with Store {
         }
       },
     );
+  }
+
+  /*
+  * Advanced filter
+  * */
+  Future<void> fetchAdvancedFilter() async {
+    isLoading = true;
+
+    List<Item> filteredList = ObservableList.of(items);
+
+    if (selectedStatusFilter != 'Todos') {
+      final status = titlesStatusTypeItemForFilter(selectedStatusFilter);
+      filteredList = filteredList.where((item) => item.status == status).toList();
+    }
+
+    if (selectedOrderFilter != 0) {
+      filteredList = filteredList.where((item) => item.order == selectedOrderFilter).toList();
+    }
+
+    if (selectedNumerationFilter != 0) {
+      filteredList = filteredList.where((item) => item.numeration == selectedNumerationFilter).toList();
+    }
+
+    if (resetFilter) {
+      filteredList = ObservableList.of(items);
+    }
+
+    itemsFilter = ObservableList.of(filteredList);
+    weightItems = ItemService.weightItems(itemsFilter);
+
+    isLoading = false;
+    resetFilter = false;
+    selectedStatusFilter = 'Todos';
+    selectedNumerationFilter = 0;
+    selectedOrderFilter = 0;
   }
 }
