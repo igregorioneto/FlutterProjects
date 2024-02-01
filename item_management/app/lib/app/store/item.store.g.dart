@@ -24,6 +24,38 @@ mixin _$ItemStore on _ItemStore, Store {
     });
   }
 
+  late final _$isLoadingAtom =
+      Atom(name: '_ItemStore.isLoading', context: context);
+
+  @override
+  bool get isLoading {
+    _$isLoadingAtom.reportRead();
+    return super.isLoading;
+  }
+
+  @override
+  set isLoading(bool value) {
+    _$isLoadingAtom.reportWrite(value, super.isLoading, () {
+      super.isLoading = value;
+    });
+  }
+
+  late final _$weightItemsAtom =
+      Atom(name: '_ItemStore.weightItems', context: context);
+
+  @override
+  double get weightItems {
+    _$weightItemsAtom.reportRead();
+    return super.weightItems;
+  }
+
+  @override
+  set weightItems(double value) {
+    _$weightItemsAtom.reportWrite(value, super.weightItems, () {
+      super.weightItems = value;
+    });
+  }
+
   late final _$fetchItemsAsyncAction =
       AsyncAction('_ItemStore.fetchItems', context: context);
 
@@ -35,7 +67,9 @@ mixin _$ItemStore on _ItemStore, Store {
   @override
   String toString() {
     return '''
-items: ${items}
+items: ${items},
+isLoading: ${isLoading},
+weightItems: ${weightItems}
     ''';
   }
 }

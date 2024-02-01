@@ -1,7 +1,11 @@
+import 'package:app/app/core/services/item_service.dart';
 import 'package:app/app/shared/utils/colors.dart';
 import 'package:app/app/shared/widget/button_icon_widget.dart';
 import 'package:app/app/shared/widget/button_simple_widget.dart';
+import 'package:app/app/shared/widget/card_item_list_widget.dart';
 import 'package:app/app/shared/widget/card_type_availability_widget.dart';
+import 'package:app/app/shared/widget/filter_advanced_type_widget.dart';
+import 'package:app/app/shared/widget/filter_simple_type_widget.dart';
 import 'package:app/app/shared/widget/status_progress_type_widget.dart';
 import 'package:app/app/store/item.store.dart';
 import 'package:flutter/material.dart';
@@ -22,45 +26,11 @@ class AguardandoMovimentacaoWidget extends StatelessWidget {
       child: Column(
         children: [
           // Buttons Filter
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              ButtonIconWidget(
-                icon: Icons.filter_alt_rounded,
-                title: 'Filtros',
-                click: () {},
-              ),
-              SizedBox(width: 10),
-              ButtonIconWidget(
-                icon: Icons.menu_outlined,
-                title: 'Ordenamento',
-                click: () {},
-              ),
-            ],
-          ),
+          FilterAdvancedTypeWidget(),
 
           // Buttons click filter [Receiving]/[Quarantine]
           SizedBox(height: 10),
-          Padding(
-            padding: const EdgeInsets.all(4.0),
-            child: Row(
-              children: [
-                ButtonSimpleWidget(
-                  title: 'Área de Recebimento',
-                  color: receivingColor.withOpacity(0.5),
-                  click: () {},
-                  fullButton: false,
-                ),
-                SizedBox(width: 10),
-                ButtonSimpleWidget(
-                  title: 'Área de Quarentena',
-                  color: quarentineColor.withOpacity(0.5),
-                  click: () {},
-                  fullButton: false,
-                ),
-              ],
-            ),
-          ),
+          FilterSimpleTypeWidget(),
 
           // Item information
           SizedBox(height: 10),
@@ -77,7 +47,7 @@ class AguardandoMovimentacaoWidget extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  'Peso: 188.544,01 kg',
+                  'Peso: ${itemStore.weightItems} kg',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 16,
@@ -94,109 +64,22 @@ class AguardandoMovimentacaoWidget extends StatelessWidget {
               itemCount: itemStore.items.length,
               itemBuilder: (context, index) {
                 final item = itemStore.items[index];
-                return Card(
-                  color: Colors.white.withOpacity(1),
-                  elevation: 5,
-                  shadowColor: Colors.grey,
-                  margin: EdgeInsets.symmetric(vertical: 12, horizontal: 6),
-                  child: IntrinsicHeight(
-                    child: Column(
-                      children: [
-                        SizedBox(height: 4),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 16,
-                            vertical: 4,
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Flexible(
-                                child: CardTypeAvailabilityWidget(status: item.status),
-                              ),
-                              SizedBox(width: 10),
-                              Flexible(
-                                child: StatusProgressTypeWidget(status: item.status),
-                              ),
-                            ],
-                          ),
-                        ),
-                        ListTile(
-                          title: Text(
-                            item.name,
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          subtitle: Text('(${item.numeration})'),
-                        ),
-                        Divider(),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 16, vertical: 4),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                'OR: ${item.order}',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              Text(
-                                'Qtd: ${item.quantity}',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 16, vertical: 4),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                'Lote: ${item.lot}',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 16, vertical: 4),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                'Lote: ${item.barcode}',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        SizedBox(height: 5),
-                        Expanded(
-                          child: ButtonSimpleWidget(
-                            title: 'Movimentar',
-                            click: () {},
-                            color: Colors.lightBlue.shade50,
-                            titleColor: Colors.lightBlue,
-                            fullButton: true,
-                          ),
-                        ),
-                      ],
+
+                if (itemStore.isLoading) {
+                  return Center(child: CircularProgressIndicator());
+                } else if (itemStore.items.isEmpty) {
+                  return Center(
+                    child: Text(
+                      'Nenhum item cadastrado...',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                  ),
-                );
+                  );
+                }
+
+                return CardItemListWidget(item: item);
               },
             ),
           ),
