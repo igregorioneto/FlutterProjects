@@ -1,6 +1,8 @@
 import 'package:app/app/shared/utils/colors.dart';
 import 'package:app/app/shared/widget/button_icon_widget.dart';
 import 'package:app/app/shared/widget/button_simple_widget.dart';
+import 'package:app/app/shared/widget/card_type_availability_widget.dart';
+import 'package:app/app/shared/widget/status_progress_type_widget.dart';
 import 'package:app/app/store/item.store.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -110,42 +112,11 @@ class AguardandoMovimentacaoWidget extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Flexible(
-                                child: Container(
-                                  child: Text(
-                                    'DISPONÍVEL PARA ARMAZENAMENTO',
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 8,
-                                      color: storageColor,
-                                    ),
-                                  ),
-                                  color: storagesBackground,
-                                  padding: EdgeInsets.all(6),
-                                ),
+                                child: CardTypeAvailabilityWidget(status: item.status),
                               ),
                               SizedBox(width: 10),
                               Flexible(
-                                child: Row(
-                                  children: [
-                                    Text(
-                                      'Quarentena',
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 10,
-                                        color: Colors.grey,
-                                      ),
-                                    ),
-                                    Icon(Icons.arrow_forward),
-                                    Text(
-                                      'Armazenamento',
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 10,
-                                        color: Colors.grey,
-                                      ),
-                                    ),
-                                  ],
-                                ),
+                                child: StatusProgressTypeWidget(status: item.status),
                               ),
                             ],
                           ),
