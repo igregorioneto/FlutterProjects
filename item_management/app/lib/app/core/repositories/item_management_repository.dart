@@ -17,6 +17,20 @@ class ItemManagementRepository {
     }
   }
 
+  // Updating item
+  Future<void> updatingItem(Item updateItem) async {
+    try {
+      int index = mockData.indexWhere((item) => item['id'] == updateItem.id);
+      if (index != -1) {
+        mockData[index] = updateItem.toJson();
+      } else {
+        throw Exception('Item not found for update.');
+      }
+    } catch(e) {
+      throw Exception('Failed to update item.');
+    }
+  }
+
   // return for repository
   Future<List<Item>> getItemManagementList() async {
     return getItemManagementListMock();

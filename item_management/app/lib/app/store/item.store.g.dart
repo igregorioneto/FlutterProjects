@@ -105,6 +105,23 @@ mixin _$ItemStore on _ItemStore, Store {
     });
   }
 
+  late final _$_isItemsMovimentationsAtom =
+      Atom(name: '_ItemStore._isItemsMovimentations', context: context);
+
+  @override
+  bool get _isItemsMovimentations {
+    _$_isItemsMovimentationsAtom.reportRead();
+    return super._isItemsMovimentations;
+  }
+
+  @override
+  set _isItemsMovimentations(bool value) {
+    _$_isItemsMovimentationsAtom
+        .reportWrite(value, super._isItemsMovimentations, () {
+      super._isItemsMovimentations = value;
+    });
+  }
+
   late final _$fetchItemsAsyncAction =
       AsyncAction('_ItemStore.fetchItems', context: context);
 
@@ -129,6 +146,20 @@ mixin _$ItemStore on _ItemStore, Store {
   Future<void> fetchItemsQuarantine() {
     return _$fetchItemsQuarantineAsyncAction
         .run(() => super.fetchItemsQuarantine());
+  }
+
+  late final _$_ItemStoreActionController =
+      ActionController(name: '_ItemStore', context: context);
+
+  @override
+  void updatingIsItemsMovimentations(bool value) {
+    final _$actionInfo = _$_ItemStoreActionController.startAction(
+        name: '_ItemStore.updatingIsItemsMovimentations');
+    try {
+      return super.updatingIsItemsMovimentations(value);
+    } finally {
+      _$_ItemStoreActionController.endAction(_$actionInfo);
+    }
   }
 
   @override

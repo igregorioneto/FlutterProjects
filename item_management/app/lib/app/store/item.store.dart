@@ -38,7 +38,19 @@ abstract class _ItemStore with Store {
   bool resetFilter = false;
 
   // Movimentation Item
-  ObservableList<Item> itemsMovimentations = ObservableList();
+  @observable
+  bool _isItemsMovimentations = false;
+  bool get isItemsMovimentations => _isItemsMovimentations;
+
+  /*Alteration isItemsMovimentations*/
+  @action
+  void updatingIsItemsMovimentations(bool value) {
+    if (_isItemsMovimentations != value) {
+      _isItemsMovimentations = value;
+      print(_isItemsMovimentations);
+      fetchItems();
+    }
+  }
 
   /*
   * List Items and Weight Items
@@ -48,8 +60,12 @@ abstract class _ItemStore with Store {
     isLoading = true;
 
     final fetchedItems = await repository.getItemManagementList();
-    items = ObservableList.of(fetchedItems);
+    items = ObservableList.of(
+      fetchedItems.where((item) => !item.storageArea || item.storageArea),
+    );
+
     itemsFilter = ObservableList.of(items);
+
     weightItems = ItemService.weightItems(itemsFilter);
 
     isLoading = false;
@@ -61,9 +77,10 @@ abstract class _ItemStore with Store {
   @action
   Future<void> fetchItemsReceiving() async {
     isLoading = true;
-
-    List<Item> filteredList =
+    List<Item> filteredList = [];
+    filteredList =
         items.where((item) => item.status == 'Receiving').toList();
+
     itemsFilter.clear();
     itemsFilter = ObservableList.of(filteredList);
     weightItems = ItemService.weightItems(itemsFilter);
@@ -78,8 +95,10 @@ abstract class _ItemStore with Store {
   Future<void> fetchItemsQuarantine() async {
     isLoading = true;
 
-    List<Item> filteredList =
+    List<Item> filteredList = [];
+    filteredList =
         items.where((item) => item.status == 'Quarantine').toList();
+
     itemsFilter.clear();
     itemsFilter = ObservableList.of(filteredList);
     weightItems = ItemService.weightItems(itemsFilter);
@@ -110,19 +129,25 @@ abstract class _ItemStore with Store {
   Future<void> fetchAdvancedFilter() async {
     isLoading = true;
 
-    List<Item> filteredList = ObservableList.of(items);
+    List<Item> filteredList = [];
+    filteredList = ObservableList.of(items);
 
     if (selectedStatusFilter != 'Todos') {
       final status = titlesStatusTypeItemForFilter(selectedStatusFilter);
-      filteredList = filteredList.where((item) => item.status == status).toList();
+      filteredList =
+          filteredList.where((item) => item.status == status).toList();
     }
 
     if (selectedOrderFilter != 0) {
-      filteredList = filteredList.where((item) => item.order == selectedOrderFilter).toList();
+      filteredList = filteredList
+          .where((item) => item.order == selectedOrderFilter)
+          .toList();
     }
 
     if (selectedNumerationFilter != 0) {
-      filteredList = filteredList.where((item) => item.numeration == selectedNumerationFilter).toList();
+      filteredList = filteredList
+          .where((item) => item.numeration == selectedNumerationFilter)
+          .toList();
     }
 
     if (resetFilter) {
@@ -144,6 +169,6 @@ abstract class _ItemStore with Store {
   * */
   Future<void> fetchStorageAreaUpdated(Item item) async {
     item.storageArea = true;
-    itemsFilter.add(item);
+    await repository.updatingItem(item);
   }
 }

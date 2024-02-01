@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
                 ItemStore(repository: ItemManagementRepository(dio: Dio())),
           ),
         ],
-        child: DefaultTabController(length: 2,child: HomePage()),
+        child: DefaultTabController(length: 2,initialIndex: 0, child: HomePage()),
       ),
     );
   }

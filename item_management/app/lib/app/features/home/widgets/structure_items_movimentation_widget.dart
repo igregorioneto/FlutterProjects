@@ -12,12 +12,16 @@ import 'package:app/app/store/item.store.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
-class AguardandoMovimentacaoWidget extends StatelessWidget {
+class StructureItemsMovimentationWidget extends StatelessWidget {
   final ItemStore itemStore;
+  final bool itemMovimentation;
+  final bool isItemsMovimentations;
 
-  const AguardandoMovimentacaoWidget({
+  const StructureItemsMovimentationWidget({
     super.key,
     required this.itemStore,
+    required this.itemMovimentation,
+    required this.isItemsMovimentations,
   });
 
   @override
@@ -239,6 +243,7 @@ class AguardandoMovimentacaoWidget extends StatelessWidget {
                         return CardItemListWidget(
                           item: item,
                           click: () => fnMovimentationItem(item),
+                          itemMovimentation: itemMovimentation,
                         );
                       }
                     }

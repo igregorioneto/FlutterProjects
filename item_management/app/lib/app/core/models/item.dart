@@ -31,4 +31,18 @@ class Item {
         quantity = json['quantity'],
         status = json['status'],
         storageArea = json['storage_area'];
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'name': name,
+      'numeration': numeration,
+      'order': order,
+      'lot': lot,
+      'barcode': barcode,
+      'quantity': quantity,
+      'status': status,
+      'storage_area': storageArea,
+    };
+  }
 }

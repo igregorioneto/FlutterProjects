@@ -8,11 +8,13 @@ import 'package:flutter/material.dart';
 class CardItemListWidget extends StatelessWidget {
   final Item item;
   final VoidCallback click;
+  final bool itemMovimentation;
 
   const CardItemListWidget({
     super.key,
     required this.item,
     required this.click,
+    required this.itemMovimentation,
   });
 
   @override
@@ -109,7 +111,7 @@ class CardItemListWidget extends StatelessWidget {
               ),
             ),
             SizedBox(height: 5),
-            Expanded(
+            itemMovimentation ? Expanded(
               child: ButtonSimpleWidget(
                 title: 'Movimentar',
                 click: click,
@@ -117,7 +119,7 @@ class CardItemListWidget extends StatelessWidget {
                 titleColor: Colors.lightBlue,
                 fullButton: true,
               ),
-            ),
+            ) : Container(),
           ],
         ),
       ),
