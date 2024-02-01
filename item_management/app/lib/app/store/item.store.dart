@@ -26,6 +26,9 @@ abstract class _ItemStore with Store {
   @observable
   double weightItems = 0;
 
+  @observable
+  bool isSorteAscending = true;
+
   /*
   * List Items and Weight Items
   * */
@@ -48,7 +51,8 @@ abstract class _ItemStore with Store {
   Future<void> fetchItemsReceiving() async {
     isLoading = true;
 
-    List<Item> filteredList = items.where((item) => item.status == 'Receiving').toList();
+    List<Item> filteredList =
+        items.where((item) => item.status == 'Receiving').toList();
     itemsFilter.clear();
     itemsFilter = ObservableList.of(filteredList);
     weightItems = ItemService.weightItems(itemsFilter);
@@ -63,11 +67,29 @@ abstract class _ItemStore with Store {
   Future<void> fetchItemsQuarantine() async {
     isLoading = true;
 
-    List<Item> filteredList = items.where((item) => item.status == 'Quarantine').toList();
+    List<Item> filteredList =
+        items.where((item) => item.status == 'Quarantine').toList();
     itemsFilter.clear();
     itemsFilter = ObservableList.of(filteredList);
     weightItems = ItemService.weightItems(itemsFilter);
 
     isLoading = false;
+  }
+
+  /*
+  * Ordenation Item by name
+  * */
+  Future<void> fetchOrdenationItensByName() async {
+    isSorteAscending = !isSorteAscending;
+
+    itemsFilter.sort(
+      (a, b) {
+        if (isSorteAscending) {
+          return a.name.compareTo(b.name);
+        } else {
+          return b.name.compareTo(a.name);
+        }
+      },
+    );
   }
 }

@@ -27,7 +27,10 @@ class AguardandoMovimentacaoWidget extends StatelessWidget {
       child: Column(
         children: [
           // Buttons Filter
-          FilterAdvancedTypeWidget(),
+          FilterAdvancedTypeWidget(
+            click1: () {},
+            click2: itemStore.fetchOrdenationItensByName,
+          ),
 
           // Buttons click filter [Receiving]/[Quarantine]
           SizedBox(height: 10),

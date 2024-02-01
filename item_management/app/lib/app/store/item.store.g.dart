@@ -72,6 +72,22 @@ mixin _$ItemStore on _ItemStore, Store {
     });
   }
 
+  late final _$isSorteAscendingAtom =
+      Atom(name: '_ItemStore.isSorteAscending', context: context);
+
+  @override
+  bool get isSorteAscending {
+    _$isSorteAscendingAtom.reportRead();
+    return super.isSorteAscending;
+  }
+
+  @override
+  set isSorteAscending(bool value) {
+    _$isSorteAscendingAtom.reportWrite(value, super.isSorteAscending, () {
+      super.isSorteAscending = value;
+    });
+  }
+
   late final _$fetchItemsAsyncAction =
       AsyncAction('_ItemStore.fetchItems', context: context);
 
@@ -104,7 +120,8 @@ mixin _$ItemStore on _ItemStore, Store {
 items: ${items},
 itemsFilter: ${itemsFilter},
 isLoading: ${isLoading},
-weightItems: ${weightItems}
+weightItems: ${weightItems},
+isSorteAscending: ${isSorteAscending}
     ''';
   }
 }
