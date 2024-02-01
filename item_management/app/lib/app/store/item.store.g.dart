@@ -24,6 +24,22 @@ mixin _$ItemStore on _ItemStore, Store {
     });
   }
 
+  late final _$itemsFilterAtom =
+      Atom(name: '_ItemStore.itemsFilter', context: context);
+
+  @override
+  ObservableList<Item> get itemsFilter {
+    _$itemsFilterAtom.reportRead();
+    return super.itemsFilter;
+  }
+
+  @override
+  set itemsFilter(ObservableList<Item> value) {
+    _$itemsFilterAtom.reportWrite(value, super.itemsFilter, () {
+      super.itemsFilter = value;
+    });
+  }
+
   late final _$isLoadingAtom =
       Atom(name: '_ItemStore.isLoading', context: context);
 
@@ -64,10 +80,29 @@ mixin _$ItemStore on _ItemStore, Store {
     return _$fetchItemsAsyncAction.run(() => super.fetchItems());
   }
 
+  late final _$fetchItemsReceivingAsyncAction =
+      AsyncAction('_ItemStore.fetchItemsReceiving', context: context);
+
+  @override
+  Future<void> fetchItemsReceiving() {
+    return _$fetchItemsReceivingAsyncAction
+        .run(() => super.fetchItemsReceiving());
+  }
+
+  late final _$fetchItemsQuarantineAsyncAction =
+      AsyncAction('_ItemStore.fetchItemsQuarantine', context: context);
+
+  @override
+  Future<void> fetchItemsQuarantine() {
+    return _$fetchItemsQuarantineAsyncAction
+        .run(() => super.fetchItemsQuarantine());
+  }
+
   @override
   String toString() {
     return '''
 items: ${items},
+itemsFilter: ${itemsFilter},
 isLoading: ${isLoading},
 weightItems: ${weightItems}
     ''';

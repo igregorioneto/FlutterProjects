@@ -30,7 +30,10 @@ class AguardandoMovimentacaoWidget extends StatelessWidget {
 
           // Buttons click filter [Receiving]/[Quarantine]
           SizedBox(height: 10),
-          FilterSimpleTypeWidget(),
+          FilterSimpleTypeWidget(
+            click1: itemStore.fetchItemsReceiving,
+            click2: itemStore.fetchItemsQuarantine,
+          ),
 
           // Item information
           SizedBox(height: 10),
@@ -61,13 +64,15 @@ class AguardandoMovimentacaoWidget extends StatelessWidget {
           SizedBox(height: 10),
           Expanded(
             child: ListView.builder(
-              itemCount: itemStore.items.length,
+              itemCount: itemStore.itemsFilter.length,
               itemBuilder: (context, index) {
-                final item = itemStore.items[index];
+                final item = itemStore.itemsFilter.length > index
+                    ? itemStore.itemsFilter[index]
+                    : null;
 
                 if (itemStore.isLoading) {
                   return Center(child: CircularProgressIndicator());
-                } else if (itemStore.items.isEmpty) {
+                } else if (itemStore.itemsFilter.isEmpty) {
                   return Center(
                     child: Text(
                       'Nenhum item cadastrado...',
@@ -79,7 +84,9 @@ class AguardandoMovimentacaoWidget extends StatelessWidget {
                   );
                 }
 
-                return CardItemListWidget(item: item);
+                if (item != null) {
+                  return CardItemListWidget(item: item);
+                }
               },
             ),
           ),
