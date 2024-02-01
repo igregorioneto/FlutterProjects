@@ -1,12 +1,13 @@
 class Item {
   final int? id;
-  final String name;
-  final int numeration;
-  final int order;
-  final String lot;
-  final String barcode;
-  final double quantity;
-  final String status;
+  late final String name;
+  late final int numeration;
+  late final int order;
+  late final String lot;
+  late final String barcode;
+  late final double quantity;
+  late final String status;
+  late final bool storageArea;
 
   Item({
     this.id,
@@ -17,6 +18,7 @@ class Item {
     required this.barcode,
     required this.quantity,
     required this.status,
+    required this.storageArea,
   });
 
   Item.fromJson(Map json)
@@ -27,5 +29,6 @@ class Item {
         lot = json['lot'],
         barcode = json['barcode'],
         quantity = json['quantity'],
-        status = json['status'];
+        status = json['status'],
+        storageArea = json['storage_area'];
 }

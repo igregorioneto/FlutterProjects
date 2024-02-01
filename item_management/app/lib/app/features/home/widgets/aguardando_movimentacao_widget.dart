@@ -35,7 +35,12 @@ class AguardandoMovimentacaoWidget extends StatelessWidget {
                   // Filter status
                   DropdownButton(
                     value: itemStore.selectedStatusFilter,
-                    items: ['Todos', 'Quarentena', 'Recebimento', 'Armazenamento'].map(
+                    items: [
+                      'Todos',
+                      'Quarentena',
+                      'Recebimento',
+                      'Armazenamento'
+                    ].map(
                       (String filter) {
                         return DropdownMenuItem(
                           value: filter,
@@ -89,9 +94,11 @@ class AguardandoMovimentacaoWidget extends StatelessWidget {
                 },
                 child: Text(
                   'Cancelar',
-                  style: TextStyle(fontSize: 18,
+                  style: TextStyle(
+                    fontSize: 18,
                     color: Colors.red,
-                    fontWeight: FontWeight.bold,),
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
               TextButton(
@@ -107,6 +114,58 @@ class AguardandoMovimentacaoWidget extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
+              ),
+            ],
+          );
+        },
+      );
+    }
+
+    void fnMovimentationItem(Item item) {
+      showDialog(
+        context: context,
+        builder: (BuildContext builder) {
+          return AlertDialog(
+            title: Text(
+              'Movimentação do Item - ${item.numeration}',
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            ),
+            content: SizedBox(
+              height: 100,
+              child: Column(
+                children: [
+                  Divider(),
+                  RichText(
+                    text: TextSpan(
+                      style: TextStyle(fontSize: 22, color: Colors.black),
+                      children: [
+                        TextSpan(
+                          text: 'Para confirmar o armazenamento do item na ',
+                        ),
+                        TextSpan(
+                          text: 'Área de Armazenamento',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        TextSpan(
+                          text: ' clique em confirmar.',
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            actions: [
+              ButtonSimpleWidget(
+                title: 'Confirmar',
+                color: Colors.blue,
+                click: () {
+                  print(item.name);
+                  Navigator.of(context).pop();
+                },
+                fullButton: false,
               ),
             ],
           );
@@ -177,7 +236,10 @@ class AguardandoMovimentacaoWidget extends StatelessWidget {
                       return Center(child: CircularProgressIndicator());
                     } else {
                       if (item != null) {
-                        return CardItemListWidget(item: item);
+                        return CardItemListWidget(
+                          item: item,
+                          click: () => fnMovimentationItem(item),
+                        );
                       }
                     }
                   },

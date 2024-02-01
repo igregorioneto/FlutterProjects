@@ -4,7 +4,7 @@ class ButtonSimpleWidget extends StatelessWidget {
   final String title;
   final Color? titleColor;
   final Color color;
-  final VoidCallback click;
+  final Function click;
   final bool fullButton;
 
   const ButtonSimpleWidget({
@@ -20,7 +20,9 @@ class ButtonSimpleWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialButton(
       minWidth: fullButton ? double.infinity : 150,
-      onPressed: click,
+      onPressed: () {
+        click();
+      },
       child: Text(
         title,
         style: TextStyle(

@@ -23,7 +23,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Itens para movimentação',
+          'Itens aguardando movimentação',
           style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.bold,

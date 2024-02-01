@@ -10,7 +10,8 @@ List<Map<String, dynamic>> mockData = [
     "lot": "215465416576817168768176",
     "barcode": "123456789012",
     "quantity": 5682.92,
-    "status": "Receiving"
+    "status": "Receiving",
+    "storage_area": false,
   },
   {
     "id": 1,
@@ -20,7 +21,8 @@ List<Map<String, dynamic>> mockData = [
     "lot": "215465416576817168768177",
     "barcode": "234567890123",
     "quantity": 4823.75,
-    "status": "Quarantine"
+    "status": "Quarantine",
+    "storage_area": false,
   },
   {
     "id": 2,
@@ -30,7 +32,8 @@ List<Map<String, dynamic>> mockData = [
     "lot": "215465416576817168768178",
     "barcode": "345678901234",
     "quantity": 7000.00,
-    "status": "Storage"
+    "status": "Storage",
+    "storage_area": false,
   },
   {
     "id": 3,
@@ -40,7 +43,8 @@ List<Map<String, dynamic>> mockData = [
     "lot": "215465416576817168768179",
     "barcode": "456789012345",
     "quantity": 1200.50,
-    "status": "Receiving"
+    "status": "Receiving",
+    "storage_area": false,
   },
   {
     "id": 4,
@@ -50,7 +54,8 @@ List<Map<String, dynamic>> mockData = [
     "lot": "215465416576817168768180",
     "barcode": "567890123456",
     "quantity": 220.30,
-    "status": "Quarantine"
+    "status": "Quarantine",
+    "storage_area": false,
   },
   {
     "id": 5,
@@ -60,7 +65,8 @@ List<Map<String, dynamic>> mockData = [
     "lot": "215465416576817168768181",
     "barcode": "678901234567",
     "quantity": 50.75,
-    "status": "Storage"
+    "status": "Storage",
+    "storage_area": false,
   },
   {
     "id": 6,
@@ -70,7 +76,8 @@ List<Map<String, dynamic>> mockData = [
     "lot": "215465416576817168768182",
     "barcode": "789012345678",
     "quantity": 1500.20,
-    "status": "Receiving"
+    "status": "Receiving",
+    "storage_area": false,
   },
   {
     "id": 7,
@@ -80,7 +87,8 @@ List<Map<String, dynamic>> mockData = [
     "lot": "215465416576817168768183",
     "barcode": "890123456789",
     "quantity": 305.90,
-    "status": "Quarantine"
+    "status": "Quarantine",
+    "storage_area": false,
   },
   {
     "id": 8,
@@ -90,7 +98,8 @@ List<Map<String, dynamic>> mockData = [
     "lot": "215465416576817168768184",
     "barcode": "901234567890",
     "quantity": 65.25,
-    "status": "Storage"
+    "status": "Storage",
+    "storage_area": false,
   },
   {
     "id": 9,
@@ -100,7 +109,8 @@ List<Map<String, dynamic>> mockData = [
     "lot": "215465416576817168768185",
     "barcode": "012345678901",
     "quantity": 800.80,
-    "status": "Receiving"
+    "status": "Receiving",
+    "storage_area": false,
   },
   {
     "id": 10,
@@ -110,7 +120,8 @@ List<Map<String, dynamic>> mockData = [
     "lot": "215465416576817168768186",
     "barcode": "123456789012",
     "quantity": 420.45,
-    "status": "Quarantine"
+    "status": "Quarantine",
+    "storage_area": false,
   },
   {
     "id": 11,
@@ -120,7 +131,8 @@ List<Map<String, dynamic>> mockData = [
     "lot": "215465416576817168768187",
     "barcode": "234567890123",
     "quantity": 160.60,
-    "status": "Storage"
+    "status": "Storage",
+    "storage_area": false,
   },
   {
     "id": 12,
@@ -130,7 +142,8 @@ List<Map<String, dynamic>> mockData = [
     "lot": "215465416576817168768188",
     "barcode": "345678901234",
     "quantity": 320.75,
-    "status": "Receiving"
+    "status": "Receiving",
+    "storage_area": false,
   },
   {
     "id": 13,
@@ -140,7 +153,8 @@ List<Map<String, dynamic>> mockData = [
     "lot": "215465416576817168768189",
     "barcode": "456789012345",
     "quantity": 75.40,
-    "status": "Quarantine"
+    "status": "Quarantine",
+    "storage_area": false,
   },
   {
     "id": 14,
@@ -150,7 +164,8 @@ List<Map<String, dynamic>> mockData = [
     "lot": "215465416576817168768190",
     "barcode": "567890123456",
     "quantity": 40.20,
-    "status": "Storage"
+    "status": "Storage",
+    "storage_area": false,
   },
   {
     "id": 15,
@@ -160,7 +175,8 @@ List<Map<String, dynamic>> mockData = [
     "lot": "215465416576817168768191",
     "barcode": "678901234567",
     "quantity": 900.10,
-    "status": "Receiving"
+    "status": "Receiving",
+    "storage_area": false,
   },
   {
     "id": 16,
@@ -170,7 +186,8 @@ List<Map<String, dynamic>> mockData = [
     "lot": "215465416576817168768192",
     "barcode": "789012345678",
     "quantity": 110.30,
-    "status": "Quarantine"
+    "status": "Quarantine",
+    "storage_area": false,
   },
   {
     "id": 17,
@@ -180,7 +197,8 @@ List<Map<String, dynamic>> mockData = [
     "lot": "215465416576817168768193",
     "barcode": "890123456789",
     "quantity": 95.50,
-    "status": "Storage"
+    "status": "Storage",
+    "storage_area": false,
   },
   {
     "id": 18,
@@ -190,7 +208,8 @@ List<Map<String, dynamic>> mockData = [
     "lot": "215465416576817168768194",
     "barcode": "901234567890",
     "quantity": 180.20,
-    "status": "Receiving"
+    "status": "Receiving",
+    "storage_area": false,
   },
   {
     "id": 19,
@@ -200,6 +219,7 @@ List<Map<String, dynamic>> mockData = [
     "lot": "215465416576817168768195",
     "barcode": "012345678901",
     "quantity": 30.75,
-    "status": "Quarantine"
+    "status": "Quarantine",
+    "storage_area": false,
   }
 ];

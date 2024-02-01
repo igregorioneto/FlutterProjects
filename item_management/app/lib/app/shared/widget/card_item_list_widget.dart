@@ -7,10 +7,12 @@ import 'package:flutter/material.dart';
 
 class CardItemListWidget extends StatelessWidget {
   final Item item;
+  final VoidCallback click;
 
   const CardItemListWidget({
     super.key,
     required this.item,
+    required this.click,
   });
 
   @override
@@ -110,7 +112,7 @@ class CardItemListWidget extends StatelessWidget {
             Expanded(
               child: ButtonSimpleWidget(
                 title: 'Movimentar',
-                click: () {},
+                click: click,
                 color: Colors.lightBlue.shade50,
                 titleColor: Colors.lightBlue,
                 fullButton: true,

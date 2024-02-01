@@ -37,6 +37,9 @@ abstract class _ItemStore with Store {
   int selectedNumerationFilter = 0;
   bool resetFilter = false;
 
+  // Movimentation Item
+  ObservableList<Item> itemsMovimentations = ObservableList();
+
   /*
   * List Items and Weight Items
   * */
@@ -134,5 +137,13 @@ abstract class _ItemStore with Store {
     selectedStatusFilter = 'Todos';
     selectedNumerationFilter = 0;
     selectedOrderFilter = 0;
+  }
+
+  /*
+  * Movimentation to Storage area
+  * */
+  Future<void> fetchStorageAreaUpdated(Item item) async {
+    item.storageArea = true;
+    itemsFilter.add(item);
   }
 }
