@@ -308,7 +308,7 @@ O projeto "Counter with Mobx" foi a conversão do app inicial do flutter de cont
 <details>
 <summary>Items Management - item_management</summary>
 
-## Counter with Mobx
+## Items Management
 
 <img src="item_management/app/assets/Android Emulator - tablet_5554 2024-02-01 19-47-52.gif" width="300">
 <br />
