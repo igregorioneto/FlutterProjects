@@ -40,6 +40,9 @@ mixin MessageStateMixin {
   void clearInfo() => _infoMessage.value = null;
   void clearSuccess() => _successMessage.value = null;
 
+  /**
+   * Methods called in the app 
+  */
   void showError(String message) {
     untracked(() => clearError());
     _errorMessage.value = message;
@@ -70,10 +73,14 @@ mixin MessageViewMixin<T extends StatefulWidget> on State<T> {
       switch (state) {
         case MessageStateMixin(:final errorMessage?):
           Messages.showError(errorMessage, context);
+          break;
         case MessageStateMixin(:final infoMessage?):
           Messages.showInfo(infoMessage, context);
+          break;
         case MessageStateMixin(:final successMessage?):
           Messages.showSuccess(successMessage, context);
+          break;
+        default:
       }
     });
   }
