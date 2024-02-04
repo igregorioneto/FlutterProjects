@@ -1,4 +1,6 @@
+import 'package:asyncstate/asyncstate.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_getit/flutter_getit.dart';
 import 'package:lab_clinicas_core/lab_clinicas_core.dart';
 import 'package:lab_clinicas_teste/home_controller.dart';
 
@@ -11,19 +13,21 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+    return LabClinicasCoreConfig(
+      title: 'Lab Clinicas Teste',
+      pagesBuilders: [
+        FlutterGetItPageBuilder(
+          page: (_) => MyHomePage(title: 'Flutter GetIt'),
+          path: '/',
+        ),
+      ],
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
+
   final String title;
 
   @override
@@ -42,7 +46,8 @@ class _MyHomePageState extends State<MyHomePage> with MessageViewMixin {
 
   void _incrementCounter() {
     // Messages.showSuccess('Import realizado com sucesso', context);
-    _controller.fazerAlgo();
+    //_controller.fazerAlgo();
+    Future.delayed(Duration(seconds: 3)).asyncLoader();
     setState(() {
       _counter++;
     });
