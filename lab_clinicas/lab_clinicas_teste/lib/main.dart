@@ -47,7 +47,7 @@ class _MyHomePageState extends State<MyHomePage> with MessageViewMixin {
   void _incrementCounter() {
     // Messages.showSuccess('Import realizado com sucesso', context);
     //_controller.fazerAlgo();
-    Future.delayed(Duration(seconds: 3)).asyncLoader();
+    Future.delayed(const Duration(seconds: 3)).asyncLoader();
     setState(() {
       _counter++;
     });
