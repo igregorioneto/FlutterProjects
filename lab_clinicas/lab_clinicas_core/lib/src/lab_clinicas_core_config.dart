@@ -25,6 +25,7 @@ class LabClinicasCoreConfig extends StatelessWidget {
     return FlutterGetIt(
       debugMode: kDebugMode,
       bindings: bindings,
+      bindingsBuilder: () => [Bind.lazySingleton((i) => "Batata")],
       pages: [...pages ?? [], ...pagesBuilders ?? []],
       modules: modules,
       builder: (context, routes, flutterGetItNavObserver) {
@@ -33,6 +34,7 @@ class LabClinicasCoreConfig extends StatelessWidget {
           builder: (navigatorObserver) {
             return MaterialApp(
               navigatorObservers: [
+                navigatorObserver,
                 flutterGetItNavObserver,
               ],
               routes: routes,
