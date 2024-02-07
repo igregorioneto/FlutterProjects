@@ -1,5 +1,5 @@
 import 'dart:developer';
-import 'dart:html';
+import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:lab_clinicas_core/lab_clinicas_core.dart';
