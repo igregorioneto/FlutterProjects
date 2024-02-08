@@ -10,6 +10,14 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  bool obscureText = true;
+
+  void isObscureText() {
+    setState(() {
+      obscureText = !obscureText;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,12 +58,17 @@ class _LoginPageState extends State<LoginPage> {
               InputCustomWidget(
                 label: 'Email',
                 hintText: 'example@pigz.com.br',
+                obscureText: false,
+                toggleViewPassword: () {},
               ),
               SizedBox(height: 20),
               // Senha
               InputCustomWidget(
                 label: 'Senha',
                 hintText: '******',
+                isPassword: true,
+                obscureText: obscureText,
+                toggleViewPassword: isObscureText,
               ),
             ],
           ),
