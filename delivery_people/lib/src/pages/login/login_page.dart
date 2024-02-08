@@ -1,4 +1,5 @@
 import 'package:delivery_people/src/utils/colors.dart';
+import 'package:delivery_people/src/wigets/button_custom_widget.dart';
 import 'package:delivery_people/src/wigets/input_custom_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -96,23 +97,11 @@ class _LoginPageState extends State<LoginPage> {
                 SizedBox(
                   height: 48,
                   width: double.infinity,
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(16),
-                        side: BorderSide(color: AppColors.orangeLight),
-                      ),
-                      primary: AppColors.orange,
-                    ),
-                    onPressed: () {},
-                    child: Text(
-                      'Entrar',
-                      style: TextStyle(
-                        color: AppColors.white,
-                        fontSize: 16,
-                        fontFamily: 'Poppins',
-                      ),
-                    ),
+                  child: ButtonCustomWidget(
+                    borderColor: AppColors.orange,
+                    buttonColor: AppColors.orangeDark,
+                    textColor: AppColors.white,
+                    titleButton: 'Entrar',
                   ),
                 ),
               ],
