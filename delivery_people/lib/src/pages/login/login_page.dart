@@ -1,5 +1,6 @@
 import 'package:delivery_people/src/utils/colors.dart';
 import 'package:delivery_people/src/wigets/button_custom_widget.dart';
+import 'package:delivery_people/src/wigets/button_icon_custom_widget.dart';
 import 'package:delivery_people/src/wigets/input_custom_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -102,6 +103,61 @@ class _LoginPageState extends State<LoginPage> {
                     buttonColor: AppColors.orangeDark,
                     textColor: AppColors.white,
                     titleButton: 'Entrar',
+                    isIcon: false,
+                  ),
+                ),
+
+                // não encontrou a conta
+                SizedBox(height: 16),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Não tem uma conta?',
+                      style: TextStyle(
+                        color: AppColors.gray2,
+                      ),
+                    ),
+                    TextButton(
+                      onPressed: () {},
+                      child: Text(
+                        'Criar agora',
+                        style: TextStyle(
+                          color: AppColors.orange,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+
+                SizedBox(height: 24),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Entrar com',
+                      style: TextStyle(
+                        fontSize: 13,
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.bold,
+                        color: AppColors.black,
+                      ),
+                    ),
+                    SizedBox(width: 5),
+                    Expanded(child: Divider(color: AppColors.black))
+                  ],
+                ),
+
+                SizedBox(height: 16),
+                SizedBox(
+                  height: 48,
+                  width: double.infinity,
+                  child: ButtonIconCustomWidget(
+                    titleButton: 'Continuar com o Google',
+                    imageButton: 'assets/images/logo_googleg_48dp.png',
+                    borderColor: AppColors.gray3,
+                    buttonColor: AppColors.white,
+                    titleColor: AppColors.gray2,
                   ),
                 ),
               ],

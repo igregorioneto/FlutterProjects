@@ -5,6 +5,8 @@ class ButtonCustomWidget extends StatelessWidget {
   final Color borderColor;
   final Color textColor;
   final String titleButton;
+  final IconData? icon;
+  final bool isIcon;
 
   const ButtonCustomWidget({
     super.key,
@@ -12,11 +14,13 @@ class ButtonCustomWidget extends StatelessWidget {
     required this.borderColor,
     required this.textColor,
     required this.titleButton,
+    required this.isIcon,
+    this.icon,
   });
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
+    return ElevatedButton.icon(
       style: ElevatedButton.styleFrom(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(16),
@@ -25,7 +29,8 @@ class ButtonCustomWidget extends StatelessWidget {
         primary: buttonColor,
       ),
       onPressed: () {},
-      child: Text(
+      icon: isIcon ? Icon(icon, color: textColor) : Column(),
+      label: Text(
         titleButton,
         style: TextStyle(
           color: textColor,
