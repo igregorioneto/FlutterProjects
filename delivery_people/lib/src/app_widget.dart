@@ -1,5 +1,8 @@
+import 'package:delivery_people/src/pages/home/home_page.dart';
 import 'package:delivery_people/src/pages/login/login_page.dart';
 import 'package:delivery_people/src/pages/overview/overview_page.dart';
+import 'package:delivery_people/src/pages/profile/profile_page.dart';
+import 'package:delivery_people/src/pages/report/report_page.dart';
 import 'package:delivery_people/src/pages/splash_screen/splash_screen_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -20,7 +23,7 @@ class MyApp extends StatelessWidget {
       home: SplashScreenPage(),
       routes: {
         '/login': (context) => LoginPage(),
-        '/overview': (context) => OverviewPage(),
+        '/home': (context) => HomePage(),
       },
     );
   }

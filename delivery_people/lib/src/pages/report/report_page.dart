@@ -1,19 +1,19 @@
 import 'package:delivery_people/src/utils/colors.dart';
 import 'package:flutter/material.dart';
 
-class OverviewPage extends StatefulWidget {
-  const OverviewPage({super.key});
+class ReportPage extends StatefulWidget {
+  const ReportPage({super.key});
 
   @override
-  State<OverviewPage> createState() => _OverviewPageState();
+  State<ReportPage> createState() => _ReportPageState();
 }
 
-class _OverviewPageState extends State<OverviewPage> {
+class _ReportPageState extends State<ReportPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Visão Geral'),
+        title: Text('Relatórios'),
         centerTitle: true,
         leading: IconButton(
           icon: Icon(Icons.arrow_back_outlined, color: AppColors.orange),

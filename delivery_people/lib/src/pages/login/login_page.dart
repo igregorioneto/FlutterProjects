@@ -104,7 +104,7 @@ class _LoginPageState extends State<LoginPage> {
                     textColor: AppColors.white,
                     titleButton: 'Entrar',
                     click: () {
-                      Navigator.of(context).pushNamed('/overview');
+                      Navigator.of(context).pushNamed('/home');
                     },
                     isIcon: false,
                   ),
