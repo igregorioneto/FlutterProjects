@@ -1,3 +1,4 @@
+import 'package:delivery_people/src/core/services/page_management.dart';
 import 'package:delivery_people/src/pages/overview/overview_page.dart';
 import 'package:delivery_people/src/pages/profile/profile_page.dart';
 import 'package:delivery_people/src/pages/report/report_page.dart';
@@ -13,11 +14,6 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int _selectedIndexNavigationBottom = 1;
-  List<Widget> _widgetOptions = <Widget>[
-    ReportPage(),
-    OverviewPage(),
-    ProfilePage(),
-  ];
 
   void _onItemTapped(int index) {
     setState(() {
@@ -30,7 +26,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       body: IndexedStack(
         index: _selectedIndexNavigationBottom,
-        children: _widgetOptions,
+        children: PageManagement.widgetOptions,
       ),
       bottomNavigationBar: BottomNavigationBar(
         selectedItemColor: AppColors.orange,
@@ -46,11 +42,11 @@ class _HomePageState extends State<HomePage> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.home_outlined, size: 28),
-            label: 'Relatórios',
+            label: 'Visão geral',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person_2_outlined, size: 28),
-            label: 'Relatórios',
+            label: 'Perfil',
           ),
         ],
         currentIndex: _selectedIndexNavigationBottom,
