@@ -7,6 +7,7 @@ class ButtonCustomWidget extends StatelessWidget {
   final String titleButton;
   final IconData? icon;
   final bool isIcon;
+  final VoidCallback click;
 
   const ButtonCustomWidget({
     super.key,
@@ -15,6 +16,7 @@ class ButtonCustomWidget extends StatelessWidget {
     required this.textColor,
     required this.titleButton,
     required this.isIcon,
+    required this.click,
     this.icon,
   });
 
@@ -28,7 +30,7 @@ class ButtonCustomWidget extends StatelessWidget {
         ),
         primary: buttonColor,
       ),
-      onPressed: () {},
+      onPressed: click,
       icon: isIcon ? Icon(icon, color: textColor) : Column(),
       label: Text(
         titleButton,

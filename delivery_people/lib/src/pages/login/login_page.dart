@@ -103,6 +103,9 @@ class _LoginPageState extends State<LoginPage> {
                     buttonColor: AppColors.orangeDark,
                     textColor: AppColors.white,
                     titleButton: 'Entrar',
+                    click: () {
+                      Navigator.of(context).pushNamed('/overview');
+                    },
                     isIcon: false,
                   ),
                 ),

@@ -12,10 +12,7 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
   @override
   void initState() {
     Future.delayed(Duration(seconds: 3)).then((value) {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => LoginPage()),
-      );
+      Navigator.pushNamed(context, '/login');
     });
   }
 
