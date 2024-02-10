@@ -1,5 +1,6 @@
 import 'package:delivery_people/src/utils/colors.dart';
 import 'package:delivery_people/src/wigets/button_simple_icon_custom_widget.dart';
+import 'package:delivery_people/src/wigets/card_simple_title_value_widget.dart';
 import 'package:flutter/material.dart';
 
 class OverviewPage extends StatefulWidget {
@@ -114,41 +115,25 @@ class _OverviewPageState extends State<OverviewPage> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 18),
+                  SizedBox(height: 8),
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Container(
-                        width: 100,
-                        height: 100,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(16),
-                          border: Border.all(
-                            color: AppColors.gray3,
-                            width: 1,
-                          ),
-                        ),
-                        child: Column(
-                          children: [
-                            Text(
-                              'Aceitas',
-                              style: TextStyle(
-                                fontSize: 13,
-                                fontFamily: 'Poppins',
-                              ),
-                            ),
-                            Text(
-                              '15',
-                              style: TextStyle(
-                                fontSize: 50,
-                                fontFamily: 'Poppins',
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ],
-                        ),
+                      CardSimpleTitleValueWidget(
+                        title: 'Aceitas',
+                        value: '15',
+                      ),
+                      CardSimpleTitleValueWidget(
+                        title: 'Rejeitadas',
+                        value: '5',
+                      ),
+                      CardSimpleTitleValueWidget(
+                        title: 'Total',
+                        value: '20',
                       ),
                     ],
                   ),
+                  SizedBox(height: 8),
                 ],
               ),
             ),
