@@ -15,4 +15,8 @@ class AppColors {
   static const Color gray4 = Color(0xFF707070);
   static const Color pureBlack = Color(0xFF000000);
   static const Color orangeDark = Color(0xFFFF671F);
+
+  static Color gradientColor(double value) {
+    return Color.lerp(orangeLight, orangeDark, value)!;
+  }
 }
