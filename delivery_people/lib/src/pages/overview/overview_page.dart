@@ -23,7 +23,10 @@ class _OverviewPageState extends State<OverviewPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Visão Geral'),
+        title: Text(
+          'Visão Geral',
+          style: TextStyle(fontFamily: 'Poppins'),
+        ),
         centerTitle: true,
         leading: IconButton(
           icon: Icon(Icons.arrow_back_outlined, color: AppColors.orange),
@@ -44,18 +47,18 @@ class _OverviewPageState extends State<OverviewPage> {
                     leading: Text(
                       'Ganhos do dia',
                       style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        color: AppColors.white,
-                      ),
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          color: AppColors.white,
+                          fontFamily: 'Poppins'),
                     ),
                     trailing: Text(
                       '29/07',
                       style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        color: AppColors.white,
-                      ),
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          color: AppColors.white,
+                          fontFamily: 'Poppins'),
                     ),
                   ),
                   Padding(
@@ -67,10 +70,10 @@ class _OverviewPageState extends State<OverviewPage> {
                             ? Text(
                                 'R\$ 150',
                                 style: TextStyle(
-                                  fontSize: 30,
-                                  fontWeight: FontWeight.bold,
-                                  color: AppColors.white,
-                                ),
+                                    fontSize: 30,
+                                    fontWeight: FontWeight.bold,
+                                    color: AppColors.white,
+                                    fontFamily: 'Poppins'),
                               )
                             : Container(
                                 color: AppColors.white,
@@ -79,7 +82,9 @@ class _OverviewPageState extends State<OverviewPage> {
                               ),
                         ButtonSimpleIconCustomWidget(
                           click: visibledValue,
-                          icon: _isVisibledValue ? Icons.visibility_off : Icons.visibility,
+                          icon: _isVisibledValue
+                              ? Icons.visibility_off
+                              : Icons.visibility,
                           color: AppColors.white,
                           size: 30,
                         ),
@@ -90,6 +95,65 @@ class _OverviewPageState extends State<OverviewPage> {
                 ],
               ),
             ),
+
+            SizedBox(height: 32),
+
+            // Card Resumo das entregas
+            Card(
+              color: AppColors.white,
+              child: Column(
+                children: [
+                  ListTile(
+                    title: Text(
+                      'Resumo das Entregas',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: AppColors.black,
+                        fontFamily: 'Poppins',
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 18),
+                  Row(
+                    children: [
+                      Container(
+                        width: 100,
+                        height: 100,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(16),
+                          border: Border.all(
+                            color: AppColors.gray3,
+                            width: 1,
+                          ),
+                        ),
+                        child: Column(
+                          children: [
+                            Text(
+                              'Aceitas',
+                              style: TextStyle(
+                                fontSize: 13,
+                                fontFamily: 'Poppins',
+                              ),
+                            ),
+                            Text(
+                              '15',
+                              style: TextStyle(
+                                fontSize: 50,
+                                fontFamily: 'Poppins',
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+
+            // Card Iniciar nova entrega
           ],
         ),
       ),
