@@ -23,6 +23,8 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    WidgetsBinding.instance!.addPostFrameCallback((_) => FocusScope.of(context).unfocus());
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(

@@ -26,6 +26,7 @@ class _OverviewPageState extends State<OverviewPage> {
 
   @override
   Widget build(BuildContext context) {
+    WidgetsBinding.instance!.addPostFrameCallback((_) => FocusScope.of(context).unfocus());
     return Scaffold(
       appBar: AppBar(
         title: Text(
