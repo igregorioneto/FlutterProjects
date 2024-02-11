@@ -1,3 +1,4 @@
+import 'package:delivery_people/src/pages/new_delivery/new_delivery.dart';
 import 'package:delivery_people/src/utils/colors.dart';
 import 'package:delivery_people/src/wigets/button_custom_widget.dart';
 import 'package:delivery_people/src/wigets/button_simple_icon_custom_widget.dart';
@@ -150,7 +151,12 @@ class _OverviewPageState extends State<OverviewPage> {
                             textColor: AppColors.white,
                             titleButton: 'OK',
                             isIcon: false,
-                            click: () {},
+                            click: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => NewDeliveryPage()),
+                              );
+                            },
                           ),
                         ],
                       ),
