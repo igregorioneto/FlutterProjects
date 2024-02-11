@@ -42,7 +42,7 @@ class TextTitleInfoCustomWidget extends StatelessWidget {
           ),
         ),
         Text(
-          '${distance}km',
+          'Distancia: ${distance}km',
           style: TextStyle(
             fontSize: distanceSize ?? 14,
             fontFamily: 'Poppins',
