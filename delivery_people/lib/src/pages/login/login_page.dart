@@ -5,6 +5,7 @@ import 'package:delivery_people/src/wigets/button_icon_custom_widget.dart';
 import 'package:delivery_people/src/wigets/input_custom_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
 
 class LoginPage extends StatefulWidget {
@@ -17,7 +18,7 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   bool obscureText = true;
   TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController  = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
   late UserStore _userStore;
 
   @override
@@ -33,17 +34,44 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Future<void> login() async {
-    _userStore.login(emailController.text, passwordController.text);
+    await _userStore.login(emailController.text, passwordController.text);
     if (_userStore.isLogged) {
       Navigator.of(context).pushNamed('/home');
     } else {
-      print('Não foi possível realizar o login!');
+      showDialog(
+        context: context,
+        builder: (context) {
+          return Observer(
+            builder: (_) {
+              return AlertDialog(
+                title: Text(
+                  'E-mail ou Senha inválidos!',
+                  style: TextStyle(fontSize: 16),
+                ),
+                icon: Icon(Icons.close, color: Colors.red,),
+                actions: [
+                  TextButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: Text(
+                      'CONTINUAR',
+                      style: TextStyle(
+                        color: Colors.red,
+                      ),
+                    ),
+                  ),
+                ],
+              );
+            },
+          );
+        },
+      );
     }
   }
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
@@ -97,7 +125,7 @@ class _LoginPageState extends State<LoginPage> {
                   toggleViewPassword: isObscureText,
                   controller: passwordController,
                 ),
-        
+
                 SizedBox(height: 16),
                 // esqueci a senha
                 Row(
@@ -115,7 +143,7 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ],
                 ),
-        
+
                 SizedBox(height: 16),
                 // Button entrar
                 SizedBox(

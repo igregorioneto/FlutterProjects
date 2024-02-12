@@ -2,8 +2,11 @@ import 'package:delivery_people/src/core/services/page_management.dart';
 import 'package:delivery_people/src/pages/overview/overview_page.dart';
 import 'package:delivery_people/src/pages/profile/profile_page.dart';
 import 'package:delivery_people/src/pages/report/report_page.dart';
+import 'package:delivery_people/src/store/user.store.dart';
 import 'package:delivery_people/src/utils/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -13,7 +16,14 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  late UserStore _userStore;
   int _selectedIndexNavigationBottom = 1;
+
+  @override
+  void initState() {
+    super.initState();
+    _userStore = Provider.of<UserStore>(context, listen: false);
+  }
 
   void _onItemTapped(int index) {
     setState(() {
@@ -24,9 +34,17 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: IndexedStack(
-        index: _selectedIndexNavigationBottom,
-        children: PageManagement.widgetOptions,
+      body: Observer(
+        builder: (_) {
+          if (_userStore.isLoading) {
+            return Center(child: CircularProgressIndicator(),);
+          } else {
+            return IndexedStack(
+              index: _selectedIndexNavigationBottom,
+              children: PageManagement.widgetOptions,
+            );
+          }
+        },
       ),
       bottomNavigationBar: BottomNavigationBar(
         selectedItemColor: AppColors.orange,
