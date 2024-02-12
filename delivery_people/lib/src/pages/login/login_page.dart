@@ -1,9 +1,11 @@
+import 'package:delivery_people/src/store/user.store.dart';
 import 'package:delivery_people/src/utils/colors.dart';
 import 'package:delivery_people/src/wigets/button_custom_widget.dart';
 import 'package:delivery_people/src/wigets/button_icon_custom_widget.dart';
 import 'package:delivery_people/src/wigets/input_custom_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -14,6 +16,15 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   bool obscureText = true;
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController  = TextEditingController();
+  late UserStore _userStore;
+
+  @override
+  void initState() {
+    super.initState();
+    _userStore = Provider.of<UserStore>(context, listen: false);
+  }
 
   void isObscureText() {
     setState(() {
@@ -21,9 +32,17 @@ class _LoginPageState extends State<LoginPage> {
     });
   }
 
+  Future<void> login() async {
+    _userStore.login(emailController.text, passwordController.text);
+    if (_userStore.isLogged) {
+      Navigator.of(context).pushNamed('/home');
+    } else {
+      print('Não foi possível realizar o login!');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    WidgetsBinding.instance!.addPostFrameCallback((_) => FocusScope.of(context).unfocus());
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -66,6 +85,7 @@ class _LoginPageState extends State<LoginPage> {
                   hintText: 'example@pigz.com.br',
                   obscureText: false,
                   toggleViewPassword: () {},
+                  controller: emailController,
                 ),
                 SizedBox(height: 20),
                 // Senha
@@ -75,6 +95,7 @@ class _LoginPageState extends State<LoginPage> {
                   isPassword: true,
                   obscureText: obscureText,
                   toggleViewPassword: isObscureText,
+                  controller: passwordController,
                 ),
         
                 SizedBox(height: 16),
@@ -105,9 +126,7 @@ class _LoginPageState extends State<LoginPage> {
                     buttonColor: AppColors.orangeDark,
                     textColor: AppColors.white,
                     titleButton: 'Entrar',
-                    click: () {
-                      Navigator.of(context).pushNamed('/home');
-                    },
+                    click: login,
                     isIcon: false,
                   ),
                 ),

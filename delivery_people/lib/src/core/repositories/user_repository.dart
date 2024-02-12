@@ -12,15 +12,22 @@ class UserRepository {
   Future<bool> login(String email, String password) async {
     try {
       // Procura usuário na lista de mocks
-      User? user = mockUsers.firstWhere((user) => user['email'] == email, orElse: () => null);
-      if (user != null) {
-        SharedPreferences prefs = await SharedPreferences.getInstance();
-        await prefs.setString('user_email', user.email);
-        return true;
-      } else {
-        return false;
+      Map<String, dynamic> userData = mockUsers
+          .firstWhere((user) => user['email'] == email);
+      if (userData != null) {
+        User user = User.fromJson(userData);
+        if (user.password == password) {
+          SharedPreferences prefs = await SharedPreferences.getInstance();
+          await prefs.setString('user_email', user.email);
+          return true;
+        } else {
+          return false;
+        }
       }
-    } catch(e) {
+      return false;
+    } on StateError {
+      return false;
+    } catch (e) {
       throw Exception('Error when logging in: ${e}');
     }
   }
@@ -34,10 +41,8 @@ class UserRepository {
       } else {
         return false;
       }
-    } catch(e) {
+    } catch (e) {
       throw Exception('Not logged out');
     }
   }
-
-
 }

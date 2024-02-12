@@ -7,6 +7,7 @@ class InputCustomWidget extends StatelessWidget {
   final bool? isPassword;
   final VoidCallback toggleViewPassword;
   final bool obscureText;
+  final TextEditingController controller;
 
   InputCustomWidget({
     super.key,
@@ -15,11 +16,13 @@ class InputCustomWidget extends StatelessWidget {
     this.isPassword = false,
     required this.toggleViewPassword,
     required this.obscureText,
+    required this.controller,
   });
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      controller: controller,
       obscureText: obscureText,
       decoration: InputDecoration(
         border: OutlineInputBorder(

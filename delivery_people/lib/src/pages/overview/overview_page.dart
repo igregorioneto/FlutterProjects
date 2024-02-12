@@ -15,6 +15,7 @@ class OverviewPage extends StatefulWidget {
 }
 
 class _OverviewPageState extends State<OverviewPage> {
+  TextEditingController deliveryController = TextEditingController();
   double _grandientValue = 0.5;
   bool _isVisibledValue = true;
 
@@ -143,6 +144,7 @@ class _OverviewPageState extends State<OverviewPage> {
                               hintText: '123456',
                               toggleViewPassword: () {},
                               obscureText: false,
+                              controller: deliveryController,
                             ),
                           ),
                           SizedBox(width: 8),

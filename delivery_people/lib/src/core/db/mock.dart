@@ -4,7 +4,7 @@ import 'package:delivery_people/src/core/models/address.dart';
 import 'package:delivery_people/src/core/models/delivery.dart';
 import 'package:delivery_people/src/core/models/user.dart';
 
-List<dynamic> mockUsers = [
+List<Map<String,dynamic>> mockUsers = [
   {
     "id": "1",
     "email": "user1@example.com",
@@ -32,7 +32,7 @@ List<dynamic> mockUsers = [
   }
 ];
 
-List<dynamic> mockDeliveries = [
+List<Map<String,dynamic>> mockDeliveries = [
   {
     "id": "1",
     "estimated_time": 30,
