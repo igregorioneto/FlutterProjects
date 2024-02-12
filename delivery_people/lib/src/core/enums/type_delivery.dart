@@ -1,0 +1,4 @@
+enum TypeDelivery {
+  Coleta,
+  Entrega;
+}
