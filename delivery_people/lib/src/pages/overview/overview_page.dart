@@ -1,4 +1,5 @@
 import 'package:delivery_people/src/pages/new_delivery/new_delivery.dart';
+import 'package:delivery_people/src/store/user.store.dart';
 import 'package:delivery_people/src/utils/colors.dart';
 import 'package:delivery_people/src/wigets/button_custom_widget.dart';
 import 'package:delivery_people/src/wigets/button_simple_icon_custom_widget.dart';
@@ -6,6 +7,7 @@ import 'package:delivery_people/src/wigets/card_custom_widgets.dart';
 import 'package:delivery_people/src/wigets/card_simple_title_value_widget.dart';
 import 'package:delivery_people/src/wigets/input_custom_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class OverviewPage extends StatefulWidget {
   const OverviewPage({super.key});
@@ -16,8 +18,15 @@ class OverviewPage extends StatefulWidget {
 
 class _OverviewPageState extends State<OverviewPage> {
   TextEditingController deliveryController = TextEditingController();
+  late UserStore _userStore;
   double _grandientValue = 0.5;
   bool _isVisibledValue = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _userStore = Provider.of<UserStore>(context, listen: false);
+  }
 
   void visibledValue() {
     setState(() {
@@ -38,6 +47,7 @@ class _OverviewPageState extends State<OverviewPage> {
         leading: IconButton(
           icon: Icon(Icons.arrow_back_outlined, color: AppColors.orange),
           onPressed: () {
+            _userStore.logout();
             Navigator.of(context).pop();
           },
         ),

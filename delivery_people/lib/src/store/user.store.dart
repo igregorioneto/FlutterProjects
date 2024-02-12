@@ -26,4 +26,11 @@ abstract class _UserStore with Store {
 
     _isLoading = false;
   }
+
+  @action
+  Future<void> logout() async {
+    _isLoading = true;
+    _isLogged = await repository.logout();
+    _isLoading = false;
+  }
 }

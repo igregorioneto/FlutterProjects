@@ -41,6 +41,8 @@ class UserRepository {
       } else {
         return false;
       }
+    } on StateError {
+      return false;
     } catch (e) {
       throw Exception('Not logged out');
     }
