@@ -24,6 +24,14 @@ class InputCustomWidget extends StatelessWidget {
     return TextFormField(
       controller: controller,
       obscureText: obscureText,
+      validator: (value) {
+        if (value!.isEmpty) {
+          return 'Este campo é obrigatório';
+        } else if (value!.length < 6) {
+          return 'Valor mínimo é de 6 dígitos';
+        }
+        return null;
+      },
       decoration: InputDecoration(
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(16),

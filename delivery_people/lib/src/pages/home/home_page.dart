@@ -2,7 +2,7 @@ import 'package:delivery_people/src/core/services/page_management.dart';
 import 'package:delivery_people/src/pages/overview/overview_page.dart';
 import 'package:delivery_people/src/pages/profile/profile_page.dart';
 import 'package:delivery_people/src/pages/report/report_page.dart';
-import 'package:delivery_people/src/store/user.store.dart';
+import 'package:delivery_people/src/store/user/user.store.dart';
 import 'package:delivery_people/src/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

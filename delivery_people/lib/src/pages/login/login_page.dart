@@ -1,4 +1,4 @@
-import 'package:delivery_people/src/store/user.store.dart';
+import 'package:delivery_people/src/store/user/user.store.dart';
 import 'package:delivery_people/src/utils/colors.dart';
 import 'package:delivery_people/src/wigets/button_custom_widget.dart';
 import 'package:delivery_people/src/wigets/button_icon_custom_widget.dart';
@@ -33,10 +33,16 @@ class _LoginPageState extends State<LoginPage> {
     });
   }
 
+  void clearInputs() {
+    emailController.clear();
+    passwordController.clear();
+  }
+
   Future<void> login() async {
     await _userStore.login(emailController.text, passwordController.text);
     if (_userStore.isLogged) {
       Navigator.of(context).pushNamed('/home');
+      clearInputs();
     } else {
       showDialog(
         context: context,

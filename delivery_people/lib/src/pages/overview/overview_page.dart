@@ -1,5 +1,6 @@
 import 'package:delivery_people/src/pages/new_delivery/new_delivery.dart';
-import 'package:delivery_people/src/store/user.store.dart';
+import 'package:delivery_people/src/store/delivery/delivery.store.dart';
+import 'package:delivery_people/src/store/user/user.store.dart';
 import 'package:delivery_people/src/utils/colors.dart';
 import 'package:delivery_people/src/wigets/button_custom_widget.dart';
 import 'package:delivery_people/src/wigets/button_simple_icon_custom_widget.dart';
@@ -19,6 +20,7 @@ class OverviewPage extends StatefulWidget {
 class _OverviewPageState extends State<OverviewPage> {
   TextEditingController deliveryController = TextEditingController();
   late UserStore _userStore;
+  late DeliveryStore _deliveryStore;
   double _grandientValue = 0.5;
   bool _isVisibledValue = true;
 
@@ -26,6 +28,13 @@ class _OverviewPageState extends State<OverviewPage> {
   void initState() {
     super.initState();
     _userStore = Provider.of<UserStore>(context, listen: false);
+    _deliveryStore = Provider.of<DeliveryStore>(context, listen: false);
+    fetchDeliveriesData();
+    print(_deliveryStore.deliveries.length);
+  }
+
+  void fetchDeliveriesData() async {
+    await _deliveryStore.fetchDeliveries();
   }
 
   void visibledValue() {

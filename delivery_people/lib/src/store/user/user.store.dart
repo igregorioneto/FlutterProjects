@@ -21,15 +21,15 @@ abstract class _UserStore with Store {
   @action
   Future<void> login(String email, String password) async {
     _isLoading = true;
-
+    Future.delayed(Duration(seconds: 3));
     _isLogged = await repository.login(email, password);
-
     _isLoading = false;
   }
 
   @action
   Future<void> logout() async {
     _isLoading = true;
+    Future.delayed(Duration(seconds: 3));
     _isLogged = await repository.logout();
     _isLoading = false;
   }
