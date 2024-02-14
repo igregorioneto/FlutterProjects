@@ -333,3 +333,32 @@ O projeto "Items Management" aplicativo de gerenciamento de itens de um desafio 
 - **Flutter:** Framework de desenvolvimento multiplataforma que permite a criação de aplicativos nativos para iOS e Android a partir de um único código-base.
 - **Dart:** Linguagem de programação utilizada pelo Flutter para desenvolvimento de aplicações mobile.
 </details>
+
+
+<details>
+<summary>Delivery People - delivery_people (Ainda em construção!)</summary>
+
+## Delivery People
+
+<img src="delivery_people/assets/app.gif" width="300">
+<br />
+
+### Descrição
+
+O projeto "Delivery People" aplicativo de gerenciamento de entregas. Pode localizar a entrega, aceitar e verificar a rota. Esta sendo utilizado o MobX junto junto com o Provider para gerencimaneto de estado e também simulando uma chamada de API.
+Foi devido um desafio encontrado no git da Pigz.
+
+### Recursos Principais
+
+- Interface de usuário atraente e responsiva, desenvolvida com Flutter.
+- Mobx para gerenciamento de estados.
+- Provider para gerenciamento de estados junto do Mobx que facilita o processo.
+- Widgets personalizados.
+- Sistema de login.
+- Rotas.
+
+### Tecnologias Utilizadas
+
+- **Flutter:** Framework de desenvolvimento multiplataforma que permite a criação de aplicativos nativos para iOS e Android a partir de um único código-base.
+- **Dart:** Linguagem de programação utilizada pelo Flutter para desenvolvimento de aplicações mobile.
+</details>
