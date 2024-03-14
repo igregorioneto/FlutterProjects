@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:notes_with_riverpod/pages/notes_page.dart';
 import 'package:notes_with_riverpod/theme/custom_theme.dart';
 
@@ -10,6 +11,18 @@ class App extends StatefulWidget {
 }
 
 class _AppState extends State<App> {
+  @override
+  void didChangeDependencies() {
+    SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle(
+        statusBarBrightness: Brightness.light,
+        systemNavigationBarIconBrightness: Brightness.light,
+        systemNavigationBarColor: CustomTheme.black,
+      ),
+    );
+    super.didChangeDependencies();
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
