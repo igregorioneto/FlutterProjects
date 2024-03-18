@@ -363,6 +363,8 @@ Foi devido um desafio encontrado no git da Pigz.
 - **Dart:** Linguagem de programação utilizada pelo Flutter para desenvolvimento de aplicações mobile.
 </details>
 
+<details>
+<summary>Notes - notes_with_riverpod</summary>
 
 ## Notes
 
