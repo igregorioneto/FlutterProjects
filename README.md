@@ -362,3 +362,26 @@ Foi devido um desafio encontrado no git da Pigz.
 - **Flutter:** Framework de desenvolvimento multiplataforma que permite a criação de aplicativos nativos para iOS e Android a partir de um único código-base.
 - **Dart:** Linguagem de programação utilizada pelo Flutter para desenvolvimento de aplicações mobile.
 </details>
+
+
+## Notes
+
+<img src="notes_with_riverpod/assets/notes.gif" width="300">
+<br />
+
+### Descrição
+
+O projeto "Notes" aplicativo de criação de notas. Foi utilizado para o gerenciamento de estados o Riverpod.
+
+### Recursos Principais
+
+- Interface de usuário atraente e responsiva, desenvolvida com Flutter.
+- Riverpod para gerenciamento de estados.
+- Provider para gerenciamento de estados junto do Riverpod que facilita o processo.
+- Widgets personalizados.
+
+### Tecnologias Utilizadas
+
+- **Flutter:** Framework de desenvolvimento multiplataforma que permite a criação de aplicativos nativos para iOS e Android a partir de um único código-base.
+- **Dart:** Linguagem de programação utilizada pelo Flutter para desenvolvimento de aplicações mobile.
+</details>
