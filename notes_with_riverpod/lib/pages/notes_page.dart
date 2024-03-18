@@ -48,7 +48,7 @@ class NotesPage extends ConsumerWidget {
         buttons: [
           IconButton(
             tooltip: viewModeValue.tooltip,
-            icon: viewFilteredValue.icon,
+            icon: viewModeValue.icon,
             onPressed: () => ref.read(notesViewModeProvider.notifier).toggle(),
           ),
           IconButton(

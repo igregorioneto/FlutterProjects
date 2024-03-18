@@ -18,6 +18,7 @@ class CustomFloatingButton extends StatelessWidget {
       ),
       onPressed: onPressed,
       child: const Icon(
+        color: Colors.white,
         Icons.add,
       ),
     );
